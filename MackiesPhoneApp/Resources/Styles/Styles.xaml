@@ -21,8 +21,8 @@
     <Color x:Key="FlyoutMenuItemTextColorLight">Magenta</Color>
     <Color x:Key="FlyoutMenuItemTextColorDark">Blue</Color>
 
-    <Color x:Key="FlyoutMenuItemBackgroundColorLight">Green</Color>
-    <Color x:Key="FlyoutMenuItemBackgroundColorDark">#8b7a5b</Color>
+    <Color x:Key="FlyoutMenuItemBackgroundColorLight">#ac6275</Color>
+    <Color x:Key="FlyoutMenuItemBackgroundColorDark">#c897a4</Color>
 
 
     <Style TargetType="ActivityIndicator">

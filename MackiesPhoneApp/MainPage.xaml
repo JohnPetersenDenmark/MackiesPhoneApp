@@ -30,6 +30,11 @@
 
 
             <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+         Text="Login" 
+         TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
+         Clicked="GoLogin_Clicked"/>
+
+            <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
                     Text="Home" 
                     TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
                     Clicked="GoHome_Clicked"/>

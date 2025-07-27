@@ -42,6 +42,12 @@ public partial class MainPage : ContentPage
         ToggleMenu_Clicked(null, null);
     }
 
+    private void GoLogin_Clicked(object sender, EventArgs e)
+    {
+        LoadView(new LoginView());
+        ToggleMenu_Clicked(null, null);
+    }
+
     private void GoSettings_Clicked(object sender, EventArgs e)
     {
         LoadView(new SettingsView());
