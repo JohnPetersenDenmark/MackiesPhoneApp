@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using MackiesPhoneApp.Services;
 
 namespace MackiesPhoneApp.Pages.User;
 
@@ -57,6 +58,10 @@ public partial class LoginView : ContentView
 
             var response = await httpClient.PostAsync("http://192.168.8.105:5000/Login/login", content);
 
+            SecureStorage.Default.Remove("jwt_token");
+
+            LoggedInUser.resetUser();
+
             if (response.IsSuccessStatusCode)
             {
                 var responseJson = await response.Content.ReadAsStringAsync();
@@ -64,10 +69,14 @@ public partial class LoginView : ContentView
 
                 if (!string.IsNullOrWhiteSpace(loginResponse?.Token))
                 {
-                    // Store the token securely
+                   
                     await SecureStorage.SetAsync("jwt_token", loginResponse.Token);
 
-                    // Navigate to the main page
+                    var tokenDecrypted = await JwtHelper.GetJwtPayloadAsync();
+
+                    LoggedInUser.setUserFromDecodedToken(tokenDecrypted);
+
+                
                     Application.Current.MainPage = new MainPage(); // Or use Shell navigation
                 }
                 else

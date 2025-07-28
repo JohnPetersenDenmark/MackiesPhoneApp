@@ -5,6 +5,11 @@
     
     <StackLayout Padding="20">
         <Label Text="Welcome to MY Home Page!" FontSize="24" />
+        
+        <Label x:Name="LoggedInUserDisplayName" 
+       Text="" 
+       FontSize="24" />
+        
     </StackLayout>
     
     
