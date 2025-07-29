@@ -2,14 +2,48 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.HomeView">
-    
+
     <StackLayout Padding="20">
-        <Label Text="Welcome to MY Home Page!" FontSize="24" />
-        
         <Label x:Name="LoggedInUserDisplayName" 
        Text="" 
        FontSize="24" />
+
+
+        <Label Text="Mackies Pizza Truck"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="Black" />
+       
+        <Label Text="Vi laver pizzaer som dem du måske fik i Århus og du kan bestille dem ubagte så du bage dem hjemme hos dig selv"
+               FontSize="16"
+               TextColor="Gray"
+               LineHeight="1.5" />
+
         
+        
+        <Label Text="Vi holder med Pizza Trucken her:"                              
+        FontSize="16"
+        TextColor="Gray"
+        LineHeight="1.5" />
+
+        <CollectionView x:Name="TruckLocationsCollectionView"              
+            SelectionMode="None"
+            SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#f0f0f0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding StartDateTime}" FontAttributes="Bold" FontSize="16" />
+                            <Label Text="{Binding LocationName}" FontSize="14" TextColor="Gray" />
+                            <Label Text="{Binding EndDateTime}" FontSize="14" TextColor="Gray" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
     
     

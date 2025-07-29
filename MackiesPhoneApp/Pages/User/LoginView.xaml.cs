@@ -49,47 +49,46 @@ public partial class LoginView : ContentView
         };
 
         var json = JsonConvert.SerializeObject(loginRequest);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
+       
 
         try
         {
-            using var httpClient = new HttpClient();
-         //   var response = await httpClient.PostAsync("https://api.mackies-pizza.dk/Login/login", content);
+          
+            var url =  "/Login/login";
 
-            var response = await httpClient.PostAsync("http://192.168.8.105:5000/Login/login", content);
+            var response = await CustomHttpClient.postRequest(url, false, json, this);
 
-            SecureStorage.Default.Remove("jwt_token");
-
-            LoggedInUser.resetUser();
-
-            if (response.IsSuccessStatusCode)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                SecureStorage.Default.Remove("jwt_token");
+
+                LoggedInUser.resetUser();
+
                 var responseJson = await response.Content.ReadAsStringAsync();
+
                 var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseJson);
 
                 if (!string.IsNullOrWhiteSpace(loginResponse?.Token))
                 {
-                   
+
                     await SecureStorage.SetAsync("jwt_token", loginResponse.Token);
 
                     var tokenDecrypted = await JwtHelper.GetJwtPayloadAsync();
 
                     LoggedInUser.setUserFromDecodedToken(tokenDecrypted);
 
-                
-                    Application.Current.MainPage = new MainPage(); // Or use Shell navigation
+                    await Navigation.PushAsync(new MainPage());
                 }
                 else
                 {
                     ErrorLabel.Text = "Invalid login response.";
                     ErrorLabel.IsVisible = true;
                 }
+
             }
-            else
-            {
-                ErrorLabel.Text = "Login failed. Check your credentials.";
-                ErrorLabel.IsVisible = true;
-            }
+
+          
+          
         }
         catch (Exception ex)
         {
