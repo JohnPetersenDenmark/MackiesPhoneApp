@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using MackiesPhoneApp.Models;
 
 namespace MackiesPhoneApp.Pages.User;
@@ -29,12 +30,21 @@ public partial class OrderPage : ContentPage
     private async void OnOrderItemTapped(object sender, EventArgs e)
     {
         // Get the data context of the tapped item
-        if (sender is Frame frame && frame.BindingContext is OrderItem selectedTruckStop)
+        if (sender is Frame frame && frame.BindingContext is OrderItem selectedOrderItemp)
         {
-            var x = 1;
-
-            // Navigate or handle logic here:
-            //await Navigation.PushAsync(new OrderPage(selectedTruckStop));
+            var popup = new PopupOrderItemSelected(selectedOrderItemp);
+            popup.OrderItemAdded += OnOrderItemAddedToBasket;
+            this.ShowPopup(popup);
+         //   MyCollectionView.SelectedItem = null;
+            
         }
+    }
+
+    private void OnOrderItemAddedToBasket(object sender, (OrderItem OrderItem, int Quantity) e)
+    {
+        var (orderItem, quantity) = e;
+        // Add to basket logic here
+        // e.g. BasketService.Add(pizza, quantity);
+      //  Console.WriteLine($"Added {quantity} of {pizza.Name} to basket.");
     }
 }
