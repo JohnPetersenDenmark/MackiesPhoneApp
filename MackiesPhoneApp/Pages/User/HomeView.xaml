@@ -28,7 +28,8 @@
 
         <CollectionView x:Name="TruckLocationsCollectionView"              
             SelectionMode="None"
-            SelectionChanged="OnSelectionChanged">
+           
+                        >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#f0f0f0">
@@ -36,9 +37,9 @@
                             <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
                         </Frame.GestureRecognizers>
                         <VerticalStackLayout>
-                            <Label Text="{Binding StartDateTime}" FontAttributes="Bold" FontSize="16" />
-                            <Label Text="{Binding LocationName}" FontSize="14" TextColor="Gray" />
-                            <Label Text="{Binding EndDateTime}" FontSize="14" TextColor="Gray" />
+                            <Label Text="{Binding StartDateRefined}" FontSize="14" />
+                            <Label Text="{Binding LocationName}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
+                            <Label Text="{Binding OpenCloseInterval}" FontSize="14" TextColor="Gray" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

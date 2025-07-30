@@ -11,5 +11,8 @@ namespace MackiesPhoneApp.Models
         public string StartDateTime { get; set; }
         public string LocationName { get; set; }
         public string EndDateTime { get; set; }
+        public string OpenCloseInterval { get; set; }
+        public string StartDateRefined { get; set; }
+
     }
 }

@@ -9,9 +9,9 @@ namespace MackiesPhoneApp.Services
     public static class Constants
     {
 
-        private static string API_BASE_URL = "http://192.168.8.105:5000";
+       // private static string API_BASE_URL = "http://192.168.8.105:5000";
 
-       // private static string API_BASE_URL = "https://api.mackies-pizza.dk";
+        private static string API_BASE_URL = "https://api.mackies-pizza.dk";
 
         public static string getApiBaseUrl()
         {
