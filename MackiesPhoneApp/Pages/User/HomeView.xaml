@@ -12,18 +12,19 @@
         <Label Text="Mackies Pizza Truck"
                FontSize="24"
                FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
                TextColor="Black" />
        
-        <Label Text="Vi laver pizzaer som dem du måske fik i Århus og du kan bestille dem ubagte så du bage dem hjemme hos dig selv"
+        <!--<Label Text="Vi laver pizzaer som dem du måske fik i Århus og du kan bestille dem ubagte så du bage dem hjemme hos dig selv"
                FontSize="16"
                TextColor="Gray"
-               LineHeight="1.5" />
+               LineHeight="1.5" />-->
 
         
         
-        <Label Text="Vi holder med Pizza Trucken her:"                              
+        <Label Margin="50" Text="Vi holder med Pizza Trucken her:"                              
         FontSize="16"
-        TextColor="Gray"
+        TextColor="Black"
         LineHeight="1.5" />
 
         <CollectionView x:Name="TruckLocationsCollectionView"              
@@ -32,14 +33,14 @@
                         >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#f0f0f0">
+                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
                         </Frame.GestureRecognizers>
                         <VerticalStackLayout>
-                            <Label Text="{Binding StartDateRefined}" FontSize="14" />
+                            <Label Text="{Binding StartDateRefined}" FontSize="16" TextColor="White" />
                             <Label Text="{Binding LocationName}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
-                            <Label Text="{Binding OpenCloseInterval}" FontSize="14" TextColor="Gray" />
+                            <Label Text="{Binding OpenCloseInterval}" FontSize="16" TextColor="White" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

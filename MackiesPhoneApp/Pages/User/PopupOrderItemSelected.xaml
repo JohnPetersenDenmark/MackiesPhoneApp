@@ -1,4 +1,4 @@
-<toolkit:Popup
+﻿<toolkit:Popup
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -6,15 +6,38 @@
     Size="300,600" >
 
 
-    <VerticalStackLayout Padding="20" Spacing="15" BackgroundColor="White" >
+    <VerticalStackLayout Padding="20" Spacing="15" BackgroundColor="#fe9abc" >
         <Image x:Name="ProductImage" WidthRequest="250" HeightRequest="300"  Aspect="AspectFill"  VerticalOptions="Center" />
-        <Label x:Name="ProductNameLabel" FontSize="20" FontAttributes="Bold" />
-        <Label x:Name="ProducDescriptionLabel" FontSize="14" />
-        <Label x:Name="ProductPriceLabel" FontSize="16" />
+        <Label x:Name="ProductNameLabel"  TextColor="White" FontSize="20" FontAttributes="Bold" />
+        <Label x:Name="ProducDescriptionLabel" TextColor="White" FontSize="14" />
+        <Label x:Name="ProductPriceLabel" TextColor="White" FontSize="16" />
+    
+        <HorizontalStackLayout Spacing="10" VerticalOptions="Center" >
 
-        <Stepper x:Name="QuantityStepper" Minimum="1" Maximum="10" Value="1" />
-        <Label Text="{Binding Source={x:Reference QuantityStepper}, Path=Value, StringFormat='Quantity: {0}'}" />
+            <Image BackgroundColor="white" Source="minussign.png"
+            WidthRequest="20"
+            HeightRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImageMinusTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+      
 
-        <Button Text="Add to Basket" Clicked="OnAddToBasketClicked"/>
+            <Label x:Name="QuantityLabel"
+           Text="1"
+           FontSize="15"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+
+            <Image BackgroundColor="White" Source="plussign.png"
+                WidthRequest="20"
+                    HeightRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImagePlusTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </HorizontalStackLayout>
+
+        <Button BackgroundColor="white" TextColor="black" Text="Put i kurven" Clicked="OnAddToBasketClicked"/>
     </VerticalStackLayout>
 </toolkit:Popup>
