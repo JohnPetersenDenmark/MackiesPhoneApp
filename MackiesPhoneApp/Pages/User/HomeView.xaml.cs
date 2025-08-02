@@ -8,10 +8,13 @@ namespace MackiesPhoneApp.Pages.User;
 
 public partial class HomeView : ContentView
 {
+   // private OrderBasket _orderBasketService;
 
     public HomeView()
     {
         InitializeComponent();
+
+      
 
         var loggedInUser = LoggedInUser.getUserDisplayName();
 

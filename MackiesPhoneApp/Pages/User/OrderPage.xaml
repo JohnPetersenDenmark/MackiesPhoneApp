@@ -4,6 +4,15 @@
              x:Class="MackiesPhoneApp.Pages.User.OrderPage"
              Title="OrderPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+      Text="Checkout" 
+      IconImageSource="checkout.png" 
+      Order="Primary" 
+      Priority="0" 
+      Clicked="OnGoToOrderBasket" />
+    </ContentPage.ToolbarItems>
+
 
     <Grid >
         <CollectionView x:Name="OrderItemsCollectionView"              

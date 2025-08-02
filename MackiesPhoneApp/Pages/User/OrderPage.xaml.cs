@@ -1,15 +1,18 @@
 using CommunityToolkit.Maui.Views;
 using MackiesPhoneApp.Models;
+using MackiesPhoneApp.Services;
 
 namespace MackiesPhoneApp.Pages.User;
 
 public partial class OrderPage : ContentPage
 {
 	TruckLocation _selectedTruckLocation;
+    
 
     public OrderPage(TruckLocation selectedTruckLocation)
 	{
         _selectedTruckLocation = selectedTruckLocation;
+       
         InitializeAsync();
         InitializeComponent();
 	}
@@ -45,6 +48,16 @@ public partial class OrderPage : ContentPage
         var (orderItem, quantity) = e;
         // Add to basket logic here
         // e.g. BasketService.Add(pizza, quantity);
+
+      
+
+
       //  Console.WriteLine($"Added {quantity} of {pizza.Name} to basket.");
+    }
+
+    private void OnGoToOrderBasket(object sender, EventArgs e)
+    {
+        // Navigate to your Checkout page or process order
+        Navigation.PushAsync(new OrderBasketPage());
     }
 }

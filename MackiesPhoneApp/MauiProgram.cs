@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using MackiesPhoneApp.Services;
 using Microsoft.Extensions.Logging;
 
 namespace MackiesPhoneApp
@@ -17,8 +18,10 @@ namespace MackiesPhoneApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<OrderBasket>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

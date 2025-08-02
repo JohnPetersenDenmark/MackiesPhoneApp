@@ -1,20 +1,24 @@
 using MackiesPhoneApp.Models;
+using MackiesPhoneApp.Services;
 
 namespace MackiesPhoneApp.Pages.User;
 
 public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
 {
-    private readonly OrderItem _orderitem;
+    private  OrderItem _orderitem;
 
 
     private int _quantity = 1;
     public string? imageurl { get; set; }
+    private OrderBasket _orderBasketService;
 
     public event EventHandler<(OrderItem orderItem, int Quantity)> OrderItemAdded;
 
-    public PopupOrderItemSelected(OrderItem orderItem)
+    public PopupOrderItemSelected(OrderItem orderItem )
 	{
-	
+       
+    _orderBasketService = ServiceHelper.GetService<OrderBasket>();
+
          InitializeComponent();
 
         _orderitem = orderItem;
@@ -24,6 +28,7 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
         ProductNameLabel.Text = orderItem.productname;
         ProducDescriptionLabel.Text = orderItem.productdescription;
         ProductPriceLabel.Text = $"Pris: {orderItem.unitprice:F2} DKK";
+
     }
 
     private void OnAddToBasketClicked(object sender, EventArgs e)
@@ -32,6 +37,12 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
 
         //int quantity = (int) QuantityLabel.Text
         //OrderItemAdded?.Invoke(this, (_orderitem, quantity));
+
+             
+                _orderBasketService.AddToBasket(_orderitem);
+        
+
+       
         Close();
     }
 
@@ -50,18 +61,5 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
         QuantityLabel.Text = _quantity.ToString();
     }
 
-    private void OnDecreaseClicked(object sender, EventArgs e)
-    {
-        if (_quantity > 1)
-        {
-            _quantity--;
-            QuantityLabel.Text = _quantity.ToString();
-        }
-    }
-
-    private void OnIncreaseClicked(object sender, EventArgs e)
-    {
-        _quantity++;
-        QuantityLabel.Text = _quantity.ToString();
-    }
+   
 }
