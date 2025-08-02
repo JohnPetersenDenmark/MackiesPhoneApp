@@ -35,29 +35,14 @@ public partial class OrderPage : ContentPage
         // Get the data context of the tapped item
         if (sender is Frame frame && frame.BindingContext is OrderItem selectedOrderItemp)
         {
-            var popup = new PopupOrderItemSelected(selectedOrderItemp);
-            popup.OrderItemAdded += OnOrderItemAddedToBasket;
-            this.ShowPopup(popup);
-         //   MyCollectionView.SelectedItem = null;
-            
+            var popup = new PopupOrderItemSelected(selectedOrderItemp);        
+            this.ShowPopup(popup);                    
         }
     }
-
-    private void OnOrderItemAddedToBasket(object sender, (OrderItem OrderItem, int Quantity) e)
-    {
-        var (orderItem, quantity) = e;
-        // Add to basket logic here
-        // e.g. BasketService.Add(pizza, quantity);
-
-      
-
-
-      //  Console.WriteLine($"Added {quantity} of {pizza.Name} to basket.");
-    }
-
+  
     private void OnGoToOrderBasket(object sender, EventArgs e)
     {
-        // Navigate to your Checkout page or process order
+        // Navigate to your Checkout page 
         Navigation.PushAsync(new OrderBasketPage());
     }
 }

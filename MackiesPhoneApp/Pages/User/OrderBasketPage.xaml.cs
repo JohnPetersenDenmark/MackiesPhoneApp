@@ -1,20 +1,27 @@
+﻿
+using MackiesPhoneApp.Models;
 using MackiesPhoneApp.Services;
+using System.Collections.ObjectModel;
 
 namespace MackiesPhoneApp.Pages.User;
 
 public partial class OrderBasketPage : ContentPage
 {
 
-	private readonly OrderBasket _orderBasketService;
+    public ObservableCollection<OrderItem> OrderBasketItems { get; set; }
+
+    private readonly OrderBasket _orderBasketService;
 
     public OrderBasketPage()
 	{
+        InitializeComponent(); // ✅ Always first
+
         _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
-        BindingContext = _orderBasketService.OrderBasketItems;
+        OrderBasketItems = _orderBasketService.OrderBasketItems;
 
-        InitializeComponent();
-	}
+        BindingContext = this; // ✅ Bind to the whole page so {Binding OrderBasketItems} works
+    }
 
     protected override void OnAppearing()
     {
@@ -28,6 +35,31 @@ public partial class OrderBasketPage : ContentPage
         _orderBasketService.ClearBasket();
         OrderItemsList.ItemsSource = null;
         OrderItemsList.ItemsSource = _orderBasketService.OrderBasketItems;
+    }
+
+    private void OnImagePlusTapped(object? sender, EventArgs e)
+    {
+        if (sender is Image img && img.BindingContext is OrderItem item)
+        {
+            item.quantity++;
+        }
+    }
+
+    private void OnImageMinusTapped(object? sender, EventArgs e)
+    {
+        if (sender is Image img && img.BindingContext is OrderItem item)
+        {
+            if (item.quantity > 1)
+                item.quantity--;
+            else
+            {
+                // remove if you want zero to drop the item
+                if (BindingContext is OrderBasket orderBasket) // or your VM
+                    orderBasket.OrderBasketItems.Remove(item);
+                else if (OrderItemsList.ItemsSource is ObservableCollection<OrderItem> coll)
+                    coll.Remove(item);
+            }
+        }
     }
 
 }

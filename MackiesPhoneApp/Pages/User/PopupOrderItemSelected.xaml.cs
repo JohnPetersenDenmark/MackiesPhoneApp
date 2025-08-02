@@ -12,7 +12,7 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
     public string? imageurl { get; set; }
     private OrderBasket _orderBasketService;
 
-    public event EventHandler<(OrderItem orderItem, int Quantity)> OrderItemAdded;
+   // public event EventHandler<(OrderItem orderItem, int Quantity)> OrderItemAdded;
 
     public PopupOrderItemSelected(OrderItem orderItem )
 	{
@@ -33,16 +33,8 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
 
     private void OnAddToBasketClicked(object sender, EventArgs e)
     {
-        // int quantity = (int)QuantityStepper.Value;
-
-        //int quantity = (int) QuantityLabel.Text
-        //OrderItemAdded?.Invoke(this, (_orderitem, quantity));
-
-             
-                _orderBasketService.AddToBasket(_orderitem);
-        
-
-       
+        _orderitem.quantity = _quantity;
+         _orderBasketService.AddToBasket(_orderitem);
         Close();
     }
 
