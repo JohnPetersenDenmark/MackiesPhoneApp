@@ -26,6 +26,13 @@ namespace MackiesPhoneApp.Services
         public void ClearBasket()
         {
             OrderBasketItems.Clear();
+            CustomerName = string.Empty;
+            Email = string.Empty;
+            PhoneNumber = string.Empty;
         }
+
+        public string CustomerName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

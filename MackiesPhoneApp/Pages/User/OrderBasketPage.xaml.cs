@@ -20,7 +20,9 @@ public partial class OrderBasketPage : ContentPage
 
         OrderBasketItems = _orderBasketService.OrderBasketItems;
 
-        BindingContext = this; // ✅ Bind to the whole page so {Binding OrderBasketItems} works
+        // BindingContext = this; // ✅ Bind to the whole page so {Binding OrderBasketItems} works
+
+        BindingContext = _orderBasketService;
     }
 
     protected override void OnAppearing()

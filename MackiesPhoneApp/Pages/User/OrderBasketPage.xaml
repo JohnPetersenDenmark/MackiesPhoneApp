@@ -8,7 +8,7 @@
     
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Din ordre"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
@@ -40,10 +40,33 @@
                         <Label Text="{Binding unitprice}" />
                         <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" />
                     </HorizontalStackLayout>
+                    
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Clear Order" Clicked="OnClearClicked" />
+        <Entry x:Name="UsernameEntry"
+            Placeholder="Username"
+            PlaceholderColor="Gray"               
+       Text="{Binding CustomerName}"
+            TextColor="Black" />
+
+        <Entry x:Name="EmailEntry"
+            Placeholder="Email"
+            PlaceholderColor="Gray"               
+ 
+            TextColor="Black" />
+
+        <Entry x:Name="PhoneNumberEntry"
+    Placeholder="Telefonnummer"
+    PlaceholderColor="Gray"               
+ 
+    TextColor="Black" />
+
+
+        <Button Text="Nulstil ordre" Clicked="OnClearClicked" />
+
+        <Button Text="Send order" Clicked="OnClearClicked" />
     </VerticalStackLayout>
 </ContentPage>
