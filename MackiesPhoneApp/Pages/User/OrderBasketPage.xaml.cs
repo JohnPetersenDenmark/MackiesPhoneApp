@@ -1,67 +1,50 @@
-﻿
-using MackiesPhoneApp.Models;
+﻿using MackiesPhoneApp.Models;
 using MackiesPhoneApp.Services;
-using System.Collections.ObjectModel;
+using Microsoft.Maui.Controls;
+using System;
 
-namespace MackiesPhoneApp.Pages.User;
-
-public partial class OrderBasketPage : ContentPage
+namespace MackiesPhoneApp.Pages.User
 {
-
-    public ObservableCollection<OrderItem> OrderBasketItems { get; set; }
-
-    private readonly OrderBasket _orderBasketService;
-
-    public OrderBasketPage()
-	{
-        InitializeComponent(); // ✅ Always first
-
-        _orderBasketService = ServiceHelper.GetService<OrderBasket>();
-
-        OrderBasketItems = _orderBasketService.OrderBasketItems;
-
-        // BindingContext = this; // ✅ Bind to the whole page so {Binding OrderBasketItems} works
-
-        BindingContext = _orderBasketService;
-    }
-
-    protected override void OnAppearing()
+    public partial class OrderBasketPage : ContentPage
     {
-        base.OnAppearing();
-        OrderItemsList.ItemsSource = null;
-        OrderItemsList.ItemsSource = _orderBasketService.OrderBasketItems;
-    }
+        private readonly OrderBasket _orderBasketService;
 
-    private void OnClearClicked(object sender, EventArgs e)
-    {
-        _orderBasketService.ClearBasket();
-        OrderItemsList.ItemsSource = null;
-        OrderItemsList.ItemsSource = _orderBasketService.OrderBasketItems;
-    }
-
-    private void OnImagePlusTapped(object? sender, EventArgs e)
-    {
-        if (sender is Image img && img.BindingContext is OrderItem item)
+        public OrderBasketPage()
         {
-            item.quantity++;
+            InitializeComponent();
+
+            _orderBasketService = ServiceHelper.GetService<OrderBasket>();
+          
+            BindingContext = _orderBasketService.order;
         }
-    }
 
-    private void OnImageMinusTapped(object? sender, EventArgs e)
-    {
-        if (sender is Image img && img.BindingContext is OrderItem item)
+        private void OnClearClicked(object sender, EventArgs e)
         {
-            if (item.quantity > 1)
-                item.quantity--;
-            else
+            _orderBasketService.ClearBasket();
+        }
+
+        private void OnImagePlusTapped(object? sender, EventArgs e)
+        {
+            if (sender is Image img && img.BindingContext is OrderItem orderItem)
             {
-                // remove if you want zero to drop the item
-                if (BindingContext is OrderBasket orderBasket) // or your VM
-                    orderBasket.OrderBasketItems.Remove(item);
-                else if (OrderItemsList.ItemsSource is ObservableCollection<OrderItem> coll)
-                    coll.Remove(item);
+                orderItem.quantity++;
+            }
+        }
+
+        private void OnImageMinusTapped(object? sender, EventArgs e)
+        {
+            if (sender is Image img && img.BindingContext is OrderItem orderItem)
+            {
+                if (orderItem.quantity > 1)
+                {
+                    orderItem.quantity--;
+                }
+                else
+                {
+                    // Remove item from basket
+                    _orderBasketService.RemoveOrderItemFromBasket(orderItem);
+                }
             }
         }
     }
-
 }

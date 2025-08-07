@@ -12,7 +12,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <CollectionView x:Name="OrderItemsList">
+        <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <HorizontalStackLayout Margin="20" Spacing="20">
@@ -55,14 +55,14 @@
         <Entry x:Name="EmailEntry"
             Placeholder="Email"
             PlaceholderColor="Gray"               
- 
+  Text="{Binding CustomerEmail}"
             TextColor="Black" />
 
         <Entry x:Name="PhoneNumberEntry"
-    Placeholder="Telefonnummer"
-    PlaceholderColor="Gray"               
- 
-    TextColor="Black" />
+             Placeholder="Telefonnummer"
+             PlaceholderColor="Gray"               
+             Text="{Binding CustomerPhoneNumber}"
+             TextColor="Black" />
 
 
         <Button Text="Nulstil ordre" Clicked="OnClearClicked" />

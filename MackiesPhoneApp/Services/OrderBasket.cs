@@ -1,4 +1,5 @@
-﻿using MackiesPhoneApp.Models;
+﻿
+using MackiesPhoneApp.Models;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,37 @@ using System.Threading.Tasks;
 namespace MackiesPhoneApp.Services
 {
     public class OrderBasket
-    {
-        public ObservableCollection<OrderItem> OrderBasketItems { get; set; } = new();
+    {         
+        public Order order { get; set; } = new();
 
-        public void AddToBasket(OrderItem orderItem)
+        public OrderBasket()
         {
-            OrderBasketItems.Add(orderItem);
+            order.OrderItemsList = new ObservableCollection < OrderItem > ();
         }
 
-        public void RemoveFromBasket(OrderItem orderItem)
+        public void AddOrderItemToBasket(OrderItem orderItem)
         {
-            OrderBasketItems.Remove(orderItem);
+            if (order.OrderItemsList.Any(item => item.productid == orderItem.productid))
+            {
+                return;
+            }
+
+            order.OrderItemsList.Add(orderItem);
+        }
+
+        public void RemoveOrderItemFromBasket(OrderItem orderItem)
+        {
+            order.OrderItemsList.Remove(orderItem);
         }
 
         public void ClearBasket()
         {
-            OrderBasketItems.Clear();
-            CustomerName = string.Empty;
-            Email = string.Empty;
-            PhoneNumber = string.Empty;
+            order.OrderItemsList.Clear();
+            order.CustomerName = string.Empty;
+            order.CustomerEmail = string.Empty;
+            order.CustomerPhoneNumber = string.Empty;
         }
 
-        public string CustomerName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+      
     }
 }

@@ -1,57 +1,76 @@
 using MackiesPhoneApp.Models;
 using MackiesPhoneApp.Services;
+using System.ComponentModel;
 
 namespace MackiesPhoneApp.Pages.User;
 
-public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup
+public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup, INotifyPropertyChanged
 {
-    private  OrderItem _orderitem;
+    private OrderItem _orderitem;
+
+    private bool _isActionAllowed = true;
+
+    public bool IsActionAllowed
+    {
+        get => _isActionAllowed;
+        set
+        {
+            if (_isActionAllowed != value)
+            {
+                _isActionAllowed = value;
+                OnPropertyChanged(nameof(IsActionAllowed));
+            }
+        }
+    }
 
 
-    private int _quantity = 1;
     public string? imageurl { get; set; }
     private OrderBasket _orderBasketService;
 
-   // public event EventHandler<(OrderItem orderItem, int Quantity)> OrderItemAdded;
+    public PopupOrderItemSelected(OrderItem orderItem)
+    {
 
-    public PopupOrderItemSelected(OrderItem orderItem )
-	{
-       
-    _orderBasketService = ServiceHelper.GetService<OrderBasket>();
+        _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
-         InitializeComponent();
+        InitializeComponent();
 
         _orderitem = orderItem;
 
-        ProductImage.Source = orderItem.imageurl;
+        if (_orderBasketService.order.OrderItemsList.Any(item => item.productid == orderItem.productid))
+        {
+            IsActionAllowed = false;
+        }
+        else
+        {
+            IsActionAllowed = true;
+        }
 
-        ProductNameLabel.Text = orderItem.productname;
-        ProducDescriptionLabel.Text = orderItem.productdescription;
-        ProductPriceLabel.Text = $"Pris: {orderItem.unitprice:F2} DKK";
-
+           
+        BindingContext = _orderitem;
     }
 
     private void OnAddToBasketClicked(object sender, EventArgs e)
     {
-        _orderitem.quantity = _quantity;
-         _orderBasketService.AddToBasket(_orderitem);
+        _orderBasketService.AddOrderItemToBasket(_orderitem);
         Close();
     }
 
     private void OnImageMinusTapped(object sender, EventArgs e)
-    {
-        if (_quantity > 1)
+    {      
+        if (_orderitem.quantity > 1)
         {
-            _quantity--;
-            QuantityLabel.Text = _quantity.ToString();
+            _orderitem.quantity--;
         }
     }
 
     private void OnImagePlusTapped(object sender, EventArgs e)
     {
-        _quantity++;
-        QuantityLabel.Text = _quantity.ToString();
+        _orderitem.quantity ++;
     }
 
-   
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string name)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
 }
