@@ -55,16 +55,25 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup,
         Close();
     }
 
-    private void OnImageMinusTapped(object sender, EventArgs e)
-    {      
+    private async void OnImageMinusTapped(object sender, EventArgs e)
+    {
+        await PlusSignImage.ScaleTo(1.0, 100);
+        await MinusSignImage.ScaleTo(2.0, 100);
         if (_orderitem.quantity > 1)
         {
             _orderitem.quantity--;
         }
     }
 
-    private void OnImagePlusTapped(object sender, EventArgs e)
+    private async void OnImagePlusTapped(object sender, EventArgs e)
     {
+        //PlusSignImage.RotateTo(360, 400, Easing.CubicInOut); // Spin 1 full rotation
+        //PlusSignImage.Rotation = 0; // Reset rotation so it can spin again next time
+        await PlusSignImage.ScaleTo(2.0, 100);
+        await MinusSignImage.ScaleTo(1.0, 100);
+        //  PlusSignImage.ScaleTo(1.0, 100);
+
+
         _orderitem.quantity ++;
     }
 

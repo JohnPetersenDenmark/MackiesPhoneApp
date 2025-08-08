@@ -1,4 +1,5 @@
 ﻿#if ANDROID
+using MackiesPhoneApp.Pages.User;
 using MackiesPhoneApp.Platforms.Android;
 #endif
 
@@ -10,7 +11,11 @@ namespace MackiesPhoneApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage(new MainPage());
+
+#if ANDROID
+            MainPage = new CustomFlyoutPage();
+#endif
 
 
         }      

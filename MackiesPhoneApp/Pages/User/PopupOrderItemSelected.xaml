@@ -16,7 +16,7 @@
     
         <HorizontalStackLayout Spacing="10" VerticalOptions="Center" >
 
-            <Image BackgroundColor="white" Source="minussign.png"
+            <Image x:Name="MinusSignImage" BackgroundColor="white" Source="minussign.png"
             WidthRequest="20"
             HeightRequest="20">
                 <Image.GestureRecognizers>
@@ -31,7 +31,7 @@
            VerticalOptions="Center"
            HorizontalOptions="Center" />
 
-            <Image BackgroundColor="White" Source="plussign.png"
+            <Image  x:Name="PlusSignImage" BackgroundColor="White" Source="plussigna.png"
                 WidthRequest="20"
                     HeightRequest="20">
                 <Image.GestureRecognizers>

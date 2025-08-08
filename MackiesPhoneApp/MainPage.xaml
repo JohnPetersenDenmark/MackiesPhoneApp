@@ -20,6 +20,7 @@
                      Padding="30"
                      WidthRequest="250"
                     IsVisible="False"
+                     Spacing="50"
                      TranslationX="-250"
                      ZIndex="10"
                       HorizontalOptions="Start"
@@ -29,7 +30,7 @@
             <Label Text="Menu" TextColor="{AppThemeBinding Light={StaticResource FlyoutHeadlineTextColorLight}, Dark={StaticResource FlyoutHeadlineTextColorLight}}" FontSize="24" FontAttributes="Bold" />
 
 
-            <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+            <Button  BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
          Text="Login" 
          TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
          Clicked="GoLogin_Clicked"/>
@@ -39,7 +40,7 @@
                     TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
                     Clicked="GoHome_Clicked"/>
 
-            <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+            <Button   BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
                 Text="Settings" 
                 TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
                 Clicked="GoSettings_Clicked"/>

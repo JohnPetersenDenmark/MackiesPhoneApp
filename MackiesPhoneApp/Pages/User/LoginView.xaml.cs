@@ -77,7 +77,7 @@ public partial class LoginView : ContentView
 
                     LoggedInUser.setUserFromDecodedToken(tokenDecrypted);
 
-                    await Navigation.PushAsync(new MainPage());
+                    await Navigation.PushAsync(new HomePage());
                 }
                 else
                 {

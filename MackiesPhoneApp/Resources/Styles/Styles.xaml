@@ -15,13 +15,13 @@
     <Color x:Key="FlyoutBackgroundColorLight">#fe9abc</Color>
     <Color x:Key="FlyoutBackgroundColorDark">#8d4a5b</Color>
 
-    <Color x:Key="FlyoutHeadlineTextColorLight">Red</Color>
+    <Color x:Key="FlyoutHeadlineTextColorLight">white</Color>
     <Color x:Key="FlyoutHeadlineTextColorDark">Yellow</Color>
 
-    <Color x:Key="FlyoutMenuItemTextColorLight">Magenta</Color>
+    <Color x:Key="FlyoutMenuItemTextColorLight">white</Color>
     <Color x:Key="FlyoutMenuItemTextColorDark">Blue</Color>
 
-    <Color x:Key="FlyoutMenuItemBackgroundColorLight">#ac6275</Color>
+    <Color x:Key="FlyoutMenuItemBackgroundColorLight">#d2a9b4</Color>
     <Color x:Key="FlyoutMenuItemBackgroundColorDark">#c897a4</Color>
 
 
