@@ -7,17 +7,17 @@
 
 
     <FlyoutPage.Flyout>
-        <ContentPage Title="Menu"
+        <ContentPage Title="FlyoutMenu"
                      BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutBackgroundColorLight}, Dark={StaticResource FlyoutBackgroundColorDark}}">
             <ScrollView>
                 <VerticalStackLayout Spacing="100">
 
 
-                    <Label Text="Menu" TextColor="{AppThemeBinding Light={StaticResource FlyoutHeadlineTextColorLight}, Dark={StaticResource FlyoutHeadlineTextColorLight}}" FontSize="24" FontAttributes="Bold" />
+                    <Label Text="" TextColor="{AppThemeBinding Light={StaticResource FlyoutHeadlineTextColorLight}, Dark={StaticResource FlyoutHeadlineTextColorLight}}" FontSize="24" FontAttributes="Bold" />
 
 
                     <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
-                        Text="Login" 
+                        Text="Log ind" 
                              FontSize="20" 
                             HeightRequest="100" 
                             MinimumHeightRequest="30"
@@ -39,11 +39,11 @@
                         Clicked="GoHome_Clicked"/>
 
                     <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
-                        Text="Settings" 
+                        Text="Indstillinger" 
                              FontSize="20" 
-                             HeightRequest="100" 
+                             HeightRequest="120" 
                              MinimumHeightRequest="30"
-                            WidthRequest="100"
+                            WidthRequest="120"
                             CornerRadius="50"
                             Padding="0"
                         TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"

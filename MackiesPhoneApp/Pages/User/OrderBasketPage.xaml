@@ -10,7 +10,7 @@
         <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
+                    <Frame Padding="10" Margin="10" CornerRadius="8" BackgroundColor="#fe9abc">
                         <VerticalStackLayout>
                             <Image BackgroundColor="white" Source="minussign.png"
                                WidthRequest="20"
@@ -42,27 +42,43 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Entry x:Name="UsernameEntry"
-            Placeholder="Username"
-            PlaceholderColor="Gray"               
-       Text="{Binding CustomerName}"
-            TextColor="Black" />
+        <Frame CornerRadius="8" BackgroundColor="LightGray"  Margin="10">
+        <VerticalStackLayout>
 
-        <Entry x:Name="EmailEntry"
-            Placeholder="Email"
-            PlaceholderColor="Gray"               
-  Text="{Binding CustomerEmail}"
-            TextColor="Black" />
+            <Entry x:Name="UsernameEntry"
+              Placeholder="Navn"
+               PlaceholderColor="Gray"               
+               Text="{Binding CustomerName}"
+               TextColor="Black" />
+            
+            <Entry x:Name="EmailEntry"
+             Placeholder="Email"
+                PlaceholderColor="Gray"               
+                Text="{Binding CustomerEmail}"
+                TextColor="Black" />
 
-        <Entry x:Name="PhoneNumberEntry"
-             Placeholder="Telefonnummer"
-             PlaceholderColor="Gray"               
-             Text="{Binding CustomerPhoneNumber}"
-             TextColor="Black" />
+            <Entry x:Name="PhoneNumberEntry"
+                Placeholder="Telefonnummer"
+                PlaceholderColor="Gray"               
+                Text="{Binding CustomerPhoneNumber}"
+                TextColor="Black" />
+            
+            <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
+                <Button Text="Nulstil ordre" Clicked="OnClearClicked" BackgroundColor="#fe9abc"/>
+
+                <Button Text="Send order" Clicked="OnClearClicked" BackgroundColor="#fe9abc" />
+             </HorizontalStackLayout>
+            
+            
+        </VerticalStackLayout>
+
+        </Frame>
 
 
-        <Button Text="Nulstil ordre" Clicked="OnClearClicked" />
 
-        <Button Text="Send order" Clicked="OnClearClicked" />
+
+
+
     </VerticalStackLayout>
+
 </ContentPage>

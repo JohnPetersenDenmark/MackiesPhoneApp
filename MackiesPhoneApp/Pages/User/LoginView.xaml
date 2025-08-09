@@ -4,29 +4,25 @@
              x:Class="MackiesPhoneApp.Pages.User.LoginView">
 
 
-    <VerticalStackLayout Padding="30" Spacing="20"
+    <VerticalStackLayout Padding="30" 
+                         Spacing="20"
                          VerticalOptions="CenterAndExpand">
-
-        <Label Text="Welcome"
-               FontSize="32"
-               HorizontalOptions="Center"
-               TextColor="{AppThemeBinding Light='Black', Dark='White'}" />
-
+    
         <Entry x:Name="UsernameEntry"
-               Placeholder="Username"
-               PlaceholderColor="Gray"               
+               Placeholder="Brugernavn"
+               PlaceholderColor="DimGray"               
               
                TextColor="Black" />
 
         <Entry x:Name="PasswordEntry"
-               Placeholder="Password"
+               Placeholder="Kodeord"
                IsPassword="True"
-               PlaceholderColor="Gray"
+               PlaceholderColor="DimGray"
                TextColor="Black" />
 
-        <Button Text="Login"
+        <Button Text="Log ind"
                 Clicked="OnLoginClicked"
-                BackgroundColor="#007AFF"
+                BackgroundColor="#fe9abc"
                 TextColor="White"
                 CornerRadius="8" />
 
