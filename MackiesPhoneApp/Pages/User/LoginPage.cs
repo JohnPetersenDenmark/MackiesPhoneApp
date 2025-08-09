@@ -11,7 +11,7 @@ namespace MackiesPhoneApp.Pages.User
     {
         public LoginPage()
         {
-            Title = "Home";
+            Title = "Login";
 
             Content = new LoginView(); // Use your existing ContentView
         }

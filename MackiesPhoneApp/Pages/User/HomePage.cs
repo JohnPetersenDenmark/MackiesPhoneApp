@@ -10,7 +10,7 @@ namespace MackiesPhoneApp.Pages.User
     {
         public HomePage()
         {
-            Title = "Home";
+            Title = "";
 
             Content = new HomeView(); // Use your existing ContentView
         }

@@ -2,30 +2,31 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.OrderBasketPage"
-             Title="OrderBasketPage">
+             Title="">
 
-    
-    
+
+
     <VerticalStackLayout>
-        <Label 
-            Text="Din ordre"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
         <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <HorizontalStackLayout Margin="20" Spacing="20">
+                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
+                        <VerticalStackLayout>
+                            <Image BackgroundColor="white" Source="minussign.png"
+                               WidthRequest="20"
+                              
+                                InputTransparent="False">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnImageMinusTapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
 
-                        <Image BackgroundColor="white" Source="minussign.png"
-                            WidthRequest="20"
-                            HeightRequest="20">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnImageMinusTapped" />
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Label Text="{Binding quantity}" />
+                            <HorizontalStackLayout Margin="20" Spacing="20" >
+                            <Label Text="{Binding quantity}" TextColor="White" FontSize="16"/>
+                                <Label Text="{Binding productname}" TextColor="White" FontSize="16" />
+                                <Label Text="{Binding unitprice}" TextColor="White" FontSize="16" />
+                                <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" TextColor="White" FontSize="16"/>
+                    </HorizontalStackLayout>
 
                         <Image BackgroundColor="White" Source="plussign.png"
                             WidthRequest="20"
@@ -35,13 +36,8 @@
                             </Image.GestureRecognizers>
                         </Image>
 
-
-                        <Label Text="{Binding productname}" />
-                        <Label Text="{Binding unitprice}" />
-                        <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" />
-                    </HorizontalStackLayout>
-                    
-                    
+                    </VerticalStackLayout>
+                   </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

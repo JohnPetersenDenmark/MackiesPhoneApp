@@ -30,6 +30,7 @@ public partial class OrderPage : ContentPage
         OrderItemsCollectionView.ItemsSource = allOrderItems;
     }
 
+  
     private async void OnOrderItemTapped(object sender, EventArgs e)
     {
         // Get the data context of the tapped item

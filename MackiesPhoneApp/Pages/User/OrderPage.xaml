@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.OrderPage"
-             Title="OrderPage">
+             Title="">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem 
@@ -20,18 +20,22 @@
        >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#f0f0f0">
+                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOrderItemTapped" />
                         </Frame.GestureRecognizers>
-                        <VerticalStackLayout>
+                        <VerticalStackLayout VerticalOptions="Center">
                             <HorizontalStackLayout Spacing="10">
                                 <Image Source="{Binding imageurl}" WidthRequest="100" HeightRequest="100"  Aspect="AspectFill"  VerticalOptions="Center" />
-                                <Label Text="{Binding pizzanumber}" FontSize="14" VerticalOptions="Center"  />
-                                <Label Text="{Binding productname}" FontSize="14"  VerticalOptions="Center" TextColor="Black" />
-                                <Label Text="{Binding unitprice}" FontSize="14" VerticalOptions="Center"  TextColor="Gray" />
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding pizzanumber}" FontSize="16" VerticalOptions="Center" TextColor="white" />
+                                    <Label Text="{Binding productname}" FontSize="16"  VerticalOptions="Center" TextColor="white" />
+                                    <Label Text="{Binding productdescription}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
+                                    <Label Text="{Binding unitprice, StringFormat='{0:C}'}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
+
+
+                                </VerticalStackLayout>
                             </HorizontalStackLayout>
-                            
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
