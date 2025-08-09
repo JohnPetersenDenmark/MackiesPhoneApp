@@ -1,13 +1,15 @@
-﻿using MackiesPhoneApp;
-using MackiesPhoneApp.Pages.User;
+namespace MackiesPhoneApp.Pages.User;
 
-public class CustomFlyoutPage : FlyoutPage
+public partial class CustomFlyoutPageV2 : FlyoutPage
 {
     bool _isInitialized = false;
 
-    public CustomFlyoutPage()
-    {
-        Flyout = new SideMenuPage(this);
+
+    public CustomFlyoutPageV2()
+	{
+		InitializeComponent();
+
+       
         Detail = new NavigationPage(new HomePage());
 
         Appearing += OnAppearing;
@@ -18,6 +20,26 @@ public class CustomFlyoutPage : FlyoutPage
     {
         Detail = new NavigationPage(page);
         IsPresented = false; // Closes the menu
+    }
+
+    private void GoHome_Clicked(object sender, EventArgs e)
+    {
+        Detail = new NavigationPage(new HomePage());
+
+     
+        IsPresented = false; // Close the flyout
+    }
+
+    private void GoLogin_Clicked(object sender, EventArgs e)
+    {
+        Detail = new NavigationPage(new LoginPage());
+        IsPresented = false;
+    }
+
+    private void GoSettings_Clicked(object sender, EventArgs e)
+    {
+        Detail = new NavigationPage(new SettingsPage());
+        IsPresented = false;
     }
 
     private void OnAppearing(object sender, EventArgs e)

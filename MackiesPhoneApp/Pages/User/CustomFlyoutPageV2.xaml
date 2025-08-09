@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MackiesPhoneApp.Pages.User.CustomFlyoutPageV2"
+            xmlns:pages="clr-namespace:MackiesPhoneApp.Pages.User"
+             Title="CustomFlyoutPageV2">
+
+
+    <FlyoutPage.Flyout>
+        <ContentPage Title="Menu"
+                     BackgroundColor="{DynamicResource AppBackgroundColor}">
+            <ScrollView>
+                <VerticalStackLayout Padding="20" Spacing="15">
+
+                    <Label Text="Menu Flyout page"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           TextColor="White"
+                           Margin="0,0,0,10" />
+
+                    <Button Text="🏠 Home Flyout page"
+                            Clicked="GoHome_Clicked" />
+
+                    <Button Text="🔑 Login"
+                            Clicked="GoLogin_Clicked" />
+
+                    <Button Text="⚙️ Settings"
+                            Clicked="GoSettings_Clicked" />
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+
+    <FlyoutPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <pages:HomePage />
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>

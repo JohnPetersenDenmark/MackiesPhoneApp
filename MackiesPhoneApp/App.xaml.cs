@@ -14,7 +14,7 @@ namespace MackiesPhoneApp
             //MainPage = new NavigationPage(new MainPage());
 
 #if ANDROID
-            MainPage = new CustomFlyoutPage();
+            MainPage = new CustomFlyoutPageV2();
 #endif
 
 
