@@ -8,24 +8,46 @@
 
     <FlyoutPage.Flyout>
         <ContentPage Title="Menu"
-                     BackgroundColor="{DynamicResource AppBackgroundColor}">
+                     BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutBackgroundColorLight}, Dark={StaticResource FlyoutBackgroundColorDark}}">
             <ScrollView>
-                <VerticalStackLayout Padding="20" Spacing="15">
+                <VerticalStackLayout Spacing="100">
 
-                    <Label Text="Menu Flyout page"
-                           FontAttributes="Bold"
-                           FontSize="20"
-                           TextColor="White"
-                           Margin="0,0,0,10" />
 
-                    <Button Text="🏠 Home Flyout page"
-                            Clicked="GoHome_Clicked" />
+                    <Label Text="Menu" TextColor="{AppThemeBinding Light={StaticResource FlyoutHeadlineTextColorLight}, Dark={StaticResource FlyoutHeadlineTextColorLight}}" FontSize="24" FontAttributes="Bold" />
 
-                    <Button Text="🔑 Login"
-                            Clicked="GoLogin_Clicked" />
 
-                    <Button Text="⚙️ Settings"
-                            Clicked="GoSettings_Clicked" />
+                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+                        Text="Login" 
+                             FontSize="20" 
+                            HeightRequest="100" 
+                            MinimumHeightRequest="30"
+                            WidthRequest="100"
+                            CornerRadius="50"
+                            Padding="0"
+                        TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
+                        Clicked="GoLogin_Clicked"/>
+
+                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+                        Text="Home" 
+                              FontSize="20" 
+                             HeightRequest="100" 
+                             MinimumHeightRequest="30"
+                            WidthRequest="100"
+                            CornerRadius="50"
+                            Padding="0"
+                        TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
+                        Clicked="GoHome_Clicked"/>
+
+                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+                        Text="Settings" 
+                             FontSize="20" 
+                             HeightRequest="100" 
+                             MinimumHeightRequest="30"
+                            WidthRequest="100"
+                            CornerRadius="50"
+                            Padding="0"
+                        TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
+                        Clicked="GoSettings_Clicked"/>
 
                 </VerticalStackLayout>
             </ScrollView>
