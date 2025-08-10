@@ -2,6 +2,8 @@
 using MackiesPhoneApp.Services;
 using Microsoft.Maui.Controls;
 using System;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace MackiesPhoneApp.Pages.User
 {
@@ -28,7 +30,11 @@ namespace MackiesPhoneApp.Pages.User
             var orderItemList = MakeOrderItemsDtos();
             var orderDto = MakeOrderDto();
 
-            orderDto.OrderLines = orderItemList;    
+            orderDto.OrderLines = orderItemList;
+
+            var orderContent =JsonSerializer.Serialize(orderDto);
+            var url = "/Home/createorder";
+            await CustomHttpClient.postRequest(url, false, orderContent, null);
 
             _orderBasketService.ClearBasket();
 
@@ -55,6 +61,7 @@ namespace MackiesPhoneApp.Pages.User
                 else
                 {
                     // Remove item from basket
+                    orderItem.IsInBasket = false;
                     _orderBasketService.RemoveOrderItemFromBasket(orderItem);
                 }
             }

@@ -61,6 +61,9 @@ namespace MackiesPhoneApp.Services
                 orderItem.selected = false;
                 orderItem.orderid = 0;
 
+                var orderBasketService = ServiceHelper.GetService<OrderBasket>();
+                orderItem.IsInBasket = orderBasketService.IsProductInBasket(pizza.ProductType, pizza.Id);
+              
                 pizzaOrderItemList.Add(orderItem);
             }
 
@@ -87,6 +90,9 @@ namespace MackiesPhoneApp.Services
                 orderItem.quantity = 1;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
+
+                var orderBasketService = ServiceHelper.GetService<OrderBasket>();
+                orderItem.IsInBasket = orderBasketService.IsProductInBasket(topping.ProductType, topping.Id);
 
                 pizzaOrderItemList.Add(orderItem);
             }

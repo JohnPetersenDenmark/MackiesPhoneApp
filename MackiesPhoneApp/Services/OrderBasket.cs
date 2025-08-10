@@ -26,11 +26,24 @@ namespace MackiesPhoneApp.Services
                 return;
             }
 
+            orderItem.IsInBasket = true;
+
             order.OrderItemsList.Add(orderItem);
+        }
+
+        public bool IsProductInBasket(int productType, int productId)
+        {
+            var x = order.OrderItemsList.Where(product => product.productid == productId && product.producttype == productType);
+            
+            if (x.Count() > 0) {
+                return true;
+            }
+            return false;
         }
 
         public void RemoveOrderItemFromBasket(OrderItem orderItem)
         {
+            orderItem.IsInBasket = false;
             order.OrderItemsList.Remove(orderItem);
         }
 

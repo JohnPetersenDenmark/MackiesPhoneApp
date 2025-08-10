@@ -33,9 +33,8 @@
                                     <Label Text="{Binding productname}" FontSize="16"  VerticalOptions="Center" TextColor="white" />
                                     <Label Text="{Binding productdescription}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
                                     <Label Text="{Binding unitprice, StringFormat='{0:C}'}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
-
-
                                 </VerticalStackLayout>
+                                <Image Source="checkmark.png" IsVisible="{Binding IsInBasket}" WidthRequest="100" HeightRequest="100"  Aspect="AspectFill"  VerticalOptions="Center" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>

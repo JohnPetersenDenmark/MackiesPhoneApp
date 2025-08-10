@@ -13,6 +13,7 @@ namespace MackiesPhoneApp.Models
     {
         private int _quantity;
 
+        private bool _isInBasket;
 
         public int orderid { get; set; }
 
@@ -25,9 +26,7 @@ namespace MackiesPhoneApp.Models
         public string imageurl { get; set; }
 
         public string productdescription { get; set; }
-
-      //  public int quantity { get; set; }
-
+    
         public bool selected { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
@@ -41,6 +40,15 @@ namespace MackiesPhoneApp.Models
 
         public int producttype { get; set; }
 
+        public bool IsInBasket
+        {
+            get => _isInBasket;
+            set
+            {               
+                _isInBasket = value;
+                OnPropertyChanged(nameof(IsInBasket));               
+            }
+        }
 
         public int quantity
         {
