@@ -63,6 +63,9 @@ namespace MackiesPhoneApp.Models
             }
         }
 
+        public int LocationId { get; set; }
+
+        public string Comment { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged(string name) =>

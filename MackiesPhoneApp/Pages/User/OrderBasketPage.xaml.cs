@@ -23,6 +23,19 @@ namespace MackiesPhoneApp.Pages.User
             _orderBasketService.ClearBasket();
         }
 
+        private async void OnSubmitOrderClicked(object sender, EventArgs e)
+        {
+            var orderItemList = MakeOrderItemsDtos();
+            var orderDto = MakeOrderDto();
+
+            orderDto.OrderLines = orderItemList;    
+
+            _orderBasketService.ClearBasket();
+
+            (App.Current.MainPage as CustomFlyoutPageV2).Detail = new NavigationPage(new HomePage());
+            
+        }
+
         private void OnImagePlusTapped(object? sender, EventArgs e)
         {
             if (sender is Image img && img.BindingContext is OrderItem orderItem)
@@ -45,6 +58,51 @@ namespace MackiesPhoneApp.Pages.User
                     _orderBasketService.RemoveOrderItemFromBasket(orderItem);
                 }
             }
+        }
+
+        private OrderDto MakeOrderDto ()
+        {
+            var orderDto = new OrderDto();
+
+            orderDto.CustomerName = _orderBasketService.order.CustomerName;
+            orderDto.Email = _orderBasketService.order.CustomerEmail;
+            orderDto.Phone = _orderBasketService.order.CustomerPhoneNumber;
+
+            Random random = new Random();
+            int randomNumber = random.Next(100000, 1000000); // 100000 inclusive, 1000000 exclusive
+
+            orderDto.CustomerOrderCode = randomNumber.ToString();
+            orderDto.LocationId = _orderBasketService.order.LocationId;
+
+            orderDto.Comment = _orderBasketService.order.Comment;
+
+            return orderDto;
+
+        }
+
+        private List<OrderItemDto> MakeOrderItemsDtos()
+        {
+            var OrderItemsList = new List<OrderItemDto>();
+
+            foreach (var orderItem in _orderBasketService.order.OrderItemsList)
+            {
+                var orderItemDto = new OrderItemDto();
+
+                orderItemDto.OrderId = orderItem.orderid;
+                orderItemDto.ProductId = orderItem.productid;
+                orderItemDto.ProductName = orderItem.productname;
+                orderItemDto.UnitPrice = orderItem.unitprice;
+                orderItemDto.Quantity = orderItem.quantity;
+                orderItemDto.ProductType = orderItem.producttype;
+                orderItemDto.PizzaNumber = orderItem.pizzanumber;
+                orderItemDto.DiscountedUnitPrice = orderItem.discountedunitprice;
+                orderItemDto.UnitDiscountPercentage = orderItem.unitdiscountpercentage;
+
+                OrderItemsList.Add(orderItemDto);
+            }
+
+            return OrderItemsList;
+
         }
     }
 }

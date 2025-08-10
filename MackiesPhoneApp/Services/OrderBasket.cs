@@ -40,6 +40,8 @@ namespace MackiesPhoneApp.Services
             order.CustomerName = string.Empty;
             order.CustomerEmail = string.Empty;
             order.CustomerPhoneNumber = string.Empty;
+            order.Comment = string.Empty;
+            order.LocationId = 0;
         }
 
       

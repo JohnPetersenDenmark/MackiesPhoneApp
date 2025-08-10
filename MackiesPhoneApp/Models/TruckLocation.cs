@@ -8,6 +8,7 @@ namespace MackiesPhoneApp.Models
 {
     public class TruckLocation
     {
+        public int Id { get; set; } 
         public string StartDateTime { get; set; }
         public string LocationName { get; set; }
         public string EndDateTime { get; set; }

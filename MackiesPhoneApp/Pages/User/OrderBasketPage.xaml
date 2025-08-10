@@ -45,7 +45,16 @@
         <Frame CornerRadius="8" BackgroundColor="LightGray"  Margin="10">
         <VerticalStackLayout>
 
-            <Entry x:Name="UsernameEntry"
+                <Editor x:Name="Comment"
+                    Text="{Binding Comment}"
+                         BackgroundColor="White" 
+                        TextColor="Black"
+                    Placeholder="Type your text here..."
+                    AutoSize="TextChanges"
+                    HeightRequest="200"
+                    Keyboard="Text" />
+
+                <Entry x:Name="UsernameEntry"
               Placeholder="Navn"
                PlaceholderColor="Gray"               
                Text="{Binding CustomerName}"
@@ -66,7 +75,7 @@
             <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
                 <Button Text="Nulstil ordre" Clicked="OnClearClicked" BackgroundColor="#fe9abc"/>
 
-                <Button Text="Send order" Clicked="OnClearClicked" BackgroundColor="#fe9abc" />
+                    <Button Text="Send order" Clicked="OnSubmitOrderClicked" BackgroundColor="#fe9abc" />
              </HorizontalStackLayout>
             
             

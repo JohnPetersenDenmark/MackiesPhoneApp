@@ -8,7 +8,7 @@ namespace MackiesPhoneApp.Pages.User;
 
 public partial class HomeView : ContentView
 {
-   // private OrderBasket _orderBasketService;
+   
 
     public HomeView()
     {
@@ -53,9 +53,8 @@ public partial class HomeView : ContentView
         // Get the data context of the tapped item
         if (sender is Frame frame && frame.BindingContext is TruckLocation selectedTruckStop)
         {
-            var x = 1;
-
-            // Navigate or handle logic here:
+            var orderBasketService = ServiceHelper.GetService<OrderBasket>();
+            orderBasketService.order.LocationId = selectedTruckStop.Id;
             await Navigation.PushAsync(new OrderPage(selectedTruckStop));
         }
     }
