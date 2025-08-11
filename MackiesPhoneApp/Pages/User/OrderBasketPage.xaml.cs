@@ -61,7 +61,7 @@ namespace MackiesPhoneApp.Pages.User
                 else
                 {
                     // Remove item from basket
-                    orderItem.IsInBasket = false;
+                  
                     _orderBasketService.RemoveOrderItemFromBasket(orderItem);
                 }
             }

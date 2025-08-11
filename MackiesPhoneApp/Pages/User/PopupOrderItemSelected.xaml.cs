@@ -52,7 +52,7 @@ public partial class PopupOrderItemSelected : CommunityToolkit.Maui.Views.Popup,
     private void OnAddToBasketClicked(object sender, EventArgs e)
     {
         _orderBasketService.AddOrderItemToBasket(_orderitem);
-        Close();
+        Close(true);
     }
 
     private async void OnImageMinusTapped(object sender, EventArgs e)

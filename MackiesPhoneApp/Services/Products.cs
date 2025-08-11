@@ -11,6 +11,8 @@ namespace MackiesPhoneApp.Services
 {
     public static class Products
     {
+        static List<OrderItem> allOrderItems = new List<OrderItem>();
+
         public static async Task<List<Pizza>> getPizzas()
         {
             var pizzaList = new List<Pizza>();
@@ -22,6 +24,8 @@ namespace MackiesPhoneApp.Services
 
                  pizzaList = JsonConvert.DeserializeObject<List<Pizza>>(responseJson);
             }
+
+         
 
             return pizzaList;
         }
@@ -60,10 +64,7 @@ namespace MackiesPhoneApp.Services
                 orderItem.quantity = 1;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
-
-                var orderBasketService = ServiceHelper.GetService<OrderBasket>();
-                orderItem.IsInBasket = orderBasketService.IsProductInBasket(pizza.ProductType, pizza.Id);
-              
+                             
                 pizzaOrderItemList.Add(orderItem);
             }
 
@@ -90,14 +91,31 @@ namespace MackiesPhoneApp.Services
                 orderItem.quantity = 1;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
-
-                var orderBasketService = ServiceHelper.GetService<OrderBasket>();
-                orderItem.IsInBasket = orderBasketService.IsProductInBasket(topping.ProductType, topping.Id);
-
+               
                 pizzaOrderItemList.Add(orderItem);
             }
 
             return pizzaOrderItemList;
+        }
+
+        public static List<OrderItem>  GetAllOrderItems()
+        {
+            return allOrderItems;
+        }
+
+        public static void SetAllOrderItems(List<OrderItem> OrderItemsAll)
+        {
+            allOrderItems = OrderItemsAll;
+        }
+
+        public static void SetIfOrderItemsIsInBasket()
+        {
+            foreach (var orderItem in allOrderItems)
+            {
+                var orderBasketService = ServiceHelper.GetService<OrderBasket>();
+
+                orderItem.IsInBasket = orderBasketService.IsProductInBasket(orderItem.producttype, orderItem.productid);                
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace MackiesPhoneApp.Services
                 return;
             }
 
-            orderItem.IsInBasket = true;
+          
 
             order.OrderItemsList.Add(orderItem);
         }
@@ -43,7 +43,7 @@ namespace MackiesPhoneApp.Services
 
         public void RemoveOrderItemFromBasket(OrderItem orderItem)
         {
-            orderItem.IsInBasket = false;
+           
             order.OrderItemsList.Remove(orderItem);
         }
 
