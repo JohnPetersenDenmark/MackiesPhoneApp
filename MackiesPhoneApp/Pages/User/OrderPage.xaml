@@ -6,9 +6,8 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-      Text="Kurven" 
-            
-      IconImageSource="checkout.png" 
+     
+      IconImageSource="shopping.png" 
       Order="Primary" 
       Priority="0" 
       Clicked="OnGoToOrderBasket" />

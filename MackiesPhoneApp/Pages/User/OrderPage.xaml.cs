@@ -7,15 +7,35 @@ namespace MackiesPhoneApp.Pages.User;
 public partial class OrderPage : ContentPage
 {
 	TruckLocation _selectedTruckLocation;
-    
+    private OrderBasket _orderBasketService;
+    private ToolbarItem _totalToolbarItem;
 
     public OrderPage(TruckLocation selectedTruckLocation)
 	{
+        InitializeComponent();
+
         _selectedTruckLocation = selectedTruckLocation;
+
+        _orderBasketService = ServiceHelper.GetService<OrderBasket>();
+
+        _totalToolbarItem = new ToolbarItem
+        {
+            Text = $"Total: {_orderBasketService.OrderTotal:C}"
+        };
+
+        ToolbarItems.Add(_totalToolbarItem);
+
+        _orderBasketService.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(OrderBasket.OrderTotal))
+            {
+                _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
+            }
+        };
 
         Appearing += OrderPage_Appearing;
         InitializeAsync();
-        InitializeComponent();
+       
 	}
 
     private async void OrderPage_Appearing(object? sender, EventArgs e)
@@ -47,15 +67,24 @@ public partial class OrderPage : ContentPage
         // Get the data context of the tapped item
         if (sender is Frame frame && frame.BindingContext is OrderItem selectedOrderItem)
         {
-            var popup = new PopupOrderItemSelected(selectedOrderItem);        
-           var result = await  this.ShowPopupAsync(popup);  
-            if (result is bool addedItem)
+           if (! _orderBasketService.IsProductInBasket(selectedOrderItem.producttype, selectedOrderItem.productid ))
             {
-                if (addedItem)
+                var popup = new PopupOrderItemSelected(selectedOrderItem);
+                var result = await this.ShowPopupAsync(popup);
+                if (result is bool addedItem)
                 {
-                    MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
+                    if (addedItem)
+                    {
+                        MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
+                    }
                 }
             }
+
+            else
+            {
+                Navigation.PushAsync(new OrderBasketPage());
+            }
+      
         }
     }
   

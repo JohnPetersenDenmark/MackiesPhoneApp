@@ -10,13 +10,32 @@ namespace MackiesPhoneApp.Pages.User
     public partial class OrderBasketPage : ContentPage
     {
         private readonly OrderBasket _orderBasketService;
+        private ToolbarItem _totalToolbarItem;
 
         public OrderBasketPage()
         {
             InitializeComponent();
 
             _orderBasketService = ServiceHelper.GetService<OrderBasket>();
+
           
+
+            _totalToolbarItem = new ToolbarItem
+            {
+                Text = $"Total: {_orderBasketService.OrderTotal:C}"
+                
+            };
+
+            ToolbarItems.Add(_totalToolbarItem);
+
+            _orderBasketService.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(OrderBasket.OrderTotal))
+                {
+                    _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
+                }
+            };
+
             BindingContext = _orderBasketService.order;
         }
 
@@ -46,9 +65,11 @@ namespace MackiesPhoneApp.Pages.User
         {
             if (sender is Image img && img.BindingContext is OrderItem orderItem)
             {
-                orderItem.quantity++;
+                orderItem.quantity++;              
             }
         }
+
+
 
         private void OnImageMinusTapped(object? sender, EventArgs e)
         {
@@ -56,7 +77,7 @@ namespace MackiesPhoneApp.Pages.User
             {
                 if (orderItem.quantity > 1)
                 {
-                    orderItem.quantity--;
+                    orderItem.quantity--;                
                 }
                 else
                 {

@@ -59,6 +59,9 @@
 		<MauiImage Update="Resources\Images\hamburgericon.svg">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Update="Resources\Images\shopping.svg">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</MauiImage>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
