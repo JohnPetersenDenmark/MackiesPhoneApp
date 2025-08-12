@@ -64,6 +64,7 @@ namespace MackiesPhoneApp.Services
                 orderItem.quantity = 1;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
+                orderItem.IsQuantityVisible = false;
                              
                 pizzaOrderItemList.Add(orderItem);
             }
@@ -89,6 +90,7 @@ namespace MackiesPhoneApp.Services
                 orderItem.unitprice = topping.Price;
                 orderItem.unitdiscountpercentage = 0;
                 orderItem.quantity = 1;
+                orderItem.IsQuantityVisible = false;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
                
@@ -98,24 +100,16 @@ namespace MackiesPhoneApp.Services
             return pizzaOrderItemList;
         }
 
-        public static List<OrderItem>  GetAllOrderItems()
-        {
-            return allOrderItems;
-        }
+        //public static List<OrderItem>  GetAllOrderItems()
+        //{
+        //    return allOrderItems;
+        //}
 
-        public static void SetAllOrderItems(List<OrderItem> OrderItemsAll)
-        {
-            allOrderItems = OrderItemsAll;
-        }
+        //public static void SetAllOrderItems(List<OrderItem> OrderItemsAll)
+        //{
+        //    allOrderItems = OrderItemsAll;
+        //}
 
-        public static void SetIfOrderItemsIsInBasket()
-        {
-            foreach (var orderItem in allOrderItems)
-            {
-                var orderBasketService = ServiceHelper.GetService<OrderBasket>();
-
-                orderItem.IsInBasket = orderBasketService.IsProductInBasket(orderItem.producttype, orderItem.productid);                
-            }
-        }
+        
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.OrderPage"
+             x:Name="OrderPageRoot"
              Title="">
 
     <ContentPage.ToolbarItems>
@@ -34,6 +35,36 @@
                                     <Label Text="{Binding unitprice, StringFormat='{0:C}'}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
                                 </VerticalStackLayout>
                                 <Image Source="checkmark.png" IsVisible="{Binding IsInBasket}" WidthRequest="100" HeightRequest="100"  Aspect="AspectFill"  VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout >
+                                <Image BackgroundColor="white" 
+                                       IsVisible="{Binding IsQuantityVisible}"
+                                       Source="minussign.png"
+                                        WidthRequest="20" 
+                                        InputTransparent="False">
+                                    
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnImageMinusTapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Label IsVisible="{Binding IsQuantityVisible}" Text="{Binding quantity}" FontSize="16" VerticalOptions="Center" TextColor="white" />
+                                <Image BackgroundColor="White"
+                                       IsVisible="{Binding IsQuantityVisible}"
+                                       Source="plussign.png"
+                                        WidthRequest="20"
+                                        HeightRequest="20">
+                                    
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnImagePlusTapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Button 
+                                    IsVisible="{Binding IsQuantityVisible}"
+                                    BackgroundColor="white" 
+                                    TextColor="black" 
+                                    Text="Put i kurven" Clicked="OnAddToBasketClicked" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>

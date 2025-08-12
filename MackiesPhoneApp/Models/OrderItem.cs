@@ -50,6 +50,20 @@ namespace MackiesPhoneApp.Models
             }
         }
 
+        private bool _isQuantityVisible;
+        public bool IsQuantityVisible
+        {
+            get => _isQuantityVisible;
+            set
+            {
+                if (_isQuantityVisible != value)
+                {
+                    _isQuantityVisible = value;
+                    OnPropertyChanged(nameof(IsQuantityVisible));
+                }
+            }
+        }
+
         public int quantity
         {
             get => _quantity;

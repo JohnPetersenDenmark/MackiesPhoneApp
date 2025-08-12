@@ -9,6 +9,9 @@ public partial class OrderPage : ContentPage
 	TruckLocation _selectedTruckLocation;
     private OrderBasket _orderBasketService;
     private ToolbarItem _totalToolbarItem;
+    private OrderItem _selectedItem;
+
+
 
     public OrderPage(TruckLocation selectedTruckLocation)
 	{
@@ -41,7 +44,7 @@ public partial class OrderPage : ContentPage
     private async void OrderPage_Appearing(object? sender, EventArgs e)
     {
 
-        MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
+       // MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
 
     }
 
@@ -55,8 +58,11 @@ public partial class OrderPage : ContentPage
 
         var allOrderItems = pizzaOrderItems.Concat(toppingOrderItems).ToList();
 
-        MackiesPhoneApp.Services.Products.SetAllOrderItems(allOrderItems);
-        MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
+        _orderBasketService.UpdateAllProductsItems(allOrderItems);
+
+
+        //MackiesPhoneApp.Services.Products.SetAllOrderItems(allOrderItems);
+        //  MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
 
         OrderItemsCollectionView.ItemsSource = allOrderItems;
     }
@@ -67,17 +73,21 @@ public partial class OrderPage : ContentPage
         // Get the data context of the tapped item
         if (sender is Frame frame && frame.BindingContext is OrderItem selectedOrderItem)
         {
+            _selectedItem = selectedOrderItem;
            if (! _orderBasketService.IsProductInBasket(selectedOrderItem.producttype, selectedOrderItem.productid ))
             {
-                var popup = new PopupOrderItemSelected(selectedOrderItem);
-                var result = await this.ShowPopupAsync(popup);
-                if (result is bool addedItem)
-                {
-                    if (addedItem)
-                    {
-                        MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
-                    }
-                }
+                //var popup = new PopupOrderItemSelected(selectedOrderItem);
+                //var result = await this.ShowPopupAsync(popup);
+                //if (result is bool addedItem)
+                //{
+                //    if (addedItem)
+                //    {
+                //        MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
+                //    }
+                //}
+
+                selectedOrderItem.IsQuantityVisible = true;
+
             }
 
             else
@@ -87,7 +97,40 @@ public partial class OrderPage : ContentPage
       
         }
     }
-  
+
+    private void OnImagePlusTapped(object? sender, EventArgs e)
+    {
+        if (sender is Image img && img.BindingContext is OrderItem orderItem)
+        {
+            orderItem.quantity++;
+        }
+    }
+
+    private void OnAddToBasketClicked(object sender, EventArgs e)
+    {
+        _orderBasketService.AddOrderItemToBasket(_selectedItem);
+        _selectedItem.IsQuantityVisible = false;
+
+
+    }
+
+    private void OnImageMinusTapped(object? sender, EventArgs e)
+    {
+        if (sender is Image img && img.BindingContext is OrderItem orderItem)
+        {
+            if (orderItem.quantity > 1)
+            {
+                orderItem.quantity--;
+            }
+            else
+            {
+                // Remove item from basket
+
+                _orderBasketService.RemoveOrderItemFromBasket(orderItem);
+            }
+        }
+    }
+
     private void OnGoToOrderBasket(object sender, EventArgs e)
     {
         // Navigate to your Checkout page 

@@ -1,96 +1,166 @@
 ﻿using MackiesPhoneApp.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 
-public class OrderBasket : INotifyPropertyChanged
+namespace MackiesPhoneApp.Services
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public Order order { get; set; } = new();
-
-    private decimal? _orderTotal;
-    public decimal? OrderTotal
+    public class OrderBasket : INotifyPropertyChanged
     {
-        get => _orderTotal;
-        private set
+        private Order _order = new();
+        public Order order
         {
-            if (_orderTotal != value)
+            get => _order;
+            set
             {
-                _orderTotal = value;
-                OnPropertyChanged(nameof(OrderTotal));
+                if (_order != value)
+                {
+                    _order = value;
+                    OnPropertyChanged(nameof(order));
+                }
             }
         }
-    }
 
-    public OrderBasket()
-    {
-        order.OrderItemsList = new ObservableCollection<OrderItem>();
-        order.OrderItemsList.CollectionChanged +=  OrderItemsList_CollectionChanged;
-    }
-
-    public void AddOrderItemToBasket(OrderItem orderItem)
-    {
-        if (order.OrderItemsList.Any(item => item.productid == orderItem.productid))
-            return;
-
-        order.OrderItemsList.Add(orderItem);
-    }
-
-    public void RemoveOrderItemFromBasket(OrderItem orderItem)
-    {
-        order.OrderItemsList.Remove(orderItem);
-    }
-
-    public void ClearBasket()
-    {
-        order.OrderItemsList.Clear();
-    }
-
-    private void CalculateOrderTotal()
-    {
-        decimal? total = 0;
-        foreach (var orderItem in order.OrderItemsList)
-            total += orderItem.quantity * orderItem.unitprice;
-
-        OrderTotal = total;
-    }
-
-    public bool IsProductInBasket(int productType, int productId)
-    {
-        var x = order.OrderItemsList.Where(product => product.productid == productId && product.producttype == productType);
-
-        if (x.Count() > 0)
+        private decimal? _orderTotal;
+        public decimal? OrderTotal
         {
-            return true;
-        }
-        return false;
-    }
-    private void OrderItemsList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null)
-        {
-            foreach (OrderItem newItem in e.NewItems)
-                newItem.PropertyChanged += OrderItem_PropertyChanged;
-        }
-        if (e.OldItems != null)
-        {
-            foreach (OrderItem oldItem in e.OldItems)
-                oldItem.PropertyChanged -= OrderItem_PropertyChanged;
+            get => _orderTotal;
+            private set
+            {
+                if (_orderTotal != value)
+                {
+                    _orderTotal = value;
+                    OnPropertyChanged(nameof(OrderTotal));
+                }
+            }
         }
 
-        CalculateOrderTotal();
-    }
 
-    private void OrderItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(OrderItem.quantity) || e.PropertyName == nameof(OrderItem.unitprice))
+        private ObservableCollection<OrderItem> _allProductsItems;
+        public ObservableCollection<OrderItem> AllProductsItems
         {
-            CalculateOrderTotal();
+            get => _allProductsItems;
+            set
+            {
+                if (_allProductsItems != value)
+                {
+                    _allProductsItems = value;
+                    OnPropertyChanged(nameof(AllProductsItems));
+                }
+            }
         }
-    }
 
-    protected void OnPropertyChanged(string propertyName) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public OrderBasket()
+        {
+            order.OrderItemsList = new ObservableCollection<OrderItem>();
+            _allProductsItems = new ObservableCollection<OrderItem>();
+
+            SubscribeToAllProductItemsCollection(_allProductsItems);
+        }
+
+
+        private void SubscribeToAllProductItemsCollection(ObservableCollection<OrderItem> collection)
+        {
+            if (collection == null) return;
+
+            collection.CollectionChanged += AllProductItemsCollectionChangedHandler;
+
+            foreach (var item in collection)
+                if (item is INotifyPropertyChanged npc)
+                    npc.PropertyChanged += AllProductItem_PropertyChanged;
+
+            OrderTotal = CalculateOrderTotal();
+        }
+
+        private void AllProductItemsCollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (OrderItem oldItem in e.OldItems)
+                    if (oldItem is INotifyPropertyChanged npc)
+                        npc.PropertyChanged -= AllProductItem_PropertyChanged;
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (OrderItem newItem in e.NewItems)
+                    if (newItem is INotifyPropertyChanged npc)
+                        npc.PropertyChanged += AllProductItem_PropertyChanged;
+            }
+
+            OrderTotal = CalculateOrderTotal();
+        }
+
+        private void AllProductItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OrderItem.quantity) ||
+                e.PropertyName == nameof(OrderItem.unitprice))
+            {
+                OrderTotal = CalculateOrderTotal();
+            }
+        }
+
+        public void AddOrderItemToBasket(OrderItem orderItem)
+        {
+            if (order.OrderItemsList.Any(item => item.productid == orderItem.productid))
+                return;
+            
+            order.OrderItemsList.Add(orderItem);
+            orderItem.IsInBasket = true;
+            OrderTotal = CalculateOrderTotal();
+        }
+
+        public bool IsProductInBasket(int productType, int productId)
+        {
+            return order.OrderItemsList.Any(product => product.productid == productId && product.producttype == productType);
+        }
+
+        public void RemoveOrderItemFromBasket(OrderItem orderItem)
+        {
+            order.OrderItemsList.Remove(orderItem);
+            orderItem.IsInBasket = false;
+            OrderTotal = CalculateOrderTotal();
+        }
+
+        public void ClearBasket()
+        {
+            order.OrderItemsList.Clear();
+
+            order.CustomerName = string.Empty;
+            order.CustomerEmail = string.Empty;
+            order.CustomerPhoneNumber = string.Empty;
+            order.Comment = string.Empty;
+            order.LocationId = 0;
+
+            OrderTotal = 0;
+
+            foreach (var productItem in _allProductsItems)
+            {
+                productItem.IsInBasket = false;
+            }
+        }
+
+        public decimal? CalculateOrderTotal()
+        {
+            decimal? orderTotal = 0;
+            foreach (var orderItem in order.OrderItemsList)
+                orderTotal += orderItem.quantity * orderItem.unitprice;
+
+            return orderTotal;
+        }
+    
+        // Update existing collection (keeps reference, UI still updates)
+        public void UpdateAllProductsItems(List<OrderItem> newItems)
+        {
+            _allProductsItems.Clear();
+            foreach (var item in newItems)
+                _allProductsItems.Add(item);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
-

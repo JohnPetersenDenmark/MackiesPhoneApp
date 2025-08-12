@@ -57,8 +57,10 @@ namespace MackiesPhoneApp.Pages.User
 
             _orderBasketService.ClearBasket();
 
-            (App.Current.MainPage as CustomFlyoutPageV2).Detail = new NavigationPage(new HomePage());
-            
+            //   (App.Current.MainPage as CustomFlyoutPageV2).Detail = new NavigationPage(new HomePage());
+
+            await Navigation.PushAsync(new HomePage());
+
         }
 
         private void OnImagePlusTapped(object? sender, EventArgs e)
