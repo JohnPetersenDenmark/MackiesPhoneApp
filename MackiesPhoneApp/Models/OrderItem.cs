@@ -64,6 +64,20 @@ namespace MackiesPhoneApp.Models
             }
         }
 
+        private bool _isQuantityEditable;
+        public bool IsQuantityEditable
+        {
+            get => _isQuantityEditable;
+            set
+            {
+                if (_isQuantityEditable != value)
+                {
+                    _isQuantityEditable = value;
+                    OnPropertyChanged(nameof(IsQuantityEditable));
+                }
+            }
+        }
+
         public int quantity
         {
             get => _quantity;

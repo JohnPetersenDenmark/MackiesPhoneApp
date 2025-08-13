@@ -64,8 +64,9 @@ namespace MackiesPhoneApp.Services
                 orderItem.quantity = 1;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
+                orderItem.IsQuantityEditable = false;
                 orderItem.IsQuantityVisible = false;
-                             
+
                 pizzaOrderItemList.Add(orderItem);
             }
 
@@ -90,6 +91,7 @@ namespace MackiesPhoneApp.Services
                 orderItem.unitprice = topping.Price;
                 orderItem.unitdiscountpercentage = 0;
                 orderItem.quantity = 1;
+                orderItem.IsQuantityEditable = false;
                 orderItem.IsQuantityVisible = false;
                 orderItem.selected = false;
                 orderItem.orderid = 0;

@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Views;
 using MackiesPhoneApp.Models;
 using MackiesPhoneApp.Services;
+using Microsoft.Maui.Controls;
 
 namespace MackiesPhoneApp.Pages.User;
 
@@ -86,6 +87,7 @@ public partial class OrderPage : ContentPage
                 //    }
                 //}
 
+                selectedOrderItem.IsQuantityEditable = true;
                 selectedOrderItem.IsQuantityVisible = true;
 
             }
@@ -109,9 +111,9 @@ public partial class OrderPage : ContentPage
     private void OnAddToBasketClicked(object sender, EventArgs e)
     {
         _orderBasketService.AddOrderItemToBasket(_selectedItem);
-        _selectedItem.IsQuantityVisible = false;
-
-
+        _selectedItem.IsQuantityEditable = false;
+        _selectedItem.IsQuantityVisible = true;
+        _selectedItem.IsInBasket = true;
     }
 
     private void OnImageMinusTapped(object? sender, EventArgs e)
@@ -129,6 +131,16 @@ public partial class OrderPage : ContentPage
                 _orderBasketService.RemoveOrderItemFromBasket(orderItem);
             }
         }
+    }
+
+    private async void OnDetailsTapped(object sender, EventArgs e)
+    {
+        if (sender is Label detailLabel && detailLabel.BindingContext is OrderItem selectedOrderItem) 
+        {
+            var popup = new PopupDetailPage(selectedOrderItem);
+            var result = await this.ShowPopupAsync(popup);
+        }
+    
     }
 
     private void OnGoToOrderBasket(object sender, EventArgs e)

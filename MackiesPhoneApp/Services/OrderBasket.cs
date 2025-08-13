@@ -121,6 +121,7 @@ namespace MackiesPhoneApp.Services
         {
             order.OrderItemsList.Remove(orderItem);
             orderItem.IsInBasket = false;
+            orderItem.IsQuantityVisible = false;
             OrderTotal = CalculateOrderTotal();
         }
 
@@ -139,6 +140,8 @@ namespace MackiesPhoneApp.Services
             foreach (var productItem in _allProductsItems)
             {
                 productItem.IsInBasket = false;
+                productItem.IsQuantityEditable = false;
+                productItem.IsQuantityVisible = false;
             }
         }
 
