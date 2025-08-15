@@ -15,70 +15,162 @@
     </ContentPage.ToolbarItems>
 
 
-    <Grid >
-        <CollectionView x:Name="OrderItemsCollectionView"              
+    <!--<Grid >-->
+    <CollectionView x:Name="OrderItemsCollectionView"              
       SelectionMode="None"
        >
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnOrderItemTapped" />
-                        </Frame.GestureRecognizers>
-                        <VerticalStackLayout VerticalOptions="Center">
-                            <HorizontalStackLayout Spacing="10">
-                                <Image Source="{Binding imageurl}" WidthRequest="100" HeightRequest="100"  Aspect="AspectFill"  VerticalOptions="Center" />
-                                <VerticalStackLayout VerticalOptions="Center">
-                                    <Label Text="{Binding pizzanumber}" FontSize="16" VerticalOptions="Center" TextColor="white" />
-                                    <Label Text="{Binding productname}" FontSize="16"  VerticalOptions="Center" TextColor="white" />
-                                    <Label Text="{Binding productdescription}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
-                                    <Label Text="{Binding unitprice, StringFormat='{0:C}/stk.'}" FontSize="16" VerticalOptions="Center"  TextColor="white" />
-                                    <HorizontalStackLayout Spacing="10">
-                                        <Image BackgroundColor="#fe9abc" 
-                                        IsVisible="{Binding IsQuantityEditable}"
-                                        Source="minussign.png"
-                                        WidthRequest="20" 
-                                        InputTransparent="False">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnImageMinusTapped" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
 
-                                        <Label IsVisible="{Binding IsQuantityVisible}" Text="{Binding quantity,  StringFormat='{0} stk.'}" FontSize="16" VerticalOptions="Center" TextColor="white" />
+                <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOrderItemTapped" />
+                    </Frame.GestureRecognizers>
 
-                                        <Image BackgroundColor="#fe9abc"
-                                        IsVisible="{Binding IsQuantityEditable}"
-                                        Source="plussign.png"
-                                        WidthRequest="20"
-                                        HeightRequest="20">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnImagePlusTapped" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
-                                <Image Source="shopping.png" IsVisible="{Binding IsInBasket}" WidthRequest="20" HeightRequest="20"  Aspect="AspectFill"  VerticalOptions="Center" />
-                            </HorizontalStackLayout>
+                    <!--<VerticalStackLayout VerticalOptions="Center">-->
 
-                            <HorizontalStackLayout >
-                             
+                    <!--<HorizontalStackLayout Spacing="10">-->
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <!-- Image column -->
+                            <ColumnDefinition Width="Auto" />
+                            <!-- Content column fills the rest -->
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                  
+                        <!-- Left image -->
+                        <Image Grid.Column="0"
+                            Source="{Binding imageurl}" 
+                            WidthRequest="120" 
+                            HeightRequest="120"  
+                            Aspect="AspectFill"  
+                            VerticalOptions="Center" />
+
+                        <!-- Labels stacked vertically to the right of image -->
+                        <VerticalStackLayout Grid.Column="1"
+                         VerticalOptions="Center"
+                         Spacing="2">
+                            <Label Text="{Binding pizzanumber}" 
+                                FontSize="16" 
+                                TextColor="white" />
+                            <Label Text="{Binding productname}" 
+                                FontSize="16"  
+                                TextColor="white" />
+                            <Label Text="{Binding productdescription}" 
+                                FontSize="16" 
+                                TextColor="white" />
+                            <Label Text="{Binding unitprice, StringFormat='{0:C}/stk.'}" 
+                                FontSize="16"  
+                                TextColor="white" />
+
+                            <HorizontalStackLayout Grid.Column="0" Spacing="8">
+                                <Image 
+                                    IsVisible="{Binding IsQuantityEditable}"
+                                    BackgroundColor="#fe9abc"                                             
+                                    Source="minussign.png"
+                                    WidthRequest="20" 
+                                    InputTransparent="False">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnImageMinusTapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label 
+                                IsVisible="{Binding IsQuantityVisible}" 
+                                Text="{Binding quantity,  StringFormat='{0} stk.'}" 
+                                FontSize="16" 
+                                VerticalOptions="Center" 
+                                TextColor="white" />
+                                <Image 
+                                    BackgroundColor="#fe9abc"
+                                    IsVisible="{Binding IsQuantityEditable}"
+                                    Source="plussign.png"
+                                    WidthRequest="20"
+                                    HeightRequest="20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnImagePlusTapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
                                 <Button 
                                     IsVisible="{Binding IsQuantityEditable}"
                                     BackgroundColor="white" 
                                     TextColor="black" 
                                     Text="Put i kurven" Clicked="OnAddToBasketClicked" />
                             </HorizontalStackLayout>
-
-                            <Label Text="Se detaljer"
-                                   TextColor="White">
+                            <Label
+                                Text="{Binding LineTotal,  StringFormat='{0} kr.'}" 
+                                IsVisible="{Binding IsInBasket}" 
+                                 HorizontalOptions="End"
+                                FontSize="16" 
+                                VerticalOptions="Center"  
+                                TextColor="white" />
+                            <Label 
+                                    Text="Se detaljer"
+                                    TextColor="White">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnDetailsTapped" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Grid>
+
+                        <!--<HorizontalStackLayout Spacing="10">-->
+
+                        
+    
+   
+                       
+
+                        <!--<HorizontalStackLayout Grid.Column="6" Grid.Row="1" Spacing="8">
+                                        <Label
+                                            Text="{Binding LineTotal}" 
+                                            IsVisible="{Binding IsInBasket}" 
+                                           HorizontalOptions="End"
+                                            FontSize="16" 
+                                            VerticalOptions="Center"  
+                                            TextColor="white" />
+                         </HorizontalStackLayout>-->
+
+
+                        <!--</HorizontalStackLayout>-->
+                        <!--</VerticalStackLayout>-->
+
+
+                        <!--<Image  Grid.Column="7" Grid.Row="1"
+                                    Source="shopping.png" 
+                                    IsVisible="{Binding IsInBasket}" 
+                                    WidthRequest="20" HeightRequest="20"  
+                                    Aspect="AspectFill"  
+                                    VerticalOptions="Center" />-->
+
+                        <!--</HorizontalStackLayout>-->
+
+                        <!--<HorizontalStackLayout Grid.Column="3" Spacing="20" >
+                             
+                                <Button 
+                                    IsVisible="{Binding IsQuantityEditable}"
+                                    BackgroundColor="white" 
+                                    TextColor="black" 
+                                    Text="Put i kurven" Clicked="OnAddToBasketClicked" />
+                               
+                           
+
+                            <Label 
+                                Text="Se detaljer"
+                                TextColor="White">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnDetailsTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                         </Frame>
+
+                        </HorizontalStackLayout>-->
+                   
+                </Grid>
+                </Frame>
+                <!--</VerticalStackLayout>-->
+              
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    <!--</Grid>-->
 </ContentPage>
