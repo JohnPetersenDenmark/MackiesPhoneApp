@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls;
 using MackiesPhoneApp.Pages.User;
-
+using MackiesPhoneApp.Services;
 namespace MackiesPhoneApp.Pages.User
 {
     public partial class CustomFlyoutPageV2 : FlyoutPage
@@ -12,8 +12,10 @@ namespace MackiesPhoneApp.Pages.User
         {
             InitializeComponent();
 
-            _navPage = Detail as NavigationPage;        
-           
+            _navPage = Detail as NavigationPage;
+
+          
+
             Appearing += CustomFlyoutPageV2_Appearing;
             Disappearing += CustomFlyoutPageV2_Disappearing;
         }

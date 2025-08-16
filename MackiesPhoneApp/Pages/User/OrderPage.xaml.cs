@@ -22,21 +22,28 @@ public partial class OrderPage : ContentPage
 
         _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
-        _totalToolbarItem = new ToolbarItem
-        {
-            Text = $"Total: {_orderBasketService.OrderTotal:C}"
-        };
+        //var barItem = new ToolbarItem;
+        //barItem.Style.Setters.
 
-        ToolbarItems.Add(_totalToolbarItem);
 
-        _orderBasketService.PropertyChanged += (s, e) =>
-        {
-            if (e.PropertyName == nameof(OrderBasket.OrderTotal))
-            {
-                _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
-            }
-        };
+        //_totalToolbarItem = new ToolbarItem
+        //{
+        //    Text = $"Total: {_orderBasketService.OrderTotal:C}",
 
+
+        //};
+
+        //ToolbarItems.Add(_totalToolbarItem);
+
+        //_orderBasketService.PropertyChanged += (s, e) =>
+        //{
+        //    if (e.PropertyName == nameof(OrderBasket.OrderTotal))
+        //    {
+        //        _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
+        //    }
+        //};
+
+        BindingContext = ServiceHelper.GetService<OrderBasket>();
         Appearing += OrderPage_Appearing;
         InitializeAsync();
        
@@ -126,9 +133,10 @@ public partial class OrderPage : ContentPage
             }
             else
             {
+                orderItem.quantity = 1;
                 // Remove item from basket
 
-                _orderBasketService.RemoveOrderItemFromBasket(orderItem);
+                //_orderBasketService.RemoveOrderItemFromBasket(orderItem);
             }
         }
     }

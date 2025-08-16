@@ -27,7 +27,7 @@ namespace MackiesPhoneApp.Services
         public decimal? OrderTotal
         {
             get => _orderTotal;
-            private set
+             set
             {
                 if (_orderTotal != value)
                 {
@@ -121,7 +121,7 @@ namespace MackiesPhoneApp.Services
         {
             order.OrderItemsList.Remove(orderItem);
             orderItem.IsInBasket = false;
-            orderItem.IsQuantityVisible = false;
+            // orderItem.IsQuantityVisible = false;
             OrderTotal = CalculateOrderTotal();
         }
 

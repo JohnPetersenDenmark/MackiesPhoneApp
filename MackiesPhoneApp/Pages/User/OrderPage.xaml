@@ -2,18 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.OrderPage"
+             xmlns:local="clr-namespace:MackiesPhoneApp.Services"
              x:Name="OrderPageRoot"
-             Title="">
+            Title="">
+
+   
+
+    <NavigationPage.TitleView>
+        <Label Text="{Binding OrderTotal, StringFormat='Total: {0:C}'}"
+               FontSize="14"
+               VerticalOptions="Center"
+               HorizontalOptions="End"/>
+    </NavigationPage.TitleView>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem 
-     
-      IconImageSource="shopping.png" 
-      Order="Primary" 
-      Priority="0" 
-      Clicked="OnGoToOrderBasket" />
+        <ToolbarItem      
+        IconImageSource="shopping.png" 
+        Order="Primary" 
+        Priority="0" 
+        Clicked="OnGoToOrderBasket" />
     </ContentPage.ToolbarItems>
 
+    
 
     <!--<Grid >-->
     <CollectionView x:Name="OrderItemsCollectionView"              
@@ -60,7 +70,7 @@
                                 FontSize="16" 
                                 TextColor="white" />
                             <Label Text="{Binding unitprice, StringFormat='{0:C}/stk.'}" 
-                                FontSize="16"  
+                                FontSize="14"  
                                 TextColor="white" />
 
                             <HorizontalStackLayout Grid.Column="0" Spacing="8">
@@ -77,7 +87,7 @@
                                 <Label 
                                 IsVisible="{Binding IsQuantityVisible}" 
                                 Text="{Binding quantity,  StringFormat='{0} stk.'}" 
-                                FontSize="16" 
+                                FontSize="14" 
                                 VerticalOptions="Center" 
                                 TextColor="white" />
                                 <Image 
@@ -95,17 +105,32 @@
                                     BackgroundColor="white" 
                                     TextColor="black" 
                                     Text="Put i kurven" Clicked="OnAddToBasketClicked" />
+
+
+                                <Image 
+     BackgroundColor="#fe9abc"
+    IsVisible="{Binding IsInBasket}" 
+     Source="shoppingbasket.png"
+     WidthRequest="40"
+     HeightRequest="40">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnImagePlusTapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+
                             </HorizontalStackLayout>
                             <Label
-                                Text="{Binding LineTotal,  StringFormat='{0} kr.'}" 
+                                Text="{Binding LineTotal,  StringFormat='ialt: {0} kr.'}" 
                                 IsVisible="{Binding IsInBasket}" 
                                  HorizontalOptions="End"
-                                FontSize="16" 
+                                FontSize="15" 
                                 VerticalOptions="Center"  
                                 TextColor="white" />
                             <Label 
                                     Text="Se detaljer"
-                                    TextColor="White">
+                                    TextColor="White"
+                                FontSize="16">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnDetailsTapped" />
                                 </Label.GestureRecognizers>

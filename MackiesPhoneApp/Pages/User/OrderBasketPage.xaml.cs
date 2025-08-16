@@ -57,9 +57,8 @@ namespace MackiesPhoneApp.Pages.User
 
             _orderBasketService.ClearBasket();
 
-            //   (App.Current.MainPage as CustomFlyoutPageV2).Detail = new NavigationPage(new HomePage());
-
-            await Navigation.PushAsync(new HomePage());
+           
+            await Navigation.PopToRootAsync();
 
         }
 
