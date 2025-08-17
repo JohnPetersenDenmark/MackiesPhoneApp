@@ -3,38 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.HomeView">
 
-    <StackLayout Padding="20">
+
+    <!--<NavigationPage.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Image Source="jjfisk_logo.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HeightRequest="40"/>
+
+            <Label Text="{Binding OrderTotal, StringFormat='Total: {0:C}'}"
+            FontSize="14"
+            VerticalOptions="Center"
+            HorizontalOptions="End"/>
+        </Grid>
+    </NavigationPage.TitleView>-->
+
+
+    <StackLayout Padding="0" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
         <Label x:Name="LoggedInUserDisplayName" 
        Text="" 
        FontSize="24" />
 
-        
 
-        <Label Text="Mackies Pizza Truck"
+        <VerticalStackLayout >
+        <Label Text="JJ Fisk - en seriøs fiskehandler"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalTextAlignment="Center"
-               TextColor="Black" />
-       
-        <!--<Label Text="Vi laver pizzaer som dem du måske fik i Århus og du kan bestille dem ubagte så du bage dem hjemme hos dig selv"
-               FontSize="16"
-               TextColor="Gray"
-               LineHeight="1.5" />-->
-
-        
-        
-        <Label Margin="50" Text="Vi holder med Pizza Trucken her:"                              
+               TextColor="White" />
+                    
+        <Label Margin="50" Text="Vi holder med fiskebilerne her :"                              
         FontSize="16"
-        TextColor="Black"
+        TextColor="White"
         LineHeight="1.5" />
 
-        <CollectionView x:Name="TruckLocationsCollectionView"              
-            SelectionMode="None"
-           
-                        >
-            <CollectionView.ItemTemplate>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Black}}">
+
+            <CollectionView x:Name="TruckLocationsCollectionView"              
+            SelectionMode="None">
+                <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
+                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
                         </Frame.GestureRecognizers>
@@ -47,6 +58,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        </VerticalStackLayout>
     </StackLayout>
     
     

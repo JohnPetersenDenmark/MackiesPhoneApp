@@ -18,23 +18,27 @@ namespace MackiesPhoneApp.Pages.User
 
             _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
-          
+            var grid = SetNavigationBarPageTitle.setContentTotal();
 
-            _totalToolbarItem = new ToolbarItem
-            {
-                Text = $"Total: {_orderBasketService.OrderTotal:C}"
-                
-            };
+            NavigationPage.SetTitleView(this, grid);
 
-            ToolbarItems.Add(_totalToolbarItem);
 
-            _orderBasketService.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(OrderBasket.OrderTotal))
-                {
-                    _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
-                }
-            };
+
+            //_totalToolbarItem = new ToolbarItem
+            //{
+            //    Text = $"Total: {_orderBasketService.OrderTotal:C}"
+
+            //};
+
+            //ToolbarItems.Add(_totalToolbarItem);
+
+            //_orderBasketService.PropertyChanged += (s, e) =>
+            //{
+            //    if (e.PropertyName == nameof(OrderBasket.OrderTotal))
+            //    {
+            //        _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
+            //    }
+            //};
 
             BindingContext = _orderBasketService.order;
         }

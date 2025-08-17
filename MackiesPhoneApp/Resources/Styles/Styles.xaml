@@ -4,15 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="AppSystemBarsBackgroundColorLight">#fe9abc</Color>
+    <Color x:Key="AppSystemBarsBackgroundColorLight">#2c509c</Color>
     <Color x:Key="AppSystemBarsBackgroundColorDark">#8d4a5b</Color>
 
 
-    <Color x:Key="AppToolbarBackgroundColorLight">#fe9abc</Color>
+    <Color x:Key="AppToolbarBackgroundColorLight">#2c509c</Color>
     <Color x:Key="AppToolbarBackgroundColorDark">#8d4a5b</Color>
 
+    <Color x:Key="HamburgerIconColorLight">#ffac2c</Color>
    
-    <Color x:Key="FlyoutBackgroundColorLight">#fe9abc</Color>
+
+    <Color x:Key="ViewItemBackgroundColorLight">#ffac2c</Color>
+    <Color x:Key="ViewItemBackgroundColorDark">#8d4a5b</Color>
+
+    <Color x:Key="FlyoutBackgroundColorLight">#2c509c</Color>
     <Color x:Key="FlyoutBackgroundColorDark">#8d4a5b</Color>
 
     <Color x:Key="FlyoutHeadlineTextColorLight">white</Color>
@@ -456,11 +461,11 @@
         <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
     </Style>
 
-    <Style TargetType="NavigationPage">
+    <!--<Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
         <Setter Property="IconColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
-    </Style>
+    </Style>-->
 
     <Style TargetType="TabbedPage">
         <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />

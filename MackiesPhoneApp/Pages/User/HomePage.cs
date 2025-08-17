@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MackiesPhoneApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,11 @@ namespace MackiesPhoneApp.Pages.User
         {
             Title = "";
 
-            Content = new HomeView(); // Use your existing ContentView
+            var titleGrid = SetNavigationBarPageTitle.setContentLogo();
+
+            NavigationPage.SetTitleView(this, titleGrid);
+
+             Content = new HomeView(); // Use your existing ContentView
         }
     }
 }

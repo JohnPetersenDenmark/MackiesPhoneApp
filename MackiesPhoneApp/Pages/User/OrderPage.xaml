@@ -8,20 +8,27 @@
 
    
 
-    <NavigationPage.TitleView>
+    <!--<NavigationPage.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Image Source="jjfisk_logo.png"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HeightRequest="40"/>
+        
         <Label Text="{Binding OrderTotal, StringFormat='Total: {0:C}'}"
                FontSize="14"
                VerticalOptions="Center"
                HorizontalOptions="End"/>
-    </NavigationPage.TitleView>
+        </Grid>
+    </NavigationPage.TitleView>-->
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem      
         IconImageSource="shopping.png" 
         Order="Primary" 
         Priority="0" 
         Clicked="OnGoToOrderBasket" />
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
 
     
 

@@ -22,26 +22,10 @@ public partial class OrderPage : ContentPage
 
         _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
-        //var barItem = new ToolbarItem;
-        //barItem.Style.Setters.
 
+        var grid = SetNavigationBarPageTitle.SetContentLogoAndTotal(this);
+        NavigationPage.SetTitleView(this, grid);
 
-        //_totalToolbarItem = new ToolbarItem
-        //{
-        //    Text = $"Total: {_orderBasketService.OrderTotal:C}",
-
-
-        //};
-
-        //ToolbarItems.Add(_totalToolbarItem);
-
-        //_orderBasketService.PropertyChanged += (s, e) =>
-        //{
-        //    if (e.PropertyName == nameof(OrderBasket.OrderTotal))
-        //    {
-        //        _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
-        //    }
-        //};
 
         BindingContext = ServiceHelper.GetService<OrderBasket>();
         Appearing += OrderPage_Appearing;
