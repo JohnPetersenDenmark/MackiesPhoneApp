@@ -4,21 +4,6 @@
              x:Class="MackiesPhoneApp.Pages.User.HomeView">
 
 
-    <!--<NavigationPage.TitleView>
-        <Grid HorizontalOptions="FillAndExpand">
-            <Image Source="jjfisk_logo.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                HeightRequest="40"/>
-
-            <Label Text="{Binding OrderTotal, StringFormat='Total: {0:C}'}"
-            FontSize="14"
-            VerticalOptions="Center"
-            HorizontalOptions="End"/>
-        </Grid>
-    </NavigationPage.TitleView>-->
-
-
     <StackLayout Padding="0" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
         <Label x:Name="LoggedInUserDisplayName" 
        Text="" 
@@ -39,25 +24,38 @@
 
         </VerticalStackLayout>
 
-        <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-
-            <CollectionView x:Name="TruckLocationsCollectionView"              
-            SelectionMode="None">
+        <VerticalStackLayout Padding="10" >
+            
+                <CollectionView x:Name="TruckLocationsCollectionView"              
+                                SelectionMode="None">
                 <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
-                        </Frame.GestureRecognizers>
+                   
+                        <DataTemplate>
                         <VerticalStackLayout>
-                            <Label Text="{Binding StartDateRefined}" FontSize="16" TextColor="White" />
-                            <Label Text="{Binding LocationName}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
-                            <Label Text="{Binding OpenCloseInterval}" FontSize="16" TextColor="White" />
+
+                            <Frame CornerRadius="5"  Padding="5" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
+
+                                <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
+                                    </Frame.GestureRecognizers>
+
+                                    <VerticalStackLayout Margin="10">
+                                        <Label Text="{Binding StartDateRefined}" FontSize="16" TextColor="White" />
+                                        <Label Text="{Binding LocationName}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
+                                        <Label Text="{Binding OpenCloseInterval}" FontSize="16" TextColor="White" />
+                                    </VerticalStackLayout>
+
+                                </Frame>
+                            </Frame>
+                           
                         </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                    </DataTemplate>
+                   
+                </CollectionView.ItemTemplate>
         </CollectionView>
+           
         </VerticalStackLayout>
     </StackLayout>
     

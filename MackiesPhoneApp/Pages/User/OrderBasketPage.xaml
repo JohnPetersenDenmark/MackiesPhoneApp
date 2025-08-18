@@ -6,11 +6,12 @@
 
 
 
-    <VerticalStackLayout>
+    <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
         <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="10" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
+                    <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
+                        <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                         <VerticalStackLayout>
                             <Image BackgroundColor="white" Source="minussign.png"
                                WidthRequest="20"
@@ -38,6 +39,7 @@
 
                     </VerticalStackLayout>
                    </Frame>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

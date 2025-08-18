@@ -6,40 +6,15 @@
              x:Name="OrderPageRoot"
             Title="">
 
-   
+    <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
 
-    <!--<NavigationPage.TitleView>
-        <Grid HorizontalOptions="FillAndExpand">
-            <Image Source="jjfisk_logo.png"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   HeightRequest="40"/>
-        
-        <Label Text="{Binding OrderTotal, StringFormat='Total: {0:C}'}"
-               FontSize="14"
-               VerticalOptions="Center"
-               HorizontalOptions="End"/>
-        </Grid>
-    </NavigationPage.TitleView>-->
-
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem      
-        IconImageSource="shopping.png" 
-        Order="Primary" 
-        Priority="0" 
-        Clicked="OnGoToOrderBasket" />
-    </ContentPage.ToolbarItems>-->
-
-    
-
-    <!--<Grid >-->
-    <CollectionView x:Name="OrderItemsCollectionView"              
-      SelectionMode="None"
-       >
-        <CollectionView.ItemTemplate>
+        <CollectionView x:Name="OrderItemsCollectionView"              
+            SelectionMode="None"
+            >
+        <CollectionView.ItemTemplate Margin="20">
             <DataTemplate>
-
-                <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
+                <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
+                    <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnOrderItemTapped" />
                     </Frame.GestureRecognizers>
@@ -47,7 +22,7 @@
                     <!--<VerticalStackLayout VerticalOptions="Center">-->
 
                     <!--<HorizontalStackLayout Spacing="10">-->
-                    <Grid HorizontalOptions="FillAndExpand">
+                            <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10" >
                         <Grid.ColumnDefinitions>
                             <!-- Image column -->
                             <ColumnDefinition Width="Auto" />
@@ -115,11 +90,11 @@
 
 
                                 <Image 
-     BackgroundColor="Transparent"
-    IsVisible="{Binding IsInBasket}" 
-     Source="shoppingbasket.png"
-     WidthRequest="40"
-     HeightRequest="40">
+                                    BackgroundColor="Transparent"
+                                    IsVisible="{Binding IsInBasket}" 
+                                    Source="shoppingbasket.png"
+                                    WidthRequest="40"
+                                    HeightRequest="40">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnImagePlusTapped" />
                                     </Image.GestureRecognizers>
@@ -199,10 +174,11 @@
                    
                 </Grid>
                 </Frame>
+                </Frame>
                 <!--</VerticalStackLayout>-->
               
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
-    <!--</Grid>-->
+    </StackLayout>
 </ContentPage>

@@ -19,6 +19,9 @@
     <Color x:Key="ViewItemBackgroundColorLight">#ffbd56</Color>
     <Color x:Key="ViewItemBackgroundColorDark">#8d4a5b</Color>
 
+    <Color x:Key="ViewItemBorderColorLight">White</Color>
+    <Color x:Key="ViewItemBorderColorDark">#8d4a5b</Color>
+
     <Color x:Key="FlyoutBackgroundColorLight">#2c509c</Color>
     <Color x:Key="FlyoutBackgroundColorDark">#8d4a5b</Color>
 
