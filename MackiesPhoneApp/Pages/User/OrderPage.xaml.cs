@@ -12,6 +12,8 @@ public partial class OrderPage : ContentPage
     private ToolbarItem _totalToolbarItem;
     private OrderItem _selectedItem;
 
+    private List<OrderItem> allOrderItems;
+
 
 
     public OrderPage(TruckLocation selectedTruckLocation)
@@ -35,8 +37,7 @@ public partial class OrderPage : ContentPage
 
     private async void OrderPage_Appearing(object? sender, EventArgs e)
     {
-
-       // MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
+       
 
     }
 
@@ -48,7 +49,7 @@ public partial class OrderPage : ContentPage
         var pizzaOrderItems = MackiesPhoneApp.Services.Products.MakePizzaOrderItems(pizzaList);
         var toppingOrderItems = MackiesPhoneApp.Services.Products.MakeToppingOrderItems(toppingList);
 
-        var allOrderItems = pizzaOrderItems.Concat(toppingOrderItems).ToList();
+         allOrderItems = pizzaOrderItems.Concat(toppingOrderItems).ToList();
 
         _orderBasketService.UpdateAllProductsItems(allOrderItems);
 
@@ -66,17 +67,16 @@ public partial class OrderPage : ContentPage
         if (sender is Frame frame && frame.BindingContext is OrderItem selectedOrderItem)
         {
             _selectedItem = selectedOrderItem;
+
            if (! _orderBasketService.IsProductInBasket(selectedOrderItem.producttype, selectedOrderItem.productid ))
             {
-                //var popup = new PopupOrderItemSelected(selectedOrderItem);
-                //var result = await this.ShowPopupAsync(popup);
-                //if (result is bool addedItem)
-                //{
-                //    if (addedItem)
-                //    {
-                //        MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
-                //    }
-                //}
+             
+                foreach(var orderItem in allOrderItems)
+                {
+                    orderItem.IsQuantityEditable = false;
+                }
+
+               // OrderItemsCollectionView.ItemsSource = allOrderItems;
 
                 selectedOrderItem.IsQuantityEditable = true;
                 selectedOrderItem.IsQuantityVisible = true;
