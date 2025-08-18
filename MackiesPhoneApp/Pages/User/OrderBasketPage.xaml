@@ -10,7 +10,7 @@
         <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="10" CornerRadius="8" BackgroundColor="#fe9abc">
+                    <Frame Padding="10" Margin="10" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                         <VerticalStackLayout>
                             <Image BackgroundColor="white" Source="minussign.png"
                                WidthRequest="20"
@@ -73,9 +73,14 @@
                 TextColor="Black" />
             
             <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
-                <Button Text="Nulstil ordre" Clicked="OnClearClicked" BackgroundColor="#fe9abc"/>
+                <Button Text="Nulstil ordre"
+                        Clicked="OnClearClicked"                        
+                        BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}"
+                        />
 
-                    <Button Text="Send order" Clicked="OnSubmitOrderClicked" BackgroundColor="#fe9abc" />
+                    <Button Text="Send order" 
+                            Clicked="OnSubmitOrderClicked" 
+                              BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}" />
              </HorizontalStackLayout>
             
             

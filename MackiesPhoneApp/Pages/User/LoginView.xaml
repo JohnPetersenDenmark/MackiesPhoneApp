@@ -22,7 +22,7 @@
 
         <Button Text="Log ind"
                 Clicked="OnLoginClicked"
-                BackgroundColor="#fe9abc"
+                BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}" 
                 TextColor="White"
                 CornerRadius="8" />
 

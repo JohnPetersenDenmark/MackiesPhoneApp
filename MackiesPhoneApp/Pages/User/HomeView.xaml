@@ -39,7 +39,7 @@
 
         </VerticalStackLayout>
 
-        <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Black}}">
+        <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
 
             <CollectionView x:Name="TruckLocationsCollectionView"              
             SelectionMode="None">

@@ -39,7 +39,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
 
-                <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="#fe9abc">
+                <Frame Padding="10" Margin="5" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnOrderItemTapped" />
                     </Frame.GestureRecognizers>
@@ -83,7 +83,7 @@
                             <HorizontalStackLayout Grid.Column="0" Spacing="8">
                                 <Image 
                                     IsVisible="{Binding IsQuantityEditable}"
-                                    BackgroundColor="#fe9abc"                                             
+                                    BackgroundColor="Transparent"                                             
                                     Source="minussign.png"
                                     WidthRequest="20" 
                                     InputTransparent="False">
@@ -98,7 +98,7 @@
                                 VerticalOptions="Center" 
                                 TextColor="white" />
                                 <Image 
-                                    BackgroundColor="#fe9abc"
+                                    BackgroundColor="Transparent"
                                     IsVisible="{Binding IsQuantityEditable}"
                                     Source="plussign.png"
                                     WidthRequest="20"
@@ -115,7 +115,7 @@
 
 
                                 <Image 
-     BackgroundColor="#fe9abc"
+     BackgroundColor="Transparent"
     IsVisible="{Binding IsInBasket}" 
      Source="shoppingbasket.png"
      WidthRequest="40"

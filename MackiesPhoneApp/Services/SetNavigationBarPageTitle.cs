@@ -50,10 +50,11 @@ namespace MackiesPhoneApp.Services
 
             var goToBasketButton = new ImageButton
             {
+                Margin = 10,
                 Source = "shopping.png",    // your cart icon (svg/png in Resources/Images)
                 BackgroundColor = Colors.Transparent,
-                HeightRequest = 32,
-                WidthRequest = 32,
+                HeightRequest = 20,
+                WidthRequest = 20,
                 Aspect = Aspect.AspectFit,
                 VerticalOptions = LayoutOptions.Center,                
             };
@@ -97,7 +98,7 @@ namespace MackiesPhoneApp.Services
                 Source = "jjfisk_logo.png",
                 HeightRequest = 60,
                 HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
+                VerticalOptions = LayoutOptions.Center,                
             };
             
             grid.Children.Add(logo);

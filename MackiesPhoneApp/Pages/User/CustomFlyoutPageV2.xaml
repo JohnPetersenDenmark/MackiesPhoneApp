@@ -56,7 +56,7 @@
 
     <FlyoutPage.Detail>
         <NavigationPage
-        BarBackgroundColor="White"
+        BarBackgroundColor= "{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorLight}}"                           
         BarTextColor= "{AppThemeBinding Light={StaticResource HamburgerIconColorLight}, Dark={StaticResource FlyoutBackgroundColorDark}}">
             <x:Arguments>
                 <pages:HomePage />
