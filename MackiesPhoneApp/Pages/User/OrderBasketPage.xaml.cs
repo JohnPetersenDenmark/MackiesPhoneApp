@@ -21,25 +21,7 @@ namespace MackiesPhoneApp.Pages.User
             var grid = SetNavigationBarPageTitle.setContentTotal();
 
             NavigationPage.SetTitleView(this, grid);
-
-
-
-            //_totalToolbarItem = new ToolbarItem
-            //{
-            //    Text = $"Total: {_orderBasketService.OrderTotal:C}"
-
-            //};
-
-            //ToolbarItems.Add(_totalToolbarItem);
-
-            //_orderBasketService.PropertyChanged += (s, e) =>
-            //{
-            //    if (e.PropertyName == nameof(OrderBasket.OrderTotal))
-            //    {
-            //        _totalToolbarItem.Text = $"Total: {_orderBasketService.OrderTotal:C}";
-            //    }
-            //};
-
+          
             BindingContext = _orderBasketService.order;
         }
 

@@ -24,23 +24,14 @@ public partial class OrderPage : ContentPage
 
         _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
-
         var grid = SetNavigationBarPageTitle.SetContentLogoAndTotal(this);
         NavigationPage.SetTitleView(this, grid);
 
-
-        BindingContext = ServiceHelper.GetService<OrderBasket>();
-        Appearing += OrderPage_Appearing;
+        BindingContext = ServiceHelper.GetService<OrderBasket>();       
         InitializeAsync();
        
 	}
-
-    private async void OrderPage_Appearing(object? sender, EventArgs e)
-    {
-       
-
-    }
-
+   
     private async void InitializeAsync()
     {
         var pizzaList = await MackiesPhoneApp.Services.Products.getPizzas();
@@ -53,41 +44,29 @@ public partial class OrderPage : ContentPage
 
         _orderBasketService.UpdateAllProductsItems(allOrderItems);
 
-
-        //MackiesPhoneApp.Services.Products.SetAllOrderItems(allOrderItems);
-        //  MackiesPhoneApp.Services.Products.SetIfOrderItemsIsInBasket();
-
         OrderItemsCollectionView.ItemsSource = allOrderItems;
     }
 
   
     private async void OnOrderItemTapped(object sender, EventArgs e)
     {
-        // Get the data context of the tapped item
         if (sender is Frame frame && frame.BindingContext is OrderItem selectedOrderItem)
         {
             _selectedItem = selectedOrderItem;
 
            if (! _orderBasketService.IsProductInBasket(selectedOrderItem.producttype, selectedOrderItem.productid ))
-            {
-             
+            {             
                 foreach(var orderItem in allOrderItems)
                 {
                     orderItem.IsQuantityEditable = false;
-                }
-
-               // OrderItemsCollectionView.ItemsSource = allOrderItems;
-
+                }             
                 selectedOrderItem.IsQuantityEditable = true;
                 selectedOrderItem.IsQuantityVisible = true;
-
             }
-
             else
             {
                 Navigation.PushAsync(new OrderBasketPage());
-            }
-      
+            }      
         }
     }
 
@@ -117,10 +96,7 @@ public partial class OrderPage : ContentPage
             }
             else
             {
-                orderItem.quantity = 1;
-                // Remove item from basket
-
-                //_orderBasketService.RemoveOrderItemFromBasket(orderItem);
+                orderItem.quantity = 1;    
             }
         }
     }
@@ -133,11 +109,5 @@ public partial class OrderPage : ContentPage
             var result = await this.ShowPopupAsync(popup);
         }
     
-    }
-
-    private void OnGoToOrderBasket(object sender, EventArgs e)
-    {
-        // Navigate to your Checkout page 
-        Navigation.PushAsync(new OrderBasketPage());
     }
 }

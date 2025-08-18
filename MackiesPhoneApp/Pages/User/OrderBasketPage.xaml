@@ -4,8 +4,6 @@
              x:Class="MackiesPhoneApp.Pages.User.OrderBasketPage"
              Title="">
 
-
-
     <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
         <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
@@ -45,7 +43,7 @@
         </CollectionView>
 
         <Frame CornerRadius="8" BackgroundColor="LightGray"  Margin="10">
-        <VerticalStackLayout>
+            <VerticalStackLayout>
 
                 <Editor x:Name="Comment"
                     Text="{Binding Comment}"
@@ -61,21 +59,21 @@
                PlaceholderColor="Gray"               
                Text="{Binding CustomerName}"
                TextColor="Black" />
-            
-            <Entry x:Name="EmailEntry"
+
+                <Entry x:Name="EmailEntry"
              Placeholder="Email"
                 PlaceholderColor="Gray"               
                 Text="{Binding CustomerEmail}"
                 TextColor="Black" />
 
-            <Entry x:Name="PhoneNumberEntry"
+                <Entry x:Name="PhoneNumberEntry"
                 Placeholder="Telefonnummer"
                 PlaceholderColor="Gray"               
                 Text="{Binding CustomerPhoneNumber}"
                 TextColor="Black" />
-            
-            <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
-                <Button Text="Nulstil ordre"
+
+                <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
+                    <Button Text="Nulstil ordre"
                         Clicked="OnClearClicked"                        
                         BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}"
                         />
@@ -83,18 +81,9 @@
                     <Button Text="Send order" 
                             Clicked="OnSubmitOrderClicked" 
                               BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}" />
-             </HorizontalStackLayout>
-            
-            
-        </VerticalStackLayout>
-
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
         </Frame>
-
-
-
-
-
-
     </VerticalStackLayout>
 
 </ContentPage>
