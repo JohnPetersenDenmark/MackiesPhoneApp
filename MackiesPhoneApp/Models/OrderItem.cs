@@ -21,12 +21,14 @@ namespace MackiesPhoneApp.Models
 
         public string productname { get; set; }
 
-        public string pizzanumber { get; set; }
+        public string productnumber { get; set; }
 
         public string imageurl { get; set; }
 
         public string productdescription { get; set; }
-    
+
+        public string details { get; set; }
+
         public bool selected { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]

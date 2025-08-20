@@ -25,6 +25,7 @@
                          Keyboard="Text" />-->
 
                     <ScrollView HeightRequest="300" Margin="20">
+                        <VerticalStackLayout>
                         <Label                          
                             Text="{Binding productdescription}"
                            LineBreakMode="CharacterWrap"
@@ -32,6 +33,14 @@
                              >
                             
                         </Label>
+                        <Label                          
+      Text="{Binding details}"
+     LineBreakMode="CharacterWrap"
+      TextColor="White"
+       >
+
+                        </Label>
+                        </VerticalStackLayout>
                     </ScrollView>
                 </VerticalStackLayout>
             </Frame>

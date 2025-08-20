@@ -109,7 +109,7 @@ namespace MackiesPhoneApp.Pages.User
                 orderItemDto.UnitPrice = orderItem.unitprice;
                 orderItemDto.Quantity = orderItem.quantity;
                 orderItemDto.ProductType = orderItem.producttype;
-                orderItemDto.PizzaNumber = orderItem.pizzanumber;
+                orderItemDto.PizzaNumber = orderItem.productnumber;
                 orderItemDto.DiscountedUnitPrice = orderItem.discountedunitprice;
                 orderItemDto.UnitDiscountPercentage = orderItem.unitdiscountpercentage;
 

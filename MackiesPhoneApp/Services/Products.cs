@@ -13,105 +13,50 @@ namespace MackiesPhoneApp.Services
     {
         static List<OrderItem> allOrderItems = new List<OrderItem>();
 
-        public static async Task<List<Pizza>> getPizzas()
+        public static async Task<List<Product>> getProducts()
         {
-            var pizzaList = new List<Pizza>();
-            var partialUrl = "/Home/pizzalist";
+            var productList = new List<Product>();
+            var partialUrl = "/Home/productlist";
             var response = await MackiesPhoneApp.Services.CustomHttpClient.getRequest(partialUrl, false, null);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var responseJson = await response.Content.ReadAsStringAsync();
 
-                 pizzaList = JsonConvert.DeserializeObject<List<Pizza>>(responseJson);
+                productList = JsonConvert.DeserializeObject<List<Product>>(responseJson);
             }
-
          
-
-            return pizzaList;
+            return productList;
         }
 
-        public static async Task<List<Topping>> getToppings()
+       
+
+        public static List<OrderItem>  MakeProductItems(List<Product> productList)
         {
-            var toppingList = new List<Topping>();
-            var partialUrl = "/Home/toppinglist";
-            var response = await MackiesPhoneApp.Services.CustomHttpClient.getRequest(partialUrl, false, null);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                var responseJson = await response.Content.ReadAsStringAsync();
+            var productOrderItemList = new List<OrderItem>();
 
-                 toppingList = JsonConvert.DeserializeObject<List<Topping>>(responseJson);
-            }
-
-            return toppingList;
-        }
-
-        public static List<OrderItem>  MakePizzaOrderItems(List<Pizza> pizzaList)
-        {
-            var pizzaOrderItemList = new List<OrderItem>();
-
-            foreach (var pizza in pizzaList)
+            foreach (var product in productList)
             {
                 var orderItem = new OrderItem();
-                orderItem.productname = pizza.Name;
-                orderItem.productid = pizza.Id;
-                orderItem.pizzanumber = pizza.PizzaNumber;
-                orderItem.unitprice = pizza.Price;              
-                orderItem.producttype = pizza.ProductType;
-                orderItem.productdescription = pizza.Description;
-                orderItem.imageurl = MackiesPhoneApp.Services.Constants.getApiBaseUrl() + pizza.ImageUrl;
-                orderItem.discountedunitprice = pizza.DiscountPrice;
-                orderItem.unitdiscountpercentage = pizza.DiscountPercentage;
+                orderItem.productname = product.Name;
+                orderItem.productid = product.Id;
+                orderItem.productnumber = product.ProductNumber;
+                orderItem.unitprice = product.Price;              
+                orderItem.producttype = product.ProductType;
+                orderItem.productdescription = product.Description;
+                orderItem.details = product.Details;
+                orderItem.imageurl = MackiesPhoneApp.Services.Constants.getApiBaseUrl() + product.ImageUrl;
+                orderItem.discountedunitprice = product.DiscountPrice;
+                orderItem.unitdiscountpercentage = product.DiscountPercentage;
                 orderItem.quantity = 1;
                 orderItem.selected = false;
                 orderItem.orderid = 0;
                 orderItem.IsQuantityEditable = false;
                 orderItem.IsQuantityVisible = false;
 
-                pizzaOrderItemList.Add(orderItem);
+                productOrderItemList.Add(orderItem);
             }
 
-            return pizzaOrderItemList;
-        }
-
-        public static List<OrderItem> MakeToppingOrderItems(List<Topping> toppingList)
-        {
-            var pizzaOrderItemList = new List<OrderItem>();
-
-            foreach (var topping in toppingList)
-            {
-                var orderItem = new OrderItem();
-                orderItem.productname = topping.Name;
-                orderItem.productid = topping.Id;
-                orderItem.pizzanumber = "";
-                orderItem.imageurl = MackiesPhoneApp.Services.Constants.getApiBaseUrl() + topping.ImageUrl; 
-                orderItem.unitprice = topping.Price;
-                orderItem.producttype = topping.ProductType;
-                orderItem.productdescription = topping.Description;
-                orderItem.discountedunitprice = 0;
-                orderItem.unitprice = topping.Price;
-                orderItem.unitdiscountpercentage = 0;
-                orderItem.quantity = 1;
-                orderItem.IsQuantityEditable = false;
-                orderItem.IsQuantityVisible = false;
-                orderItem.selected = false;
-                orderItem.orderid = 0;
-               
-                pizzaOrderItemList.Add(orderItem);
-            }
-
-            return pizzaOrderItemList;
-        }
-
-        //public static List<OrderItem>  GetAllOrderItems()
-        //{
-        //    return allOrderItems;
-        //}
-
-        //public static void SetAllOrderItems(List<OrderItem> OrderItemsAll)
-        //{
-        //    allOrderItems = OrderItemsAll;
-        //}
-
-        
+            return productOrderItemList;
+        }                   
     }
 }

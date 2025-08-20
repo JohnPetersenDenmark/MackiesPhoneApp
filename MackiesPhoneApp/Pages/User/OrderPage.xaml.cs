@@ -34,14 +34,10 @@ public partial class OrderPage : ContentPage
    
     private async void InitializeAsync()
     {
-        var pizzaList = await MackiesPhoneApp.Services.Products.getPizzas();
-        var toppingList = await MackiesPhoneApp.Services.Products.getToppings();
+        var productList = await MackiesPhoneApp.Services.Products.getProducts();
 
-        var pizzaOrderItems = MackiesPhoneApp.Services.Products.MakePizzaOrderItems(pizzaList);
-        var toppingOrderItems = MackiesPhoneApp.Services.Products.MakeToppingOrderItems(toppingList);
-
-         allOrderItems = pizzaOrderItems.Concat(toppingOrderItems).ToList();
-
+        allOrderItems = MackiesPhoneApp.Services.Products.MakeProductItems(productList);
+             
         _orderBasketService.UpdateAllProductsItems(allOrderItems);
 
         OrderItemsCollectionView.ItemsSource = allOrderItems;
