@@ -4,7 +4,7 @@
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MackiesPhoneApp.Pages.User.PopupDetailPage"
                Color="White"
-                Size="300,600" >
+                Size="400,800" >
 
     <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
         <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
@@ -12,34 +12,26 @@
 
                 <VerticalStackLayout>
                 <Image Source="{Binding imageurl}" WidthRequest="250" HeightRequest="250"  Aspect="AspectFill"  VerticalOptions="Center" />
-              
 
+  
 
-                <!--<Editor x:Name="ProductDescription"
-                        Text="{Binding productdescription}"
-                        BackgroundColor="White" 
-                        TextColor="Black"
-                        Placeholder="Type your text here..."
-                        AutoSize="TextChanges"
-                        HeightRequest="200"
-                         Keyboard="Text" />-->
+                    <ScrollView HeightRequest="600" Margin="0" >
+                        <VerticalStackLayout Spacing="10">
 
-                    <ScrollView HeightRequest="300" Margin="20">
-                        <VerticalStackLayout>
-                        <Label                          
-                            Text="{Binding productdescription}"
-                           LineBreakMode="CharacterWrap"
-                            TextColor="White"
-                             >
-                            
-                        </Label>
-                        <Label                          
-      Text="{Binding details}"
-     LineBreakMode="CharacterWrap"
-      TextColor="White"
-       >
+                            <Label           
+                                Margin="30"
+                                Text="{Binding productdescription}"
+                                LineBreakMode="CharacterWrap"
+                                TextColor="White"
+                                FontSize="18"
+                            >
+                            </Label>
 
-                        </Label>
+                            <WebView x:Name="ProductDetailsWebView" 
+                            HeightRequest="900"
+                             WidthRequest="300"                           
+                                     />
+
                         </VerticalStackLayout>
                     </ScrollView>
                 </VerticalStackLayout>
