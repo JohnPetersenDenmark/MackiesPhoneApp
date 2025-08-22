@@ -6,6 +6,7 @@
              x:Name="OrderPageRoot"
             Title="">
 
+    <ScrollView>
     <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
 
         <CollectionView x:Name="OrderItemsCollectionView"              
@@ -124,4 +125,5 @@
         </CollectionView.ItemTemplate>
     </CollectionView>
     </StackLayout>
+        </ScrollView>
 </ContentPage>

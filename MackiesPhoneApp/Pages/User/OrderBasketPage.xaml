@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MackiesPhoneApp.Pages.User.OrderBasketPage"
              Title="">
+    <ScrollView>
 
-    <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
+        <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
         <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -85,5 +86,5 @@
             </VerticalStackLayout>
         </Frame>
     </VerticalStackLayout>
-
+        </ScrollView>
 </ContentPage>
