@@ -39,6 +39,8 @@ namespace MackiesPhoneApp.Models
         [JsonPropertyName("modifieddatetime")]
         public DateTime? ModifiedDateTime { get; set; }
 
+        [JsonPropertyName("deliveryDate")]
+        public DateTime? DeliveryDate { get; set; }
 
         [JsonPropertyName("locationstartdatetime")]
         public string? LocationStartDateTime { get; set; }
@@ -58,6 +60,12 @@ namespace MackiesPhoneApp.Models
 
         [JsonPropertyName("orderlines")]
         public List<OrderItemDto>? OrderLines { get; set; } = new();
+
+        [JsonPropertyName("templateScheduleId")]
+        public int? TemplateScheduleId { get; set; }
+
+        [JsonPropertyName("fishShopId")]
+        public int? FishShopId { get; set; }
 
         [JsonPropertyName("totalPrice")]
         public decimal TotalPrice { get; set; }

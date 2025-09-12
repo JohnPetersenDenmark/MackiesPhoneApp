@@ -26,7 +26,7 @@
 
         <VerticalStackLayout Padding="10" >
            
-                <CollectionView x:Name="TruckLocationsCollectionView"              
+                <CollectionView x:Name="FishShopCollectionView"              
                                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                    
@@ -37,15 +37,27 @@
 
                                 <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
 
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
-                                    </Frame.GestureRecognizers>
+                                   
 
                                     <VerticalStackLayout Margin="10">
-                                        <Label Text="{Binding StartDateRefined}" FontSize="16" TextColor="White" />
-                                        <Label Text="{Binding LocationName}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
-                                        <Label Text="{Binding OpenCloseInterval}" FontSize="16" TextColor="White" />
-                                    </VerticalStackLayout>
+                                            <Label Text="{Binding Name}" FontSize="16" TextColor="White" />
+                                        <Label Text="{Binding Area.Name}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
+                                            <CollectionView ItemsSource="{Binding Area.TemplateSchedules}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <VerticalStackLayout Padding="5" Margin="5" BackgroundColor="#f0f0f0" >
+                                                            <Border>
+                                                                <Border.GestureRecognizers>
+                                                                    <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
+                                                                </Border.GestureRecognizers>
+                                                            
+                                                            <Label Text="{Binding LocationName}" FontSize="18"  Padding="10,0,0,0" />
+                                                            </Border>
+                                                        </VerticalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </VerticalStackLayout>
 
                                 </Frame>
                             </Frame>

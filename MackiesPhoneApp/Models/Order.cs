@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MackiesPhoneApp.Models
@@ -62,6 +63,10 @@ namespace MackiesPhoneApp.Models
                 OnPropertyChanged(nameof(OrderItemsList));
             }
         }
+
+        
+        public TemplateScheduleDto TemplateSchedule { get; set; }
+        public FishShopDtoDetailed FishShop { get; set; }
 
         public int LocationId { get; set; }
 

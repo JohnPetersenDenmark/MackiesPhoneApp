@@ -29,34 +29,64 @@ public partial class HomeView : ContentView
 
     private async void InitializeAsync()
     {
-        var response = await CustomHttpClient.getRequest("/Home/truckcalendarlocationlist", false, this);
+        var response = await CustomHttpClient.getRequest("/Admin/fishshoplistSchedules", false, this);
 
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
             var responseJson = await response.Content.ReadAsStringAsync();
-            List<TruckLocation> truckLocations = JsonConvert.DeserializeObject<List<TruckLocation>>(responseJson);
+            List<FishShopDtoDetailed> fishShops = JsonConvert.DeserializeObject<List<FishShopDtoDetailed>>(responseJson);
 
-            var filteredTruckLocations = filterTruckLocations(truckLocations);
+            //var filteredTruckLocations = filterTruckLocations(truckLocations);
 
-            var sortedTruckLocations = sortTruckLocations(filteredTruckLocations);
+            //var sortedTruckLocations = sortTruckLocations(filteredTruckLocations);
 
-            foreach (var truckLocation in sortedTruckLocations)
-            {
-                refineTruckLocation(truckLocation);
-            }
-            TruckLocationsCollectionView.ItemsSource = sortedTruckLocations;
+            //foreach (var truckLocation in sortedTruckLocations)
+            //{
+            //    refineTruckLocation(truckLocation);
+            //}
+            FishShopCollectionView.ItemsSource = fishShops;
         }
     }
 
     private async void OnTruckLocationTapped(object sender, EventArgs e)
     {
         // Get the data context of the tapped item
-        if (sender is Frame frame && frame.BindingContext is TruckLocation selectedTruckStop)
-        {
-            var orderBasketService = ServiceHelper.GetService<OrderBasket>();
-            orderBasketService.order.LocationId = selectedTruckStop.Id;
-            await Navigation.PushAsync(new OrderPage(selectedTruckStop));
+
+        //if (sender is Frame frame && frame.BindingContext is TemplateScheduleDto templateSchedule)
+        //{
+            if (sender is Border border)
+            {
+                // The BindingContext here is TemplateSchedule
+                var tappedSchedule = border.BindingContext as TemplateScheduleDto;
+
+                // Walk up until you find the parent FishShop
+                var parentFishShop = GetParentFishShop(border);
+
+                if (tappedSchedule != null && parentFishShop != null)
+                {
+                    var orderBasketService = ServiceHelper.GetService<OrderBasket>();
+                    orderBasketService.order.TemplateSchedule = tappedSchedule;
+                    orderBasketService.order.FishShop = parentFishShop;
+                await Navigation.PushAsync(new OrderPage(tappedSchedule));
+                }
+            //}
+
+           
         }
+       
+    }
+
+    private FishShopDtoDetailed GetParentFishShop(Element element)
+    {
+        var parent = element.Parent;
+        while (parent != null)
+        {
+            if (parent.BindingContext is FishShopDtoDetailed shop)
+                return shop;
+
+            parent = parent.Parent;
+        }
+        return null;
     }
 
     private void refineTruckLocation(TruckLocation truckLocation)

@@ -87,6 +87,12 @@ namespace MackiesPhoneApp.Pages.User
             int randomNumber = random.Next(100000, 1000000); // 100000 inclusive, 1000000 exclusive
 
             orderDto.CustomerOrderCode = randomNumber.ToString();
+
+            orderDto.TemplateScheduleId = _orderBasketService.order.TemplateSchedule.Id;
+
+            orderDto.DeliveryDate = _orderBasketService.order.TemplateSchedule.Date;
+
+            orderDto.FishShopId = _orderBasketService.order.FishShop.Id;
             orderDto.LocationId = _orderBasketService.order.LocationId;
 
             orderDto.Comment = _orderBasketService.order.Comment;

@@ -7,7 +7,7 @@ namespace MackiesPhoneApp.Pages.User;
 
 public partial class OrderPage : ContentPage
 {
-	TruckLocation _selectedTruckLocation;
+    TemplateScheduleDto _selectedLocation;
     private OrderBasket _orderBasketService;
     private ToolbarItem _totalToolbarItem;
     private OrderItem _selectedItem;
@@ -16,11 +16,11 @@ public partial class OrderPage : ContentPage
 
 
 
-    public OrderPage(TruckLocation selectedTruckLocation)
+    public OrderPage(TemplateScheduleDto selectedLocation)
 	{
         InitializeComponent();
 
-        _selectedTruckLocation = selectedTruckLocation;
+        _selectedLocation = selectedLocation;
 
         _orderBasketService = ServiceHelper.GetService<OrderBasket>();
 
