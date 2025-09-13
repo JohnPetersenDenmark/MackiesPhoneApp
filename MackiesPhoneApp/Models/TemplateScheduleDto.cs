@@ -32,6 +32,9 @@ namespace MackiesPhoneApp.Models
         [JsonPropertyName("endtime")]
         public string EndTime { get; set; }
 
+        [JsonPropertyName("shopOpenTimeInterval")]
+        public string ShopOpenTimeInterval { get; set; }
+
         [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 

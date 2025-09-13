@@ -50,8 +50,13 @@
                                                                 <Border.GestureRecognizers>
                                                                     <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
                                                                 </Border.GestureRecognizers>
-                                                            
-                                                            <Label Text="{Binding LocationName}" FontSize="18"  Padding="10,0,0,0" />
+
+                                                                <VerticalStackLayout>
+                                                                    <Label Text="{Binding LocationName}" FontSize="18"  Padding="10,0,0,0" />
+                                                                    <Label Text="{Binding Date , StringFormat='{0:dd-MM-yyyy}'}" FontSize="16"  Padding="10,0,0,0" />
+                                                                    <Label Text="{Binding ShopOpenTimeInterval}" Padding="10,0,0,0"  FontSize="16"/>
+                                                                </VerticalStackLayout>
+
                                                             </Border>
                                                         </VerticalStackLayout>
                                                     </DataTemplate>

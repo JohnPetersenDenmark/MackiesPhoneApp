@@ -6,47 +6,48 @@
     <ScrollView>
 
         <VerticalStackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
-        <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
-                        <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
-                        <VerticalStackLayout>
-                            <Image BackgroundColor="white" Source="minussign.png"
+           
+            <CollectionView x:Name="OrderItemsList" ItemsSource="{Binding OrderItemsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
+                            <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
+                                <VerticalStackLayout>
+                                    <Image BackgroundColor="white" Source="minussign.png"
                                WidthRequest="20"
                               
                                 InputTransparent="False">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnImageMinusTapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnImageMinusTapped" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
 
-                            <HorizontalStackLayout Margin="20" Spacing="20" >
-                            <Label Text="{Binding quantity}" TextColor="White" FontSize="16"/>
-                                <Label Text="{Binding productname}" TextColor="White" FontSize="16" />
-                                <Label Text="{Binding unitprice}" TextColor="White" FontSize="16" />
-                                <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" TextColor="White" FontSize="16"/>
-                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Margin="20" Spacing="20" >
+                                        <Label Text="{Binding quantity}" TextColor="White" FontSize="16"/>
+                                        <Label Text="{Binding productname}" TextColor="White" FontSize="16" />
+                                        <Label Text="{Binding unitprice}" TextColor="White" FontSize="16" />
+                                        <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" TextColor="White" FontSize="16"/>
+                                    </HorizontalStackLayout>
 
-                        <Image BackgroundColor="White" Source="plussign.png"
+                                    <Image BackgroundColor="White" Source="plussign.png"
                             WidthRequest="20"
                             HeightRequest="20">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnImagePlusTapped" />
-                            </Image.GestureRecognizers>
-                        </Image>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnImagePlusTapped" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
 
-                    </VerticalStackLayout>
-                   </Frame>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Frame CornerRadius="8" BackgroundColor="LightGray"  Margin="10">
-            <VerticalStackLayout>
+            <Frame CornerRadius="8" BackgroundColor="LightGray"  Margin="10">
+                <VerticalStackLayout>
 
-                <Editor x:Name="Comment"
+                    <Editor x:Name="Comment"
                     Text="{Binding Comment}"
                          BackgroundColor="White" 
                         TextColor="Black"
@@ -55,36 +56,56 @@
                     HeightRequest="200"
                     Keyboard="Text" />
 
-                <Entry x:Name="UsernameEntry"
+                    <Entry x:Name="UsernameEntry"
               Placeholder="Navn"
                PlaceholderColor="Gray"               
                Text="{Binding CustomerName}"
                TextColor="Black" />
 
-                <Entry x:Name="EmailEntry"
+                    <Entry x:Name="EmailEntry"
              Placeholder="Email"
                 PlaceholderColor="Gray"               
                 Text="{Binding CustomerEmail}"
                 TextColor="Black" />
 
-                <Entry x:Name="PhoneNumberEntry"
+                    <Entry x:Name="PhoneNumberEntry"
                 Placeholder="Telefonnummer"
                 PlaceholderColor="Gray"               
                 Text="{Binding CustomerPhoneNumber}"
                 TextColor="Black" />
 
-                <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
-                    <Button Text="Nulstil ordre"
+                    <HorizontalStackLayout  Spacing="10" HorizontalOptions="Center" >
+                        <Button Text="Nulstil ordre"
                         Clicked="OnClearClicked"                        
                         BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}"
                         />
 
-                    <Button Text="Send order" 
+                        <Button Text="Send order" 
                             Clicked="OnSubmitOrderClicked" 
                               BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}" />
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Frame>
-    </VerticalStackLayout>
-        </ScrollView>
+                    </HorizontalStackLayout>
+
+                    <Frame Margin="0,20,0,0">
+                        <VerticalStackLayout >
+
+                            <Label Margin="0,0,0,20" Text="Afhentning:" FontSize="18" FontAttributes="Bold"/>
+
+                            <Label Text="{Binding TemplateSchedule.Date,  StringFormat='{0:dd-MM-yyyy}'}" />
+                            <Label Text="{Binding TemplateSchedule.ShopOpenTimeInterval}" />
+                            <Label Text="{Binding TemplateSchedule.LocationName}" />
+                            <Label Text="{Binding TemplateSchedule.Location.Address}" />
+                       
+                    </VerticalStackLayout>
+                    </Frame>
+
+
+
+                </VerticalStackLayout>
+               
+            </Frame>
+
+            
+        </VerticalStackLayout>
+       
+    </ScrollView>
 </ContentPage>

@@ -44,6 +44,15 @@ public partial class HomeView : ContentView
             //{
             //    refineTruckLocation(truckLocation);
             //}
+
+            foreach ( var fishShop in fishShops)
+            {
+                foreach ( var templateSchedule in fishShop.Area.TemplateSchedules)
+                {
+                    templateSchedule.ShopOpenTimeInterval = "I tidsrummet " + templateSchedule.StartTime + " - " + templateSchedule.EndTime;
+                }
+                //  _orderBasketService.order.TemplateSchedule.ShopOpenTimeInterval = "I tidsrummet " + _orderBasketService.order.TemplateSchedule.StartTime + " - " + _orderBasketService.order.TemplateSchedule.EndTime;
+            }
             FishShopCollectionView.ItemsSource = fishShops;
         }
     }

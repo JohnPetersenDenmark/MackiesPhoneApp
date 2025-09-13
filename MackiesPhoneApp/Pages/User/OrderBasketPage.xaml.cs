@@ -21,7 +21,8 @@ namespace MackiesPhoneApp.Pages.User
             var grid = SetNavigationBarPageTitle.setContentTotal();
 
             NavigationPage.SetTitleView(this, grid);
-          
+
+           
             BindingContext = _orderBasketService.order;
         }
 
