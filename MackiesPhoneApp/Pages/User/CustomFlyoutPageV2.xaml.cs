@@ -56,6 +56,12 @@ namespace MackiesPhoneApp.Pages.User
             SetRootPage(new SettingsPage());
         }
 
+        private void GoTestPage_Clicked(object sender, EventArgs e)
+        {
+            SetRootPage(new TestPage());
+        }
+        
+
         private void SetRootPage(Page newRoot)
         {
             // Replace root without replacing NavigationPage

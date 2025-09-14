@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MackiesPhoneApp.Models
 {
-    public  class FishShopDtoDetailed
+    public  class FishShopDtoDetailed : INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,5 +17,24 @@ namespace MackiesPhoneApp.Models
 
         public OperationAreaDto Area { get; set; }
         public EmployeeDto? Employee { get; set; }
+
+        private bool _isVisibleTemplateSchedule;
+
+       
+
+        public bool IsVisibleTemplateSchedule
+        {
+            get => _isVisibleTemplateSchedule;
+            set
+            {
+
+                _isVisibleTemplateSchedule = value;
+                OnPropertyChanged(nameof(IsVisibleTemplateSchedule));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        void OnPropertyChanged(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

@@ -49,12 +49,46 @@ public partial class HomeView : ContentView
             {
                 foreach ( var templateSchedule in fishShop.Area.TemplateSchedules)
                 {
-                    templateSchedule.ShopOpenTimeInterval = "I tidsrummet " + templateSchedule.StartTime + " - " + templateSchedule.EndTime;
+                    templateSchedule.ShopOpenTimeInterval = "i tidsrummet " + templateSchedule.StartTime + " - " + templateSchedule.EndTime;
                 }
                 //  _orderBasketService.order.TemplateSchedule.ShopOpenTimeInterval = "I tidsrummet " + _orderBasketService.order.TemplateSchedule.StartTime + " - " + _orderBasketService.order.TemplateSchedule.EndTime;
             }
             FishShopCollectionView.ItemsSource = fishShops;
         }
+    }
+
+    private async void  OnShowNoShowLocationsTapped(object sender, EventArgs e)
+    {
+        if (sender is Border border)
+        {
+            if (border != null)
+            {
+                var fishShop = GetParentFishShop(border);
+
+                // If the content is a Label
+                var label = border.Content as Label;
+                if (label != null)
+                {
+                    if (fishShop.IsVisibleTemplateSchedule)
+                    {
+                        fishShop.IsVisibleTemplateSchedule = false;
+                         label.Text = "Vis lokationer";
+
+                        border.BackgroundColor = Color.FromArgb("#FFFFFF");
+                        label.TextColor = Color.FromArgb("#000000");
+                    }
+                    else
+                    {
+                        fishShop.IsVisibleTemplateSchedule = true;
+                         label.Text = "Gem lokationer";
+
+                      border.BackgroundColor = Color.FromArgb("#5470a9");
+
+                        label.TextColor =  Color.FromArgb("#FFFFFF");
+                    }
+                }
+            }
+        }          
     }
 
     private async void OnTruckLocationTapped(object sender, EventArgs e)

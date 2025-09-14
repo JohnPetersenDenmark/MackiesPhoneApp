@@ -39,7 +39,7 @@
                         Clicked="GoHome_Clicked"/>
 
                     <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
-                        Text="Indstillinger" 
+                        Text="Test page" 
                              FontSize="20" 
                              HeightRequest="120" 
                              MinimumHeightRequest="30"
@@ -47,7 +47,18 @@
                             CornerRadius="50"
                             Padding="0"
                         TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
-                        Clicked="GoSettings_Clicked"/>
+                        Clicked="GoTestPage_Clicked"/>
+
+                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+     Text="Indstillinger" 
+          FontSize="20" 
+          HeightRequest="120" 
+          MinimumHeightRequest="30"
+         WidthRequest="120"
+         CornerRadius="50"
+         Padding="0"
+     TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
+     Clicked="GoSettings_Clicked"/>
 
                 </VerticalStackLayout>
             </ScrollView>

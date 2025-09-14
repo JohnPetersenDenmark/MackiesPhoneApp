@@ -5,44 +5,93 @@
 
     <ScrollView>
         <StackLayout Padding="0" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
-        <Label x:Name="LoggedInUserDisplayName" 
+            <Label x:Name="LoggedInUserDisplayName" 
        Text="" 
        FontSize="24" />
 
 
-        <VerticalStackLayout >
-        <Label Text="JJ Fisk - en seriøs fiskehandler"
+            <VerticalStackLayout >
+                <Label Text="JJ Fisk - en seriøs fiskehandler"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalTextAlignment="Center"
                TextColor="White" />
-                    
-        <Label Margin="50" Text="Vi holder med fiskebilerne her :"                              
-        FontSize="16"
-        TextColor="White"
-        LineHeight="1.5" />
 
-        </VerticalStackLayout>
+                <Label Margin="50" Text="Vi holder med fiskebilerne her :"                              
+                     FontSize="16"
+                    TextColor="White"
+                     LineHeight="1.5" />
 
-        <VerticalStackLayout Padding="10" >
-           
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="10" >
+
                 <CollectionView x:Name="FishShopCollectionView"              
                                 SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                   
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                        <VerticalStackLayout>
-
-                            <Frame CornerRadius="5"  Padding="5" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
-
-                                <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
-
-                                   
-
-                                    <VerticalStackLayout Margin="10">
+                            <VerticalStackLayout>
+                                <Frame CornerRadius="5"  Padding="5" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
+                                    <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
+                                        <VerticalStackLayout Margin="10">
                                             <Label Text="{Binding Name}" FontSize="16" TextColor="White" />
-                                        <Label Text="{Binding Area.Name}" FontSize="16"  FontAttributes="Bold" TextColor="Black" />
-                                            <CollectionView ItemsSource="{Binding Area.TemplateSchedules}">
+
+                                            <HorizontalStackLayout Spacing="20">
+                                                <Label Text="{Binding Area.Name}" FontSize="16"  FontAttributes="Bold" TextColor="Black" Margin="0,0,0,0"/>
+
+                                            <!--<Label x:Name="ShowNoShowLocationsLabel" Text="Vis lokationer" FontSize="16"  FontAttributes="Bold" TextColor="Black" >
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnShowNoShowLocationsTapped" />
+                                                </Label.GestureRecognizers>
+                                            </Label>-->
+                                                <!--<Button Text="Vis lokationer"
+                                                    FontSize="10"
+                                                    BackgroundColor="#ffffff"
+                                                    WidthRequest="100"
+                                                     HeightRequest="20"
+                                                    TextColor="#000000"
+                                                     CornerRadius="20"
+                                                    Padding="12,6" 
+                                                    Clicked="OnShowNoShowLocationsTapped"
+                                                />-->
+
+
+
+
+                                                <Border Stroke="Transparent"
+                                                    BackgroundColor="#ffffff"
+                                                    StrokeShape="RoundRectangle 20"
+                                                    HeightRequest="20"
+                                                    WidthRequest="100"
+                                                    Padding="0"
+                                                    HorizontalOptions="Start">
+                                                 <Label x:Name="LabelShoNoShowLocations" Text="Vis lokationer"
+                                                   FontSize="10"
+                                                   TextColor="Black"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center" />    
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnShowNoShowLocationsTapped" />
+                                                    </Border.GestureRecognizers>
+                                                </Border>
+
+                                            </HorizontalStackLayout>
+
+                                           
+                                            <!--</HorizontalStackLayout>
+                                            
+                                            
+                                            <ImageButton Source="plussign.png"
+                                                         
+                                                WidthRequest="20"
+                                                HeightRequest="20"
+                                                BackgroundColor="Transparent"
+                                                CornerRadius="30"
+                                                Clicked="OnShowNoShowLocationsTapped" />-->
+
+ 
+
+                                            <CollectionView IsVisible="{Binding IsVisibleTemplateSchedule}" ItemsSource="{Binding Area.TemplateSchedules}">
                                                 <CollectionView.ItemTemplate>
                                                     <DataTemplate>
                                                         <VerticalStackLayout Padding="5" Margin="5" BackgroundColor="#f0f0f0" >
@@ -64,17 +113,17 @@
                                             </CollectionView>
                                         </VerticalStackLayout>
 
+                                    </Frame>
                                 </Frame>
-                            </Frame>
-                           
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                   
-                </CollectionView.ItemTemplate>
-        </CollectionView>
-         
-        </VerticalStackLayout>
-    </StackLayout>
+
+                            </VerticalStackLayout>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </StackLayout>
 
     </ScrollView>
 </ContentView>
