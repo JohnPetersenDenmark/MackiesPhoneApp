@@ -28,7 +28,22 @@ namespace MackiesPhoneApp.Services
             return productList;
         }
 
-       
+        public static async Task<List<ProductCategoryDto>> getProductCategories()
+        {
+            var categoryList = new List<ProductCategoryDto>();
+            var partialUrl = "/Home/productcategorylist";
+            var response = await MackiesPhoneApp.Services.CustomHttpClient.getRequest(partialUrl, false, null);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var responseJson = await response.Content.ReadAsStringAsync();
+
+                categoryList = JsonConvert.DeserializeObject<List<ProductCategoryDto>>(responseJson);
+            }
+
+            return categoryList;
+        }
+
+
 
         public static List<OrderItem>  MakeProductItems(List<Product> productList)
         {
@@ -52,6 +67,7 @@ namespace MackiesPhoneApp.Services
                 orderItem.orderid = 0;
                 orderItem.IsQuantityEditable = false;
                 orderItem.IsQuantityVisible = false;
+                orderItem.productcategories = product.ProductCategories;
 
                 productOrderItemList.Add(orderItem);
             }

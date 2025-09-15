@@ -70,5 +70,7 @@ namespace MackiesPhoneApp.Models
         [JsonPropertyName("totalPrice")]
         public decimal TotalPrice { get; set; }
 
+        [JsonPropertyName("productCategories")]
+        public List<ProductCategoryDto>? ProductCategories { get; set; } = new();
     }
 }

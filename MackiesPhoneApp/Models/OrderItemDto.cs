@@ -35,5 +35,7 @@ namespace MackiesPhoneApp.Models
 
         [JsonPropertyName("discountedunitprice")]
         public decimal? DiscountedUnitPrice { get; set; }
+
+        public List<ProductCategoryDto>? ProductCategories { get; set; }
     }
 }

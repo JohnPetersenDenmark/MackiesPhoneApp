@@ -19,6 +19,8 @@ namespace MackiesPhoneApp.Models
 
         public int productid { get; set; }
 
+        public List<ProductCategoryDto> productcategories { get; set; }
+
         public string productname { get; set; }
 
         public string productnumber { get; set; }

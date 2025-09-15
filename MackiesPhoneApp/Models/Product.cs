@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MackiesPhoneApp.Models
@@ -29,6 +30,9 @@ namespace MackiesPhoneApp.Models
 
         [Column(TypeName = "decimal(18,2)")]
         public Decimal? DiscountPrice { get; set; }
+
+        [JsonPropertyName("productCategories")]
+        public List<ProductCategoryDto>? ProductCategories { get; set; } = new();
     }
 }
 

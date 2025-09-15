@@ -9,7 +9,34 @@
     <ScrollView>
     <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
 
-        <CollectionView x:Name="OrderItemsCollectionView"              
+
+
+
+
+            <CollectionView x:Name="ProductCategoriesView"
+                            ItemsSource="{Binding ProductCategories}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCategorySelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                               Margin="5"
+                               InputTransparent="True"
+                               BorderColor="LightGray"
+                               BackgroundColor="LightBlue"
+                               HasShadow="False">
+                            <Label Text="{Binding CategoryName}"
+                                   FontSize="18"
+                                   TextColor="Black" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+
+            <CollectionView x:Name="OrderItemsCollectionView"              
             SelectionMode="None"
             >
         <CollectionView.ItemTemplate Margin="20">

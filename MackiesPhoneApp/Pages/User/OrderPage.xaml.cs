@@ -2,6 +2,7 @@ using CommunityToolkit.Maui.Views;
 using MackiesPhoneApp.Models;
 using MackiesPhoneApp.Services;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
 
 namespace MackiesPhoneApp.Pages.User;
 
@@ -13,6 +14,11 @@ public partial class OrderPage : ContentPage
     private OrderItem _selectedItem;
 
     private List<OrderItem> allOrderItems;
+
+
+
+    public ObservableCollection<ProductCategoryDto> Categories { get; set; }    
+    public ProductCategoryDto SelectedCategory { get; set; }
 
 
 
@@ -41,6 +47,15 @@ public partial class OrderPage : ContentPage
         _orderBasketService.UpdateAllProductsItems(allOrderItems);
 
         OrderItemsCollectionView.ItemsSource = allOrderItems;
+
+        var categoryList = await MackiesPhoneApp.Services.Products.getProductCategories();
+
+
+        _orderBasketService.ProductCategories = new ObservableCollection<ProductCategoryDto>(categoryList);
+        
+
+
+
     }
 
   
@@ -105,5 +120,26 @@ public partial class OrderPage : ContentPage
             var result = await this.ShowPopupAsync(popup);
         }
     
+    }
+
+    private void OnCategorySelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+        {
+            var selectedCategory = e.CurrentSelection.FirstOrDefault() as ProductCategoryDto;
+            if (selectedCategory != null)
+            {
+                // Example: filter products
+              //  Console.WriteLine($"Selected category: {selectedCategory.Name}");
+
+                // If you want to filter AllProductsItems based on the category:
+                var filtered = allOrderItems
+                    .Where(p => p.productcategories.Contains(selectedCategory))
+                    .ToList();
+
+                // Update the UI by replacing the collection
+                _orderBasketService.UpdateAllProductsItems(filtered);
+            }
+        }
     }
 }

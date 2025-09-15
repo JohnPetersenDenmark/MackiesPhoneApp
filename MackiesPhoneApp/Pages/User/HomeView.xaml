@@ -39,25 +39,6 @@
                                             <HorizontalStackLayout Spacing="20">
                                                 <Label Text="{Binding Area.Name}" FontSize="16"  FontAttributes="Bold" TextColor="Black" Margin="0,0,0,0"/>
 
-                                            <!--<Label x:Name="ShowNoShowLocationsLabel" Text="Vis lokationer" FontSize="16"  FontAttributes="Bold" TextColor="Black" >
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="OnShowNoShowLocationsTapped" />
-                                                </Label.GestureRecognizers>
-                                            </Label>-->
-                                                <!--<Button Text="Vis lokationer"
-                                                    FontSize="10"
-                                                    BackgroundColor="#ffffff"
-                                                    WidthRequest="100"
-                                                     HeightRequest="20"
-                                                    TextColor="#000000"
-                                                     CornerRadius="20"
-                                                    Padding="12,6" 
-                                                    Clicked="OnShowNoShowLocationsTapped"
-                                                />-->
-
-
-
-
                                                 <Border Stroke="Transparent"
                                                     BackgroundColor="#ffffff"
                                                     StrokeShape="RoundRectangle 20"
@@ -75,21 +56,31 @@
                                                     </Border.GestureRecognizers>
                                                 </Border>
 
+                                                <Border Stroke="Transparent"
+                                                     BackgroundColor="#ffffff"
+                                                     StrokeShape="RoundRectangle 20"
+                                                     HeightRequest="20"
+                                                     WidthRequest="100"
+                                                     Padding="0"
+                                                     HorizontalOptions="Start">
+                                                    <Label x:Name="LabelToggleShowContact" Text="Vis kontakt"
+                                                    FontSize="10"
+                                                    TextColor="Black"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center" />
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnToggleShowContactTapped" />
+                                                    </Border.GestureRecognizers>
+                                                </Border>
+
                                             </HorizontalStackLayout>
 
-                                           
-                                            <!--</HorizontalStackLayout>
+                                            <VerticalStackLayout IsVisible="{Binding IsVisibleContactInfo}">
+                                                <Label Text="{Binding Employee.Name}" FontSize="16" TextColor="White" />
+                                                <Label Text="{Binding Employee.Phone}" FontSize="16" TextColor="White" />
+                                                <Label Text="{Binding Employee.Email}" FontSize="16" TextColor="White" />
+                                            </VerticalStackLayout>
                                             
-                                            
-                                            <ImageButton Source="plussign.png"
-                                                         
-                                                WidthRequest="20"
-                                                HeightRequest="20"
-                                                BackgroundColor="Transparent"
-                                                CornerRadius="30"
-                                                Clicked="OnShowNoShowLocationsTapped" />-->
-
- 
 
                                             <CollectionView IsVisible="{Binding IsVisibleTemplateSchedule}" ItemsSource="{Binding Area.TemplateSchedules}">
                                                 <CollectionView.ItemTemplate>

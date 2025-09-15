@@ -91,6 +91,40 @@ public partial class HomeView : ContentView
         }          
     }
 
+    private async void OnToggleShowContactTapped(object sender, EventArgs e)
+    {
+        if (sender is Border border)
+        {
+            if (border != null)
+            {
+                var fishShop = GetParentFishShop(border);
+
+                // If the content is a Label
+                var label = border.Content as Label;
+                if (label != null)
+                {
+                    if (fishShop.IsVisibleContactInfo)
+                    {
+                        fishShop.IsVisibleContactInfo = false;
+                        label.Text = "Vis kontakt";
+
+                        border.BackgroundColor = Color.FromArgb("#FFFFFF");
+                        label.TextColor = Color.FromArgb("#000000");
+                    }
+                    else
+                    {
+                        fishShop.IsVisibleContactInfo = true;
+                        label.Text = "Gem kontakt";
+
+                        border.BackgroundColor = Color.FromArgb("#5470a9");
+
+                        label.TextColor = Color.FromArgb("#FFFFFF");
+                    }
+                }
+            }
+        }
+    }
+
     private async void OnTruckLocationTapped(object sender, EventArgs e)
     {
         // Get the data context of the tapped item

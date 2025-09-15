@@ -33,6 +33,18 @@ namespace MackiesPhoneApp.Models
             }
         }
 
+        private bool _isVisibleContactInfo; 
+        public bool IsVisibleContactInfo
+        {
+            get => _isVisibleContactInfo;
+            set
+            {
+
+                _isVisibleContactInfo = value;
+                OnPropertyChanged(nameof(IsVisibleContactInfo));
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

@@ -52,6 +52,19 @@ namespace MackiesPhoneApp.Services
             }
         }
 
+        private ObservableCollection<ProductCategoryDto> _productCategories;
+        public ObservableCollection<ProductCategoryDto> ProductCategories
+        {
+            get => _productCategories;
+            set
+            {
+                
+                    _productCategories = value;
+                    OnPropertyChanged(nameof(ProductCategories));
+                
+            }
+        }
+
         public OrderBasket()
         {
             order.OrderItemsList = new ObservableCollection<OrderItem>();
