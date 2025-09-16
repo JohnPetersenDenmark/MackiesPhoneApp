@@ -56,7 +56,7 @@ namespace MackiesPhoneApp.Services
                 orderItem.productid = product.Id;
                 orderItem.productnumber = product.ProductNumber;
                 orderItem.unitprice = product.Price;              
-                orderItem.producttype = product.ProductType;
+                orderItem.producttypes = product.ProductTypes;
                 orderItem.productdescription = product.Description;
                 orderItem.details = product.Details;
                 orderItem.imageurl = MackiesPhoneApp.Services.Constants.getApiBaseUrl() + product.ImageUrl;

@@ -37,5 +37,7 @@ namespace MackiesPhoneApp.Models
         public decimal? DiscountedUnitPrice { get; set; }
 
         public List<ProductCategoryDto>? ProductCategories { get; set; }
+
+        public List<ProductType>? ProductTypes { get; set; }
     }
 }

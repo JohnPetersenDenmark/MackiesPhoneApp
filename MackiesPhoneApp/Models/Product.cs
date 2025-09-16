@@ -33,6 +33,9 @@ namespace MackiesPhoneApp.Models
 
         [JsonPropertyName("productCategories")]
         public List<ProductCategoryDto>? ProductCategories { get; set; } = new();
+
+        [JsonPropertyName("productTypes")]
+        public List<ProductType>? ProductTypes { get; set; } = new();
     }
 }
 

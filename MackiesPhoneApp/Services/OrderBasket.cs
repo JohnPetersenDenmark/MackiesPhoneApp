@@ -65,6 +65,58 @@ namespace MackiesPhoneApp.Services
             }
         }
 
+        private bool _showProductCategories;
+        public bool ShowProductCategories
+        {
+            get => _showProductCategories;
+            set
+            {
+
+                _showProductCategories = value;
+                OnPropertyChanged(nameof(ShowProductCategories));
+
+            }
+        }
+
+        private ObservableCollection<ProductType> _productTypes;
+        public ObservableCollection<ProductType> ProductTypes
+        {
+            get => _productTypes;
+            set
+            {
+
+                _productTypes = value;
+                OnPropertyChanged(nameof(ProductTypes));
+
+            }
+        }
+
+        private bool _showProductTypes;
+        public bool ShowProductTypes
+        {
+            get => _showProductTypes;
+            set
+            {
+
+                _showProductTypes = value;
+                OnPropertyChanged(nameof(ShowProductTypes));
+
+            }
+        }
+
+        private ObservableCollection<string> _productFilters;
+        public ObservableCollection<string> ProductFilters
+        {
+            get => _productFilters;
+            set
+            {
+
+                _productFilters = value;
+                OnPropertyChanged(nameof(ProductFilters));
+
+            }
+        }
+
         public OrderBasket()
         {
             order.OrderItemsList = new ObservableCollection<OrderItem>();
@@ -125,9 +177,10 @@ namespace MackiesPhoneApp.Services
             OrderTotal = CalculateOrderTotal();
         }
 
-        public bool IsProductInBasket(int productType, int productId)
+        public bool IsProductInBasket(int productId)
         {
-            return order.OrderItemsList.Any(product => product.productid == productId && product.producttype == productType);
+            // return order.OrderItemsList.Any(product => product.productid == productId && product.producttype == productType);
+            return order.OrderItemsList.Any(product => product.productid == productId );
         }
 
         public void RemoveOrderItemFromBasket(OrderItem orderItem)

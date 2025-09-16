@@ -42,7 +42,7 @@ namespace MackiesPhoneApp.Models
         [Column(TypeName = "decimal(18,2)")]
         public Decimal? discountedunitprice { get; set; }
 
-        public int producttype { get; set; }
+        public List<ProductType> producttypes { get; set; }
 
         public bool IsInBasket
         {

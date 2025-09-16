@@ -10,10 +10,33 @@
     <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
 
 
-
+        
+        
+            <CollectionView x:Name="FiltersView"
+                  ItemsSource="{Binding ProductFilters}"
+                  SelectionMode="Multiple"
+                  SelectionChanged="OnFilterSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                     Margin="5"
+                     InputTransparent="True"
+                     BorderColor="LightGray"
+                     BackgroundColor="LightBlue"
+                     HasShadow="False">
+                            <Label Text="{Binding}"
+                         FontSize="18"
+                         TextColor="Black" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        
+        
 
 
             <CollectionView x:Name="ProductCategoriesView"
+                            IsVisible="{Binding ShowProductCategories}"
                             ItemsSource="{Binding ProductCategories}"
                             SelectionMode="Single"
                             SelectionChanged="OnCategorySelected">
@@ -28,6 +51,27 @@
                             <Label Text="{Binding CategoryName}"
                                    FontSize="18"
                                    TextColor="Black" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView x:Name="ProductTypesView"
+                IsVisible="{Binding ShowProductTypes}"
+                ItemsSource="{Binding ProductTypes}"
+                SelectionMode="Single"
+                SelectionChanged="OnTypeSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                   Margin="5"
+                   InputTransparent="True"
+                   BorderColor="LightGray"
+                   BackgroundColor="LightBlue"
+                   HasShadow="False">
+                            <Label Text="{Binding CategoryName}"
+                       FontSize="18"
+                       TextColor="Black" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
