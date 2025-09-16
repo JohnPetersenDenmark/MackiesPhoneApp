@@ -128,17 +128,23 @@ public partial class OrderPage : ContentPage
         {
             var selectedCategory = e.CurrentSelection.FirstOrDefault() as ProductCategoryDto;
             if (selectedCategory != null)
-            {
-                // Example: filter products
-              //  Console.WriteLine($"Selected category: {selectedCategory.Name}");
+            {        
+                var tmpList = new List<OrderItem>();
 
-                // If you want to filter AllProductsItems based on the category:
-                var filtered = allOrderItems
-                    .Where(p => p.productcategories.Contains(selectedCategory))
-                    .ToList();
-
-                // Update the UI by replacing the collection
-                _orderBasketService.UpdateAllProductsItems(filtered);
+                foreach (var item in allOrderItems)
+                {
+                    if (item.productcategories != null  )
+                    {
+                        foreach(var category in item.productcategories)
+                        {
+                            if (category.Id == selectedCategory.Id)
+                            {
+                                tmpList.Add(item);
+                            }                           
+                        }   
+                    }                                     
+                }
+                OrderItemsCollectionView.ItemsSource = tmpList;
             }
         }
     }
