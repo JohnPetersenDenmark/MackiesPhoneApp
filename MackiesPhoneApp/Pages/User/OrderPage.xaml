@@ -9,73 +9,87 @@
     <ScrollView>
     <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
 
-
-        
-        
-            <CollectionView x:Name="FiltersView"
-                  ItemsSource="{Binding ProductFilters}"
-                  SelectionMode="Multiple"
-                  SelectionChanged="OnFilterSelected">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="10"
-                     Margin="5"
-                     InputTransparent="True"
-                     BorderColor="LightGray"
-                     BackgroundColor="LightBlue"
-                     HasShadow="False">
-                            <Label Text="{Binding}"
-                         FontSize="18"
-                         TextColor="Black" />
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        
-        
+            <Button 
+            
+             BackgroundColor="white"  
+             TextColor="black" 
+             Text="Filtre" 
+                Clicked="OnToggleShowFilters" />
 
 
-            <CollectionView x:Name="ProductCategoriesView"
-                            IsVisible="{Binding ShowProductCategories}"
-                            ItemsSource="{Binding ProductCategories}"
-                            SelectionMode="Single"
-                            SelectionChanged="OnCategorySelected">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="10"
-                               Margin="5"
-                               InputTransparent="True"
-                               BorderColor="LightGray"
-                               BackgroundColor="LightBlue"
-                               HasShadow="False">
-                            <Label Text="{Binding CategoryName}"
-                                   FontSize="18"
-                                   TextColor="Black" />
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <VerticalStackLayout IsVisible="{Binding ShowFilters}" Spacing="20">
 
-            <CollectionView x:Name="ProductTypesView"
-                IsVisible="{Binding ShowProductTypes}"
-                ItemsSource="{Binding ProductTypes}"
-                SelectionMode="Single"
-                SelectionChanged="OnTypeSelected">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="10"
+                <!-- Category filter -->
+                <CollectionView x:Name="ProductCategoriesView"
+                ItemsSource="{Binding ProductCategories}">
+                    <CollectionView.Header>
+                        <Label Text="Vælg kategori"
+               FontSize="20"
+               FontAttributes="Bold"
+               Margin="5,0"/>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
                    Margin="5"
-                   InputTransparent="True"
                    BorderColor="LightGray"
                    BackgroundColor="LightBlue"
                    HasShadow="False">
-                            <Label Text="{Binding CategoryName}"
-                       FontSize="18"
-                       TextColor="Black" />
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+
+                                <HorizontalStackLayout x:Name="RowLayout" Spacing="10">
+                                    <!-- Check mark -->
+                                    <CheckBox IsChecked="{Binding IsSelected}" />
+
+                                    <!-- Category label -->
+                                    <Label Text="{Binding CategoryName}"
+                           FontSize="18"
+                           TextColor="Black"
+                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+
+                                <!-- Tap gesture on the frame -->
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRowTapped" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Type filter -->
+                <CollectionView x:Name="ProductTypesView"
+                    ItemsSource="{Binding ProductTypes}"
+                    SelectionMode="Multiple"
+                    SelectionChanged="OnTypeSelected">
+                    <CollectionView.Header>
+                        <Label Text="Vælg type"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="5,0"/>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
+                                    InputTransparent="True" 
+                       Margin="5"
+                       BorderColor="LightGray"
+                       BackgroundColor="LightYellow"
+                       HasShadow="False">
+                                <Label Text="{Binding Name}"
+                           FontSize="18"
+                           TextColor="Black" />
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+
+
+
+
+
 
 
 

@@ -52,6 +52,19 @@ namespace MackiesPhoneApp.Services
             }
         }
 
+        private bool _showFilters;
+        public bool ShowFilters
+        {
+            get => _showFilters;
+            set
+            {
+
+                _showFilters = value;
+                OnPropertyChanged(nameof(ShowFilters));
+
+            }
+        }
+
         private ObservableCollection<ProductCategoryDto> _productCategories;
         public ObservableCollection<ProductCategoryDto> ProductCategories
         {

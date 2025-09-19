@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Views;
+
 using MackiesPhoneApp.Models;
 using MackiesPhoneApp.Services;
 using Microsoft.Maui.Controls;
@@ -15,11 +16,8 @@ public partial class OrderPage : ContentPage
     private OrderItem _selectedItem;
 
     private List<OrderItem> allOrderItems;
-
-
-
-
-
+    private List<OrderItem> OrderItemsSortedByCategory;
+    private List<OrderItem> OrderItemsSortedByProductType;
 
 
     public OrderPage(TemplateScheduleDto selectedLocation)
@@ -29,6 +27,9 @@ public partial class OrderPage : ContentPage
         _selectedLocation = selectedLocation;
 
         _orderBasketService = ServiceHelper.GetService<OrderBasket>();
+
+        OrderItemsSortedByCategory = new List<OrderItem>();    
+        OrderItemsSortedByProductType = new List<OrderItem>();
 
         var grid = SetNavigationBarPageTitle.SetContentLogoAndTotal(this);
         NavigationPage.SetTitleView(this, grid);
@@ -49,9 +50,10 @@ public partial class OrderPage : ContentPage
         OrderItemsCollectionView.ItemsSource = allOrderItems;
 
         var categoryList = await MackiesPhoneApp.Services.Products.getProductCategories();
-
-
         _orderBasketService.ProductCategories = new ObservableCollection<ProductCategoryDto>(categoryList);
+
+        var productTypeList = await MackiesPhoneApp.Services.Products.getProductTypes();
+        _orderBasketService.ProductTypes = new ObservableCollection<ProductType>(productTypeList);
 
         var filterList = new List<string>();
         filterList.Add("Kategori");
@@ -130,100 +132,163 @@ public partial class OrderPage : ContentPage
     {
         if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
         {
-            var selectedCategory = e.CurrentSelection.FirstOrDefault() as ProductCategoryDto;
-            if (selectedCategory != null)
-            {
-                var tmpList = new List<OrderItem>();
+           //  var selectedCategoryList = e.CurrentSelection as List<ProductCategoryDto>;
+            var tmpList = new List<OrderItem>();
 
-                foreach (var item in allOrderItems)
+            foreach (var item in allOrderItems)
+            {
+                if (item.productcategories != null)
                 {
-                    if (item.productcategories != null)
+                    foreach (var category in item.productcategories)
                     {
-                        foreach (var category in item.productcategories)
+                        foreach (var selectedObject in e.CurrentSelection)
                         {
-                            if (category.Id == selectedCategory.Id)
+                            var selectedCategory = selectedObject as ProductCategoryDto;
+                            if (selectedCategory != null)
                             {
-                                tmpList.Add(item);
+                                if (category.Id == selectedCategory.Id)
+                                {
+                                    if (!tmpList.Any(c => c.productid == item.productid) )
+                                    {
+                                        tmpList.Add(item);
+                                    }
+                                    
+                                }
+                                
                             }
                         }
+                      
                     }
                 }
-                OrderItemsCollectionView.ItemsSource = tmpList;
             }
-        }
-    }
 
-    private void OnFilterSelected(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+             OrderItemsSortedByCategory = tmpList;
+
+        }
+
+        else
         {
-            var selectedFilters = e.CurrentSelection;
-            if (selectedFilters != null)
-            {
-                _orderBasketService.ShowProductCategories = false;
-                _orderBasketService.ShowProductTypes = false;
-
-                foreach (var filter in selectedFilters )
-                {
-                    if (filter is string)
-                    {
-                        if ( filter == "Kategori")
-                        {
-                            _orderBasketService.ShowProductCategories = true;
-                        }
-
-                        if ( filter == "Type")
-                        {
-                            _orderBasketService.ShowProductTypes = true;
-                        }
-                    }
-                }
-                //    var tmpList = new List<OrderItem>();
-
-                //    foreach (var item in allOrderItems)
-                //    {
-                //        if (item.productcategories != null)
-                //        {
-                //            foreach (var category in item.productcategories)
-                //            {
-                //                if (category.Id == selectedCategory.Id)
-                //                {
-                //                    tmpList.Add(item);
-                //                }
-                //            }
-                //        }
-                //    }
-                //    OrderItemsCollectionView.ItemsSource = tmpList;
-                //}
-            }
+            OrderItemsSortedByCategory = new List<OrderItem>();
         }
+
+       
+        MakeResultOrderItemList();
     }
+
+    //private void OnFilterSelected(object sender, SelectionChangedEventArgs e)
+    //{
+    //    if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+    //    {
+    //        var selectedFilters = e.CurrentSelection;
+    //        if (selectedFilters != null)
+    //        {
+    //            _orderBasketService.ShowProductCategories = false;
+    //            _orderBasketService.ShowProductTypes = false;
+
+    //            foreach (var filter in selectedFilters )
+    //            {
+    //                if (filter is string)
+    //                {
+    //                    if ( filter == "Kategori")
+    //                    {
+    //                        _orderBasketService.ShowProductCategories = !_orderBasketService.ShowProductCategories;
+    //                    }
+
+    //                    if ( filter == "Type")
+    //                    {
+    //                        _orderBasketService.ShowProductTypes = !_orderBasketService.ShowProductTypes;
+    //                    }
+    //                }
+    //            }
+               
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _orderBasketService.ShowProductCategories = false;
+    //        _orderBasketService.ShowProductTypes = false;
+    //    }
+    //}
+
+
     private void OnTypeSelected(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
         {
-            var selectedType = e.CurrentSelection.FirstOrDefault() as ProductType;
-            if (selectedType != null)
-            {
-                var tmpList = new List<OrderItem>();
+            var tmpList = new List<OrderItem>();
 
-                foreach (var item in allOrderItems)
+            foreach (var item in allOrderItems)
+            {
+                if (item.producttypes != null)
                 {
-                    if (item.producttypes != null)
+                    foreach (var productType in item.producttypes)
                     {
-                        foreach (var type in item.producttypes)
+                        foreach (var selectedObject in e.CurrentSelection)
                         {
-                            if (type.Id == selectedType.Id)
+                            var selectedProductType = selectedObject as ProductType;
+                            if (selectedProductType != null)
                             {
-                                tmpList.Add(item);
+                                if (productType.Id == selectedProductType.Id)
+                                {
+                                    if (!tmpList.Any(c => c.productid == item.productid))
+                                    {
+                                        tmpList.Add(item);
+                                    }
+
+                                }
+
                             }
                         }
+
                     }
                 }
-                OrderItemsCollectionView.ItemsSource = tmpList;
             }
+            OrderItemsSortedByProductType = tmpList;
+            
+        }
+        else
+        {
+            OrderItemsSortedByProductType = new List<OrderItem>();
+
+        }
+
+        MakeResultOrderItemList();
+    }
+    private void OnToggleShowFilters(object sender, EventArgs e)
+    {
+        _orderBasketService.ShowFilters = !_orderBasketService.ShowFilters; 
+    }
+
+    private void MakeResultOrderItemList()
+    {
+        if (OrderItemsSortedByCategory.Count > 0 && OrderItemsSortedByProductType.Count > 0)
+        {
+            var intersectList = OrderItemsSortedByCategory.Intersect(OrderItemsSortedByProductType).ToList();
+            OrderItemsCollectionView.ItemsSource = intersectList;
+        }
+        else if (OrderItemsSortedByCategory.Count > 0)
+        {
+            OrderItemsCollectionView.ItemsSource = OrderItemsSortedByCategory;
+        }
+        else if (OrderItemsSortedByProductType.Count > 0)
+        {
+            OrderItemsCollectionView.ItemsSource = OrderItemsSortedByProductType;
+        }
+        else
+        {
+            OrderItemsCollectionView.ItemsSource = allOrderItems;
         }
     }
+
+    private void OnRowTapped(object sender, EventArgs e)
+    {
+        if (sender is Frame frame && frame.BindingContext is ProductCategoryDto category)
+        {
+            // Toggle the selection
+            category.IsSelected = !category.IsSelected;
+        }
+    }
+
 }
 
     

@@ -43,6 +43,22 @@ namespace MackiesPhoneApp.Services
             return categoryList;
         }
 
+        public static async Task<List<ProductType>> getProductTypes()
+        {
+            var productTypeList = new List<ProductType>();
+
+            var partialUrl = "/Home/producttypelist";
+            var response = await MackiesPhoneApp.Services.CustomHttpClient.getRequest(partialUrl, false, null);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var responseJson = await response.Content.ReadAsStringAsync();
+
+                productTypeList = JsonConvert.DeserializeObject<List<ProductType>>(responseJson);
+            }
+
+            return productTypeList;
+        }
+
 
 
         public static List<OrderItem>  MakeProductItems(List<Product> productList)
