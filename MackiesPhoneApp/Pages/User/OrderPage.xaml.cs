@@ -19,6 +19,9 @@ public partial class OrderPage : ContentPage
     private List<OrderItem> OrderItemsSortedByCategory;
     private List<OrderItem> OrderItemsSortedByProductType;
 
+    private List<ProductCategoryDto> selectedCategories = new List<ProductCategoryDto>();
+    private List<ProductType> selectedProductTypes = new List<ProductType>();
+
 
     public OrderPage(TemplateScheduleDto selectedLocation)
     {
@@ -128,52 +131,52 @@ public partial class OrderPage : ContentPage
 
     }
 
-    private void OnCategorySelected(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
-        {
-           //  var selectedCategoryList = e.CurrentSelection as List<ProductCategoryDto>;
-            var tmpList = new List<OrderItem>();
+    //private void OnCategorySelected(object sender, SelectionChangedEventArgs e)
+    //{
+    //    if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+    //    {
+    //       //  var selectedCategoryList = e.CurrentSelection as List<ProductCategoryDto>;
+    //        var tmpList = new List<OrderItem>();
 
-            foreach (var item in allOrderItems)
-            {
-                if (item.productcategories != null)
-                {
-                    foreach (var category in item.productcategories)
-                    {
-                        foreach (var selectedObject in e.CurrentSelection)
-                        {
-                            var selectedCategory = selectedObject as ProductCategoryDto;
-                            if (selectedCategory != null)
-                            {
-                                if (category.Id == selectedCategory.Id)
-                                {
-                                    if (!tmpList.Any(c => c.productid == item.productid) )
-                                    {
-                                        tmpList.Add(item);
-                                    }
+    //        foreach (var item in allOrderItems)
+    //        {
+    //            if (item.productcategories != null)
+    //            {
+    //                foreach (var category in item.productcategories)
+    //                {
+    //                    foreach (var selectedObject in e.CurrentSelection)
+    //                    {
+    //                        var selectedCategory = selectedObject as ProductCategoryDto;
+    //                        if (selectedCategory != null)
+    //                        {
+    //                            if (category.Id == selectedCategory.Id)
+    //                            {
+    //                                if (!tmpList.Any(c => c.productid == item.productid) )
+    //                                {
+    //                                    tmpList.Add(item);
+    //                                }
                                     
-                                }
+    //                            }
                                 
-                            }
-                        }
+    //                        }
+    //                    }
                       
-                    }
-                }
-            }
+    //                }
+    //            }
+    //        }
 
-             OrderItemsSortedByCategory = tmpList;
+    //         OrderItemsSortedByCategory = tmpList;
 
-        }
+    //    }
 
-        else
-        {
-            OrderItemsSortedByCategory = new List<OrderItem>();
-        }
+    //    else
+    //    {
+    //        OrderItemsSortedByCategory = new List<OrderItem>();
+    //    }
 
        
-        MakeResultOrderItemList();
-    }
+    //    MakeResultOrderItemList();
+    //}
 
     //private void OnFilterSelected(object sender, SelectionChangedEventArgs e)
     //{
@@ -211,49 +214,51 @@ public partial class OrderPage : ContentPage
     //}
 
 
-    private void OnTypeSelected(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
-        {
-            var tmpList = new List<OrderItem>();
+    //private void OnTypeSelected(object sender, SelectionChangedEventArgs e)
+    //{
+    //    if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+    //    {
+    //        var tmpList = new List<OrderItem>();
 
-            foreach (var item in allOrderItems)
-            {
-                if (item.producttypes != null)
-                {
-                    foreach (var productType in item.producttypes)
-                    {
-                        foreach (var selectedObject in e.CurrentSelection)
-                        {
-                            var selectedProductType = selectedObject as ProductType;
-                            if (selectedProductType != null)
-                            {
-                                if (productType.Id == selectedProductType.Id)
-                                {
-                                    if (!tmpList.Any(c => c.productid == item.productid))
-                                    {
-                                        tmpList.Add(item);
-                                    }
+    //        foreach (var item in allOrderItems)
+    //        {
+    //            if (item.producttypes != null)
+    //            {
+    //                foreach (var productType in item.producttypes)
+    //                {
+    //                    foreach (var selectedObject in e.CurrentSelection)
+    //                    {
+    //                        var selectedProductType = selectedObject as ProductType;
+    //                        if (selectedProductType != null)
+    //                        {
+    //                            if (productType.Id == selectedProductType.Id)
+    //                            {
+    //                                if (!tmpList.Any(c => c.productid == item.productid))
+    //                                {
+    //                                    tmpList.Add(item);
+    //                                }
 
-                                }
+    //                            }
 
-                            }
-                        }
+    //                        }
+    //                    }
 
-                    }
-                }
-            }
-            OrderItemsSortedByProductType = tmpList;
+    //                }
+    //            }
+    //        }
+    //        OrderItemsSortedByProductType = tmpList;
             
-        }
-        else
-        {
-            OrderItemsSortedByProductType = new List<OrderItem>();
+    //    }
+    //    else
+    //    {
+    //        OrderItemsSortedByProductType = new List<OrderItem>();
 
-        }
+    //    }
 
-        MakeResultOrderItemList();
-    }
+    //    MakeResultOrderItemList();
+    //}
+
+
     private void OnToggleShowFilters(object sender, EventArgs e)
     {
         _orderBasketService.ShowFilters = !_orderBasketService.ShowFilters; 
@@ -276,17 +281,119 @@ public partial class OrderPage : ContentPage
         }
         else
         {
+            if (OrderItemsSortedByCategory.Count == 0 && selectedCategories.Count > 0)
+            {
+                OrderItemsCollectionView.ItemsSource = new List<OrderItem>();
+                return ;
+            }
+
+            if (OrderItemsSortedByProductType.Count == 0 && selectedProductTypes.Count > 0)
+            {
+                OrderItemsCollectionView.ItemsSource = new List<OrderItem>();
+                return;
+            }
             OrderItemsCollectionView.ItemsSource = allOrderItems;
         }
     }
 
-    private void OnRowTapped(object sender, EventArgs e)
+    private void OnCategoryRowTapped(object sender, EventArgs e)
     {
-        if (sender is Frame frame && frame.BindingContext is ProductCategoryDto category)
+        if (sender is Frame frame && frame.BindingContext is ProductCategoryDto categoryClicked)
         {
             // Toggle the selection
-            category.IsSelected = !category.IsSelected;
+            categoryClicked.IsSelected = !categoryClicked.IsSelected;
+
+            if (selectedCategories.Any(c => c.Id == categoryClicked.Id))
+            {
+                selectedCategories.RemoveAll(c => c.Id == categoryClicked.Id);
+            }
+            else
+            {
+                selectedCategories.Add(categoryClicked);
+            }   
+
+
+
+            var tmpList = new List<OrderItem>();
+
+            foreach (var item in allOrderItems)
+            {
+                if (item.productcategories != null)
+                {
+                    foreach (var tmpCategory in item.productcategories)
+                    {
+                        foreach (var selectedCategory in selectedCategories)
+                        {
+                            if (tmpCategory.Id == selectedCategory.Id)
+                            {
+                                if (!tmpList.Any(c => c.productid == item.productid))
+                                {
+                                    tmpList.Add(item);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            OrderItemsSortedByCategory = tmpList;
         }
+        else
+        {
+            OrderItemsSortedByCategory = new List<OrderItem>();
+
+        }
+
+        MakeResultOrderItemList();
+    }
+
+    private void OnProductTypeRowTapped(object sender, EventArgs e)
+    {
+        if (sender is Frame frame && frame.BindingContext is ProductType productTypeClicked)
+        {
+            // Toggle the selection
+            productTypeClicked.IsSelected = !productTypeClicked.IsSelected;
+
+            if (selectedProductTypes.Any(c => c.Id == productTypeClicked.Id))
+            {
+                selectedProductTypes.RemoveAll(c => c.Id == productTypeClicked.Id);
+            }
+            else
+            {
+                selectedProductTypes.Add(productTypeClicked);
+            }
+
+
+
+            var tmpList = new List<OrderItem>();
+
+            foreach (var item in allOrderItems)
+            {
+                if (item.producttypes != null)
+                {
+                    foreach (var tmpProducttypes in item.producttypes)
+                    {
+                        foreach (var selectedProductType in selectedProductTypes)
+                        {
+                            if (tmpProducttypes.Id == selectedProductType.Id)
+                            {
+                                if (!tmpList.Any(c => c.productid == item.productid))
+                                {
+                                    tmpList.Add(item);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            OrderItemsSortedByProductType = tmpList;
+        }
+        else
+        {
+            OrderItemsSortedByProductType = new List<OrderItem>();
+
+        }
+
+        MakeResultOrderItemList();
     }
 
 }

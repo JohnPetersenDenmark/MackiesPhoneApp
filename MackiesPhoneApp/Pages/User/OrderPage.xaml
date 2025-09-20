@@ -10,7 +10,7 @@
     <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
 
             <Button 
-            
+             WidthRequest="200"
              BackgroundColor="white"  
              TextColor="black" 
              Text="Filtre" 
@@ -23,8 +23,8 @@
                 <CollectionView x:Name="ProductCategoriesView"
                 ItemsSource="{Binding ProductCategories}">
                     <CollectionView.Header>
-                        <Label Text="Vælg kategori"
-               FontSize="20"
+                        <Label TextColor="white" Text="Vælg kategori"
+               FontSize="14"
                FontAttributes="Bold"
                Margin="5,0"/>
                     </CollectionView.Header>
@@ -32,67 +32,104 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="10"
+                                    WidthRequest="200"
                    Margin="5"
                    BorderColor="LightGray"
-                   BackgroundColor="LightBlue"
                    HasShadow="False">
 
-                                <HorizontalStackLayout x:Name="RowLayout" Spacing="10">
-                                    <!-- Check mark -->
-                                    <CheckBox IsChecked="{Binding IsSelected}" />
+                                <!-- Triggers to change background on selection -->
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding IsSelected}"
+                                 Value="True">
+                                        <Setter Property="BackgroundColor" Value="LightBlue" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding IsSelected}"
+                                 Value="False">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
+                                <HorizontalStackLayout HeightRequest="20" Spacing="10">
+                                    <!-- Check mark (visible but not tappable) -->
+                                    <CheckBox  Color="black"   InputTransparent="True"
+                                                Scale="0.8"
+                                                IsChecked="{Binding IsSelected}" />
 
                                     <!-- Category label -->
-                                    <Label Text="{Binding CategoryName}"
-                           FontSize="18"
-                           TextColor="Black"
-                           VerticalOptions="Center" />
+                                    <Label  Text="{Binding CategoryName}"
+                                       FontSize="14"
+                                       TextColor="Black"
+                                       VerticalOptions="Center" />
                                 </HorizontalStackLayout>
 
-                                <!-- Tap gesture on the frame -->
+                                <!-- Tap gesture on whole row -->
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnRowTapped" />
+                                    <TapGestureRecognizer Tapped="OnCategoryRowTapped" />
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <!-- Type filter -->
+                <!-- Product type filter -->
                 <CollectionView x:Name="ProductTypesView"
-                    ItemsSource="{Binding ProductTypes}"
-                    SelectionMode="Multiple"
-                    SelectionChanged="OnTypeSelected">
+                ItemsSource="{Binding ProductTypes}">
                     <CollectionView.Header>
-                        <Label Text="Vælg type"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   Margin="5,0"/>
+                        <Label TextColor="white" Text="Vælg produkttype"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Margin="5,0"/>  
                     </CollectionView.Header>
+                    
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="10"
-                                    InputTransparent="True" 
-                       Margin="5"
-                       BorderColor="LightGray"
-                       BackgroundColor="LightYellow"
-                       HasShadow="False">
-                                <Label Text="{Binding Name}"
-                           FontSize="18"
-                           TextColor="Black" />
+                                    WidthRequest="200"
+                   Margin="5"
+                   BorderColor="LightGray"
+                   HasShadow="False">
+                                <Frame.Triggers>
+                                    <!-- Change background when selected -->
+                                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding IsSelected}"
+                                 Value="True">
+                                        <Setter Property="BackgroundColor" Value="LightBlue" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding IsSelected}"
+                                 Value="False">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
+                                <HorizontalStackLayout HeightRequest="20" Spacing="10">
+                                    <!-- Check mark (not dimmed, ignores taps) -->
+                                    <CheckBox Color="black" InputTransparent="True"
+                                              Scale="0.8"
+                              IsChecked="{Binding IsSelected}" />
+
+                                    <!-- Category label -->
+                                    <Label Text="{Binding Name}"
+                           FontSize="14"
+                           TextColor="Black"
+                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+
+                                <!-- Tap gesture on the whole row -->
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnProductTypeRowTapped" />
+                                </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
+
+
+
             </VerticalStackLayout>
-
-
-
-
-
-
-
-
 
             <CollectionView x:Name="OrderItemsCollectionView"              
             SelectionMode="None"
