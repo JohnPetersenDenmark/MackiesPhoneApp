@@ -32,55 +32,84 @@
                         <DataTemplate>
                             <VerticalStackLayout>
                                 <Frame CornerRadius="5"  Padding="5" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
-                                    <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
-                                        <VerticalStackLayout Margin="10">
-                                            <Label Text="{Binding Name}" FontSize="16" TextColor="White" />
+                                    <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light=lightGray, Dark={StaticResource ViewItemBackgroundColorDark}}">
+                                        <VerticalStackLayout Margin="10" >
+                                            <Grid ColumnSpacing="10" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="200" />
+                                                    <!-- takes remaining space -->
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <!-- fits button -->
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <!-- Row 0: Name + Vis kontakt -->
+                                                    <RowDefinition Height="Auto" />
+                                                    <!-- Row 1: Contact info -->
+                                                    <RowDefinition Height="Auto" />
+                                                    <!-- Row 2: Area + Vis lokationer -->
+                                                </Grid.RowDefinitions>
 
-                                            <HorizontalStackLayout Spacing="20">
-                                                <Label Text="{Binding Area.Name}" FontSize="16"  FontAttributes="Bold" TextColor="Black" Margin="0,0,0,0"/>
 
+                                                <Label Text="{Binding Name}" 
+                                                       FontSize="16" 
+                                                         Grid.Row="0" Grid.Column="0"
+                                                       TextColor="White" />
+                                              
+                                                    <Border Stroke="Transparent"
+                                                             Grid.Row="0" Grid.Column="1"
+                                                   BackgroundColor="#ffffff"
+                                                   StrokeShape="RoundRectangle 20"
+                                                   HeightRequest="20"
+                                                   WidthRequest="100"
+                                                   Padding="0"
+                                                   HorizontalOptions="Start">
+                                                        <Label x:Name="LabelToggleShowContact" Text="Vis kontakt"
+                                                  FontSize="10"
+                                                  TextColor="Black"
+                                                  VerticalOptions="Center"
+                                                  HorizontalOptions="Center" />
+                                                        <Border.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="OnToggleShowContactTapped" />
+                                                        </Border.GestureRecognizers>
+
+
+                                                    </Border>
+                                                    <VerticalStackLayout IsVisible="{Binding IsVisibleContactInfo}"
+                                                                         Grid.Row="1" Grid.Column="1" 
+                                                                         >
+                                                        <Label Text="{Binding Employee.Name}" FontSize="16" TextColor="Black" />
+                                                        <Label Text="{Binding Employee.Phone}" FontSize="16" TextColor="Black" />
+                                                        <Label Text="{Binding Employee.Email}" FontSize="16" TextColor="Black" />
+                                                    </VerticalStackLayout>
+                                                
+                                            
+
+                                          
+                                                <Label Text="{Binding Area.Name}" 
+                                                        Grid.Row="2" Grid.Column="0"
+                                                       FontSize="16"  FontAttributes="Bold" TextColor="Black" Margin="0,0,0,0"/>
                                                 <Border Stroke="Transparent"
-                                                    BackgroundColor="#ffffff"
-                                                    StrokeShape="RoundRectangle 20"
-                                                    HeightRequest="20"
-                                                    WidthRequest="100"
-                                                    Padding="0"
-                                                    HorizontalOptions="Start">
-                                                 <Label x:Name="LabelShoNoShowLocations" Text="Vis lokationer"
-                                                   FontSize="10"
-                                                   TextColor="Black"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Center" />    
+                                                         Grid.Row="2" Grid.Column="1"
+                                                        BackgroundColor="#ffffff"
+                                                        StrokeShape="RoundRectangle 20"
+                                                             Scale="1.0"
+                                                        HeightRequest="20"
+                                                        WidthRequest="100"
+                                                        Padding="0"
+                                                        HorizontalOptions="Start">
+                                                    <Label x:Name="LabelShoNoShowLocations" Text="Vis lokationer"
+                                                       FontSize="10"
+     
+                                                       TextColor="Black"
+                                                       VerticalOptions="Center"
+                                                       HorizontalOptions="Center" />
                                                     <Border.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="OnShowNoShowLocationsTapped" />
                                                     </Border.GestureRecognizers>
                                                 </Border>
+                                            </Grid>
 
-                                                <Border Stroke="Transparent"
-                                                     BackgroundColor="#ffffff"
-                                                     StrokeShape="RoundRectangle 20"
-                                                     HeightRequest="20"
-                                                     WidthRequest="100"
-                                                     Padding="0"
-                                                     HorizontalOptions="Start">
-                                                    <Label x:Name="LabelToggleShowContact" Text="Vis kontakt"
-                                                    FontSize="10"
-                                                    TextColor="Black"
-                                                    VerticalOptions="Center"
-                                                    HorizontalOptions="Center" />
-                                                    <Border.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="OnToggleShowContactTapped" />
-                                                    </Border.GestureRecognizers>
-                                                </Border>
-
-                                            </HorizontalStackLayout>
-
-                                            <VerticalStackLayout IsVisible="{Binding IsVisibleContactInfo}">
-                                                <Label Text="{Binding Employee.Name}" FontSize="16" TextColor="White" />
-                                                <Label Text="{Binding Employee.Phone}" FontSize="16" TextColor="White" />
-                                                <Label Text="{Binding Employee.Email}" FontSize="16" TextColor="White" />
-                                            </VerticalStackLayout>
-                                            
 
                                             <CollectionView IsVisible="{Binding IsVisibleTemplateSchedule}" ItemsSource="{Binding Area.TemplateSchedules}">
                                                 <CollectionView.ItemTemplate>
