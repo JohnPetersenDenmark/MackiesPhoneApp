@@ -123,8 +123,9 @@ public partial class OrderPage : ContentPage
 
     private async void OnDetailsTapped(object sender, EventArgs e)
     {
-        if (sender is Label detailLabel && detailLabel.BindingContext is OrderItem selectedOrderItem)
-        {
+        //if (sender is Label detailLabel && detailLabel.BindingContext is OrderItem selectedOrderItem)
+            if (sender is Button button && button.BindingContext is OrderItem selectedOrderItem)
+            {
             var popup = new PopupDetailPage(selectedOrderItem);
             var result = await this.ShowPopupAsync(popup);
         }

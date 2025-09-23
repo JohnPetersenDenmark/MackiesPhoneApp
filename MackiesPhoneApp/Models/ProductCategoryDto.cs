@@ -15,7 +15,19 @@ namespace MackiesPhoneApp.Models
         public int Id { get; set; }
 
        
-        public string CategoryName { get; set; }
+       private string __categoryName;
+        public string CategoryName
+        {
+            get => __categoryName;
+            set
+            {
+                if (__categoryName != value)
+                {
+                    __categoryName = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CategoryName)));
+                }
+            }
+        }
 
         private bool _isSelected;
         public bool IsSelected

@@ -59,68 +59,61 @@ public partial class HomeView : ContentView
 
     private async void  OnShowNoShowLocationsTapped(object sender, EventArgs e)
     {
-        if (sender is Border border)
+        if (sender is Button button)
         {
-            if (border != null)
+            if (button != null)
             {
-                var fishShop = GetParentFishShop(border);
+                var fishShop = GetParentFishShop(button);
 
-                // If the content is a Label
-                var label = border.Content as Label;
-                if (label != null)
-                {
                     if (fishShop.IsVisibleTemplateSchedule)
                     {
                         fishShop.IsVisibleTemplateSchedule = false;
-                         label.Text = "Vis lokationer";
+                    button.Text = "Vis lokationer";
 
-                        border.BackgroundColor = Color.FromArgb("#FFFFFF");
-                        label.TextColor = Color.FromArgb("#000000");
-                    }
-                    else
+                    button.BackgroundColor = Color.FromArgb("#FFFFFF");
+                    button.TextColor = Color.FromArgb("#000000");
+                }
+                else
                     {
                         fishShop.IsVisibleTemplateSchedule = true;
-                         label.Text = "Gem lokationer";
+                    button.Text = "Gem lokationer";
 
-                      border.BackgroundColor = Color.FromArgb("#5470a9");
+                    button.BackgroundColor = Color.FromArgb("#5470a9");
 
-                        label.TextColor =  Color.FromArgb("#FFFFFF");
-                    }
+                      button.TextColor =  Color.FromArgb("#FFFFFF");
                 }
+
             }
         }          
     }
 
     private async void OnToggleShowContactTapped(object sender, EventArgs e)
     {
-        if (sender is Border border)
+        if (sender is Button button)
         {
-            if (border != null)
+            if (button != null)
             {
-                var fishShop = GetParentFishShop(border);
+                var fishShop = GetParentFishShop(button);
 
-                // If the content is a Label
-                var label = border.Content as Label;
-                if (label != null)
-                {
+               
                     if (fishShop.IsVisibleContactInfo)
                     {
                         fishShop.IsVisibleContactInfo = false;
-                        label.Text = "Vis kontakt";
+                    button.Text = "Vis kontakt";
 
-                        border.BackgroundColor = Color.FromArgb("#FFFFFF");
-                        label.TextColor = Color.FromArgb("#000000");
-                    }
-                    else
+                    button.BackgroundColor = Color.FromArgb("#FFFFFF");
+                    button.TextColor = Color.FromArgb("#000000");
+                }
+                else
                     {
                         fishShop.IsVisibleContactInfo = true;
-                        label.Text = "Gem kontakt";
+                        button.Text = "Gem kontakt";
 
-                        border.BackgroundColor = Color.FromArgb("#5470a9");
+                    button.BackgroundColor = Color.FromArgb("#5470a9");
 
-                        label.TextColor = Color.FromArgb("#FFFFFF");
-                    }
+                    button.TextColor = Color.FromArgb("#FFFFFF");
                 }
+
             }
         }
     }

@@ -28,10 +28,10 @@
     <Color x:Key="FlyoutHeadlineTextColorLight">white</Color>
     <Color x:Key="FlyoutHeadlineTextColorDark">Yellow</Color>
 
-    <Color x:Key="FlyoutMenuItemTextColorLight">white</Color>
+    <Color x:Key="FlyoutMenuItemTextColorLight">Black</Color>
     <Color x:Key="FlyoutMenuItemTextColorDark">Blue</Color>
 
-    <Color x:Key="FlyoutMenuItemBackgroundColorLight">#ffbd56</Color>
+    <Color x:Key="FlyoutMenuItemBackgroundColorLight">white</Color>
     <Color x:Key="FlyoutMenuItemBackgroundColorDark">#c897a4</Color>
 
 

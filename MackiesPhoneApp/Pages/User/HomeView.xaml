@@ -4,146 +4,131 @@
              x:Class="MackiesPhoneApp.Pages.User.HomeView">
 
     <ScrollView>
-        <StackLayout Padding="0" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}">
-            <Label x:Name="LoggedInUserDisplayName" 
-       Text="" 
-       FontSize="24" />
+        <VerticalStackLayout 
+            Padding="16"
+            Spacing="16"
+            BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, 
+                                                  Dark={StaticResource AppToolbarBackgroundColorDark}}">
 
+            <!-- Logged-in user -->
+            <Label x:Name="LoggedInUserDisplayName"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White" />
 
-            <VerticalStackLayout >
+            <!-- Header -->
+            <VerticalStackLayout Spacing="8">
                 <Label Text="JJ Fisk - en seriøs fiskehandler"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center"
-               TextColor="White" />
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       TextColor="White" />
 
-                <Label Margin="50" Text="Vi holder med fiskebilerne her :"                              
-                     FontSize="16"
-                    TextColor="White"
-                     LineHeight="1.5" />
-
+                <Label Text="Vi holder med fiskebilerne her:"
+                       FontSize="16"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"
+                       LineHeight="1.5" />
             </VerticalStackLayout>
 
-            <VerticalStackLayout Padding="10" >
+            <!-- Fish shops list -->
+            <CollectionView x:Name="FishShopCollectionView"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, 
+                                                          Dark={StaticResource ViewItemBorderColorDark}}"
+                                StrokeShape="RoundRectangle 8"
+                                BackgroundColor="{AppThemeBinding Light=LightGray, Dark={StaticResource ViewItemBackgroundColorDark}}"
+                                Padding="12"
+                                Margin="4">
 
-                <CollectionView x:Name="FishShopCollectionView"              
-                                SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout>
-                                <Frame CornerRadius="5"  Padding="5" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
-                                    <Frame Padding="0" Margin="0"  BackgroundColor="{AppThemeBinding Light=lightGray, Dark={StaticResource ViewItemBackgroundColorDark}}">
-                                        <VerticalStackLayout Margin="10" >
-                                            <Grid ColumnSpacing="10" >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="200" />
-                                                    <!-- takes remaining space -->
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <!-- fits button -->
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <!-- Row 0: Name + Vis kontakt -->
-                                                    <RowDefinition Height="Auto" />
-                                                    <!-- Row 1: Contact info -->
-                                                    <RowDefinition Height="Auto" />
-                                                    <!-- Row 2: Area + Vis lokationer -->
-                                                </Grid.RowDefinitions>
+                            <VerticalStackLayout Spacing="12">
+                                <!-- Shop header -->
+                                <Grid ColumnSpacing="12"
+                                      RowSpacing="6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
+                                    <!-- Shop name -->
+                                    <Label Text="{Binding Name}"
+                                           FontSize="18"
+                                           TextColor="White"
+                                           Grid.Row="0" Grid.Column="0" />
 
-                                                <Label Text="{Binding Name}" 
-                                                       FontSize="16" 
-                                                         Grid.Row="0" Grid.Column="0"
-                                                       TextColor="White" />
-                                              
-                                                    <Border Stroke="Transparent"
-                                                             Grid.Row="0" Grid.Column="1"
-                                                   BackgroundColor="#ffffff"
-                                                   StrokeShape="RoundRectangle 20"
-                                                   HeightRequest="20"
-                                                   WidthRequest="100"
-                                                   Padding="0"
-                                                   HorizontalOptions="Start">
-                                                        <Label x:Name="LabelToggleShowContact" Text="Vis kontakt"
-                                                  FontSize="10"
-                                                  TextColor="Black"
-                                                  VerticalOptions="Center"
-                                                  HorizontalOptions="Center" />
-                                                        <Border.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="OnToggleShowContactTapped" />
-                                                        </Border.GestureRecognizers>
+                                    <!-- Toggle contact button -->
+                                    <Button  Text="Vis kontakt"
+                                            FontSize="12"
+                                            Padding="6,2"
+                                            CornerRadius="12"
+                                            BackgroundColor="White"
+                                            TextColor="Black"
+                                            Grid.Row="0" Grid.Column="1"
+                                            Clicked="OnToggleShowContactTapped" />
 
+                                    <!-- Contact info -->
+                                    <VerticalStackLayout IsVisible="{Binding IsVisibleContactInfo}"
+                                                         Spacing="2"
+                                                         Grid.Row="1" Grid.Column="1"
+                                                         Grid.ColumnSpan="2">
+                                        <Label Text="{Binding Employee.Name}" TextColor="Black" FontSize="14"/>
+                                        <Label Text="{Binding Employee.Phone}" TextColor="Black" FontSize="14"/>
+                                        <Label Text="{Binding Employee.Email}" TextColor="Black" FontSize="14"/>
+                                    </VerticalStackLayout>
 
-                                                    </Border>
-                                                    <VerticalStackLayout IsVisible="{Binding IsVisibleContactInfo}"
-                                                                         Grid.Row="1" Grid.Column="1" 
-                                                                         >
-                                                        <Label Text="{Binding Employee.Name}" FontSize="16" TextColor="Black" />
-                                                        <Label Text="{Binding Employee.Phone}" FontSize="16" TextColor="Black" />
-                                                        <Label Text="{Binding Employee.Email}" FontSize="16" TextColor="Black" />
-                                                    </VerticalStackLayout>
-                                                
-                                            
+                                    <!-- Area -->
+                                    <Label Text="{Binding Area.Name}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           Grid.Row="2" Grid.Column="0" />
 
-                                          
-                                                <Label Text="{Binding Area.Name}" 
-                                                        Grid.Row="2" Grid.Column="0"
-                                                       FontSize="16"  FontAttributes="Bold" TextColor="Black" Margin="0,0,0,0"/>
-                                                <Border Stroke="Transparent"
-                                                         Grid.Row="2" Grid.Column="1"
-                                                        BackgroundColor="#ffffff"
-                                                        StrokeShape="RoundRectangle 20"
-                                                             Scale="1.0"
-                                                        HeightRequest="20"
-                                                        WidthRequest="100"
-                                                        Padding="0"
-                                                        HorizontalOptions="Start">
-                                                    <Label x:Name="LabelShoNoShowLocations" Text="Vis lokationer"
-                                                       FontSize="10"
-     
-                                                       TextColor="Black"
-                                                       VerticalOptions="Center"
-                                                       HorizontalOptions="Center" />
-                                                    <Border.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="OnShowNoShowLocationsTapped" />
-                                                    </Border.GestureRecognizers>
-                                                </Border>
-                                            </Grid>
+                                    <!-- Show locations button -->
+                                    <Button Text="Vis lokationer"
+                                            FontSize="12"
+                                            Padding="6,2"
+                                            CornerRadius="12"
+                                            BackgroundColor="White"
+                                            TextColor="Black"
+                                            Grid.Row="2" Grid.Column="1"
+                                            Clicked="OnShowNoShowLocationsTapped" />
+                                </Grid>
 
-
-                                            <CollectionView IsVisible="{Binding IsVisibleTemplateSchedule}" ItemsSource="{Binding Area.TemplateSchedules}">
-                                                <CollectionView.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <VerticalStackLayout Padding="5" Margin="5" BackgroundColor="#f0f0f0" >
-                                                            <Border>
-                                                                <Border.GestureRecognizers>
-                                                                    <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
-                                                                </Border.GestureRecognizers>
-
-                                                                <VerticalStackLayout>
-                                                                    <Label Text="{Binding LocationName}" FontSize="18"  Padding="10,0,0,0" />
-                                                                    <Label Text="{Binding Date , StringFormat='{0:dd-MM-yyyy}'}" FontSize="16"  Padding="10,0,0,0" />
-                                                                    <Label Text="{Binding ShopOpenTimeInterval}" Padding="10,0,0,0"  FontSize="16"/>
-                                                                </VerticalStackLayout>
-
-                                                            </Border>
-                                                        </VerticalStackLayout>
-                                                    </DataTemplate>
-                                                </CollectionView.ItemTemplate>
-                                            </CollectionView>
-                                        </VerticalStackLayout>
-
-                                    </Frame>
-                                </Frame>
-
+                                <!-- Locations list -->
+                                <CollectionView IsVisible="{Binding IsVisibleTemplateSchedule}"
+                                                ItemsSource="{Binding Area.TemplateSchedules}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Stroke="LightGray"
+                                                    StrokeShape="RoundRectangle 6"
+                                                    BackgroundColor="#f0f0f0"
+                                                    Padding="8"
+                                                    Margin="4">
+                                                <VerticalStackLayout>
+                                                    <Label Text="{Binding LocationName}" FontSize="16" />
+                                                    <Label Text="{Binding Date, StringFormat='{0:dd-MM-yyyy}'}" FontSize="14" />
+                                                    <Label Text="{Binding ShopOpenTimeInterval}" FontSize="14" />
+                                                </VerticalStackLayout>
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnTruckLocationTapped" />
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
                             </VerticalStackLayout>
-                        </DataTemplate>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-            </VerticalStackLayout>
-        </StackLayout>
-
+        </VerticalStackLayout>
     </ScrollView>
 </ContentView>

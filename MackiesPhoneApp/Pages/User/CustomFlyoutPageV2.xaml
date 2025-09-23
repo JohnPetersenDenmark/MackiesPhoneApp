@@ -16,7 +16,7 @@
                     <Label Text="" TextColor="{AppThemeBinding Light={StaticResource FlyoutHeadlineTextColorLight}, Dark={StaticResource FlyoutHeadlineTextColorLight}}" FontSize="24" FontAttributes="Bold" />
 
 
-                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+                    <!--<Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
                         Text="Log ind" 
                              FontSize="20" 
                             HeightRequest="100" 
@@ -25,7 +25,7 @@
                             CornerRadius="50"
                             Padding="0"
                         TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
-                        Clicked="GoLogin_Clicked"/>
+                        Clicked="GoLogin_Clicked"/>-->
 
                     <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
                         Text="Home" 
@@ -38,7 +38,7 @@
                         TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
                         Clicked="GoHome_Clicked"/>
 
-                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+                    <!--<Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
                         Text="Test page" 
                              FontSize="20" 
                              HeightRequest="120" 
@@ -47,9 +47,9 @@
                             CornerRadius="50"
                             Padding="0"
                         TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
-                        Clicked="GoTestPage_Clicked"/>
+                        Clicked="GoTestPage_Clicked"/>-->
 
-                    <Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
+                    <!--<Button BackgroundColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemBackgroundColorLight}, Dark={StaticResource FlyoutMenuItemBackgroundColorDark}}"
      Text="Indstillinger" 
           FontSize="20" 
           HeightRequest="120" 
@@ -58,7 +58,7 @@
          CornerRadius="50"
          Padding="0"
      TextColor="{AppThemeBinding Light={StaticResource FlyoutMenuItemTextColorLight}, Dark={StaticResource FlyoutMenuItemTextColorDark}}"
-     Clicked="GoSettings_Clicked"/>
+     Clicked="GoSettings_Clicked"/>-->
 
                 </VerticalStackLayout>
             </ScrollView>

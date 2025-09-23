@@ -39,7 +39,7 @@ namespace MackiesPhoneApp.Services
             {
                 Text = "order totalis",
                 FontSize = 18,
-                TextColor = Color.FromArgb("#ffac2c"),
+                TextColor = Color.FromArgb("#ffffff"),
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.End
             };
@@ -126,7 +126,7 @@ namespace MackiesPhoneApp.Services
             {
                 Text = $"Total: {orderBasketService.OrderTotal:C}",
                 FontSize = 18,
-                TextColor = Color.FromArgb("#ffac2c"),
+                TextColor = Color.FromArgb("#ffffff"),
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.End
             };
