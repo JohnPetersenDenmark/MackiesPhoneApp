@@ -23,6 +23,11 @@ namespace MackiesPhoneApp.Models
 
         public string productname { get; set; }
 
+        public string Badge { get; set; }
+        public string PricePerKg { get; set; }
+        public string SalesWeight { get; set; }
+        public string ShelfLife { get; set; }
+        
         public string productnumber { get; set; }
 
         public string imageurl { get; set; }

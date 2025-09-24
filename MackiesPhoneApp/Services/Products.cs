@@ -85,6 +85,11 @@ namespace MackiesPhoneApp.Services
                 orderItem.IsQuantityVisible = false;
                 orderItem.productcategories = product.ProductCategories;
 
+                orderItem.PricePerKg = product.PricePerKg;
+                orderItem.SalesWeight = product.SalesWeight;    
+                orderItem.ShelfLife = product.ShelfLife;    
+                orderItem.Badge = product.Badge;
+
                 productOrderItemList.Add(orderItem);
             }
 

@@ -21,6 +21,15 @@ namespace MackiesPhoneApp.Models
         public string? Description { get; set; }
         public string? Details { get; set; }
 
+        public string Badge { get; set; }
+
+       // [JsonPropertyName("priceperkilo")]
+        public string PricePerKg { get; set; }
+
+
+        public string SalesWeight { get; set; }
+        public string ShelfLife { get; set; }
+
         public string? ImageUrl { get; set; }
 
         public Decimal? Price { get; set; }
