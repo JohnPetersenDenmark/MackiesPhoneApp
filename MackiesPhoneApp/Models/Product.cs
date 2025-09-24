@@ -26,7 +26,7 @@ namespace MackiesPhoneApp.Models
        // [JsonPropertyName("priceperkilo")]
         public string PricePerKg { get; set; }
 
-
+      
         public string SalesWeight { get; set; }
         public string ShelfLife { get; set; }
 
