@@ -60,6 +60,22 @@ namespace MackiesPhoneApp.Services
         }
 
 
+        //public static async Task<List<ProductType>> getProductLabels()
+        //{
+        //    var productTypeList = new List<ProductLabel>();
+
+        //    var partialUrl = "/Home/productlabellist";
+        //    var response = await MackiesPhoneApp.Services.CustomHttpClient.getRequest(partialUrl, false, null);
+        //    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        //    {
+        //        var responseJson = await response.Content.ReadAsStringAsync();
+
+        //        productTypeList = JsonConvert.DeserializeObject<List<ProductType>>(responseJson);
+        //    }
+
+        //    return productTypeList;
+        //}
+
 
         public static List<OrderItem>  MakeProductItems(List<Product> productList)
         {
@@ -89,6 +105,15 @@ namespace MackiesPhoneApp.Services
                 orderItem.SalesWeight = product.SalesWeight;    
                 orderItem.ShelfLife = product.ShelfLife;    
                 orderItem.Badge = product.Badge;
+
+                orderItem.productlabels = product.ProductLabels;
+                if (orderItem.productlabels != null)
+                {
+                    foreach(var label in orderItem.productlabels)
+                    {
+                        label.ImageUrl = MackiesPhoneApp.Services.Constants.getApiBaseUrl() + label.ImageUrl;
+                    }
+                }
 
                 productOrderItemList.Add(orderItem);
             }

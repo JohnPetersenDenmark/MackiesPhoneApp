@@ -21,6 +21,8 @@ namespace MackiesPhoneApp.Models
 
         public List<ProductCategoryDto> productcategories { get; set; }
 
+        public List<ProductLabel> productlabels { get; set; }
+
         public string productname { get; set; }
 
         public string Badge { get; set; }

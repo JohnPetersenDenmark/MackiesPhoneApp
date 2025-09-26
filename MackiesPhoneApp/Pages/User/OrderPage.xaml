@@ -169,6 +169,9 @@
                                         <RowDefinition >
                                             
                                         </RowDefinition>
+                                        <RowDefinition >
+
+                                        </RowDefinition>
                                         <RowDefinition>
 
                                         </RowDefinition>
@@ -300,7 +303,7 @@
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
 
-                                                <Label Text="{Binding CategoryName}" FontSize="14"  Margin="10,0,0,0" TextColor="white"/>
+                                                <Label Text="{Binding LabelName}" FontSize="14"  Margin="10,0,0,0" TextColor="white"/>
                                                
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
@@ -320,6 +323,32 @@
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <Label Text="{Binding Name}" FontSize="14"  Margin="10,0,0,0" TextColor="white" HorizontalTextAlignment="Start"/>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                    <CollectionView x:Name="ProductLabelsOnProduct"
+                                                    Grid.Row="2" Grid.Column="0"                                                    
+                                                    ItemsSource="{Binding productlabels}">   
+                                        <CollectionView.Header  HorizontalTextAlignment="End" >
+                                            <StackLayout Padding="10" BackgroundColor="LightGray" HorizontalOptions="StartAndExpand">
+                                                <Label Text="Type"                  
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center" />    
+                                            </StackLayout>
+                                        </CollectionView.Header>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <HorizontalStackLayout>
+                                                    <Image 
+                                                        Source="{Binding ImageUrl}" 
+                                                        WidthRequest="20" 
+                                                        HeightRequest="20"  
+                                                        Aspect="AspectFill"  
+                                                        VerticalOptions="Center" /> 
+                                                    <Label Text="{Binding ImageUrl}" FontSize="14"  Margin="10,0,0,0" TextColor="white" HorizontalTextAlignment="Start"/>
+                                                </HorizontalStackLayout>
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>

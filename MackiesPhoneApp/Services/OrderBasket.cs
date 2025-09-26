@@ -78,6 +78,19 @@ namespace MackiesPhoneApp.Services
             }
         }
 
+        private ObservableCollection<ProductCategoryDto> _productLabels;
+        public ObservableCollection<ProductCategoryDto> ProductLabels
+        {
+            get => _productLabels;
+            set
+            {
+
+                _productLabels = value;
+                OnPropertyChanged(nameof(ProductLabels));
+
+            }
+        }
+
         private bool _showProductCategories;
         public bool ShowProductCategories
         {
