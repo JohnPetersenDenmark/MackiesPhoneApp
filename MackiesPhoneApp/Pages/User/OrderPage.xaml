@@ -1,78 +1,77 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MackiesPhoneApp.Pages.User.OrderPage"
              xmlns:local="clr-namespace:MackiesPhoneApp.Services"
+             x:Class="MackiesPhoneApp.Pages.User.OrderPage"
              x:Name="OrderPageRoot"
-            Title="">
+             Title="">
 
     <ScrollView>
-    <StackLayout Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, Dark={StaticResource AppToolbarBackgroundColorDark}}" >
+        <StackLayout Padding="10"
+                     BackgroundColor="{AppThemeBinding Light={StaticResource AppToolbarBackgroundColorLight}, 
+                                                        Dark={StaticResource AppToolbarBackgroundColorDark}}">
 
-            <Button 
-             WidthRequest="200"
-             BackgroundColor="white"  
-             TextColor="black" 
-             Text="Filtre" 
-                  Margin="5, 0,0,20"
-                Clicked="OnToggleShowFilters" />
+            <!-- Filter toggle -->
+            <Button Text="Filtre"
+                    WidthRequest="200"
+                    Margin="5,0,0,20"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    Clicked="OnToggleShowFilters" />
 
-
+            <!-- Filters -->
             <VerticalStackLayout IsVisible="{Binding ShowFilters}" Spacing="20">
 
                 <!-- Category filter -->
                 <CollectionView x:Name="ProductCategoriesView"
-                ItemsSource="{Binding ProductCategories}">
+                                ItemsSource="{Binding ProductCategories}">
                     <CollectionView.Header>
                         <Frame Padding="10"
-                              WidthRequest="200" 
-                             Margin="5, 20,0,0"
-                             BorderColor="LightGray"
-                             HasShadow="False"> 
-
-                            <Label TextColor="black" Text="Vælg produktkategori"
-                                     FontSize="14"
-                                     FontAttributes="Bold"
-                                     Margin="5"/>   
+                               WidthRequest="200"
+                               Margin="5,20,0,0"
+                               BorderColor="LightGray"
+                               HasShadow="False">
+                            <Label Text="Vælg produktkategori"
+                                   TextColor="Black"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   Margin="5"/>
                         </Frame>
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="10"
-                                    WidthRequest="200"
-                   Margin="5"
-                   BorderColor="LightGray"
-                   HasShadow="False">
+                                   WidthRequest="200"
+                                   Margin="5"
+                                   BorderColor="LightGray"
+                                   HasShadow="False">
 
-                                <!-- Triggers to change background on selection -->
+                                <!-- Background when selected -->
                                 <Frame.Triggers>
                                     <DataTrigger TargetType="Frame"
-                                 Binding="{Binding IsSelected}"
-                                 Value="True">
+                                                 Binding="{Binding IsSelected}"
+                                                 Value="True">
                                         <Setter Property="BackgroundColor" Value="LightBlue" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Frame"
-                                 Binding="{Binding IsSelected}"
-                                 Value="False">
+                                                 Binding="{Binding IsSelected}"
+                                                 Value="False">
                                         <Setter Property="BackgroundColor" Value="LightGray" />
                                     </DataTrigger>
                                 </Frame.Triggers>
 
                                 <HorizontalStackLayout HeightRequest="20" Spacing="10">
-                                    <!-- Check mark (visible but not tappable) -->
-                                    <CheckBox  Color="black"   InputTransparent="True"
-                                                Scale="0.8"
-                                                IsChecked="{Binding IsSelected}" />
-
-                                    <!-- Category label -->
-                                    <Label  Text="{Binding CategoryName}"
-                                       FontSize="14"
-                                       TextColor="Black"
-                                       VerticalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsSelected}"
+                                              InputTransparent="True"
+                                              Scale="0.8"
+                                              Color="Black" />
+                                    <Label Text="{Binding CategoryName}"
+                                           FontSize="14"
+                                           TextColor="Black"
+                                           VerticalOptions="Center" />
                                 </HorizontalStackLayout>
 
-                                <!-- Tap gesture on whole row -->
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnCategoryRowTapped" />
                                 </Frame.GestureRecognizers>
@@ -83,56 +82,54 @@
 
                 <!-- Product type filter -->
                 <CollectionView x:Name="ProductTypesView"
-                ItemsSource="{Binding ProductTypes}">
+                                ItemsSource="{Binding ProductTypes}">
                     <CollectionView.Header>
                         <Frame Padding="10"
-                             WidthRequest="200" 
-                            Margin="5"
-                            BorderColor="LightGray"
-                            HasShadow="False"> 
-                            
-                            <Label TextColor="black" Text="Vælg produkttype"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    Margin="5"/>
+                               WidthRequest="200"
+                               Margin="5"
+                               BorderColor="LightGray"
+                               HasShadow="False">
+                            <Label Text="Vælg produkttype"
+                                   TextColor="Black"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   Margin="5"/>
                         </Frame>
                     </CollectionView.Header>
-                    
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Padding="10"
-                                    WidthRequest="200"
-                   Margin="5"
-                   BorderColor="LightGray"
-                   HasShadow="False">
+                                   WidthRequest="200"
+                                   Margin="5"
+                                   BorderColor="LightGray"
+                                   HasShadow="False">
+
+                                <!-- Background when selected -->
                                 <Frame.Triggers>
-                                    <!-- Change background when selected -->
                                     <DataTrigger TargetType="Frame"
-                                 Binding="{Binding IsSelected}"
-                                 Value="True">
+                                                 Binding="{Binding IsSelected}"
+                                                 Value="True">
                                         <Setter Property="BackgroundColor" Value="LightBlue" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Frame"
-                                 Binding="{Binding IsSelected}"
-                                 Value="False">
+                                                 Binding="{Binding IsSelected}"
+                                                 Value="False">
                                         <Setter Property="BackgroundColor" Value="LightGray" />
                                     </DataTrigger>
                                 </Frame.Triggers>
 
                                 <HorizontalStackLayout HeightRequest="20" Spacing="10">
-                                    <!-- Check mark (not dimmed, ignores taps) -->
-                                    <CheckBox Color="black" InputTransparent="True"
+                                    <CheckBox IsChecked="{Binding IsSelected}"
+                                              InputTransparent="True"
                                               Scale="0.8"
-                              IsChecked="{Binding IsSelected}" />
-
-                                    <!-- Category label -->
+                                              Color="Black" />
                                     <Label Text="{Binding Name}"
-                           FontSize="14"
-                           TextColor="Black"
-                           VerticalOptions="Center" />
+                                           FontSize="14"
+                                           TextColor="Black"
+                                           VerticalOptions="Center" />
                                 </HorizontalStackLayout>
 
-                                <!-- Tap gesture on the whole row -->
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnProductTypeRowTapped" />
                                 </Frame.GestureRecognizers>
@@ -141,223 +138,251 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-
-
-
             </VerticalStackLayout>
 
-            <CollectionView x:Name="OrderItemsCollectionView"              
-            SelectionMode="None"
-            >
-        <CollectionView.ItemTemplate Margin="20">
-            <DataTemplate>
-                    <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
-                        <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnOrderItemTapped" />
-                            </Frame.GestureRecognizers>
+            <!-- Order items -->
+            <CollectionView x:Name="OrderItemsCollectionView"
+                            SelectionMode="None">
 
-                                <Grid HorizontalOptions="Start" ColumnSpacing="10" >
-                                <Grid.ColumnDefinitions>
-                                    <!-- Image column -->
-                                    <ColumnDefinition Width="Auto"/>
-                                    <!-- Content column fills the rest -->
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                <CollectionView.ItemTemplate Margin="20">
+                    <DataTemplate>
+                        <Frame CornerRadius="5"
+                               Padding="10"
+                               Margin="2"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, 
+                                                                  Dark={StaticResource ViewItemBorderColorDark}}">
+                            <Frame CornerRadius="8"
+                                   Padding="0"
+                                   Margin="0"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight},
+                                                                      Dark={StaticResource ViewItemBackgroundColorDark}}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnOrderItemTapped" />
+                                </Frame.GestureRecognizers>
 
+                                <Grid ColumnSpacing="10"
+                                      HorizontalOptions="Start">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition >
-                                            
-                                        </RowDefinition>
-                                        <RowDefinition >
-
-                                        </RowDefinition>
-                                        <RowDefinition>
-
-                                        </RowDefinition>
-                                        
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                <!-- Left image -->
-                                <Image Grid.Column="0"
-                            Source="{Binding imageurl}" 
-                            WidthRequest="190" 
-                            HeightRequest="190"  
-                            Aspect="AspectFill"  
-                            VerticalOptions="Center" />
+                                    <!-- Product image -->
+                                    <Image Grid.Column="0"
+                                           Source="{Binding imageurl}"
+                                           WidthRequest="190"
+                                           HeightRequest="190"
+                                           Aspect="AspectFill"
+                                           VerticalOptions="Center" />
 
-                                <!-- Labels stacked vertically to the right of image -->
+                                    <!-- Product info -->
                                     <VerticalStackLayout Grid.Column="1"
-                         VerticalOptions="Center"
-                         Spacing="2">
-                                        <Label Text="{Binding Badge}" 
-                                            FontSize="16" 
-                                            TextColor="white" />    
-                                        <Label Text="{Binding pizzanumber}" 
-                                FontSize="16" 
-                                TextColor="white" />
-                                        <Label Text="{Binding productname}" 
-                                FontSize="16"  
-                                TextColor="white" />
-                                        <Label Text="{Binding productdescription}" 
-                                FontSize="16" 
-                                TextColor="white" />
-                                        <Label Text="{Binding PricePerKg}" 
-                                                FontSize="14" 
-                                                TextColor="white" />
-                                        <Label Text="{Binding ShelfLife}" 
-                                                FontSize="14" 
-                                                TextColor="white" />
+                                                         VerticalOptions="Center"
+                                                         Spacing="2">
+                                      
 
-                                        <Label Text="{Binding SalesWeight}" 
-                                                FontSize="14" 
-                                                TextColor="white" />    
+                                        <Border
+                                            StrokeShape="RoundRectangle 12"
+                                            BackgroundColor="#5470a9"
+                                            StrokeThickness="0"
+                                            HorizontalOptions="Start"
+                                            WidthRequest="100"
+                                            HeightRequest="25"
+                                            Margin="0,10,0,0"
+                                            Padding="6,2,2,2">
+                                            <Label
+                                                HorizontalOptions="Center"
+                                                Text="{Binding Badge}"
+                                                FontSize="12"
+                                                TextColor="White">  
+                                             
+                                            </Label>
+                                        </Border>
+                                        
+                                        <Label Text="{Binding productname}" FontSize="16" TextColor="White" />
+                                        <Label Text="{Binding SalesWeight}" FontSize="14" TextColor="White" />
+                                        <!-- Labels -->
+                                        <CollectionView x:Name="ProductLabelsOnProduct"                                                
+                                                        ItemsSource="{Binding productlabels}">
+                                                <!--<CollectionView.Header>
+                                                    <StackLayout Padding="10"
+                                                      BackgroundColor="LightGray"
+                                                      HorizontalOptions="StartAndExpand">
+                                                        <Label Text="Mærkning"
+                                                            FontSize="14"
+                                                            FontAttributes="Bold"
+                                                            HorizontalOptions="Center" />   
+                                                </StackLayout>
+                                            </CollectionView.Header>-->
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <HorizontalStackLayout>
+                                                        <Image Source="{Binding ImageUrl}"
+                                                        WidthRequest="20"
+                                                        HeightRequest="20"
+                                                        Aspect="AspectFill"
+                                                        VerticalOptions="Center" />
+                                                        <!--<Label Text="{Binding LabelName}"
+                                                        FontSize="14"
+                                                        Margin="10,0,0,0"
+                                                        TextColor="White"
+                                                        HorizontalTextAlignment="Start" />-->  
+                                                    </HorizontalStackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>   
+                                        <!--<Label Text="{Binding productdescription}" FontSize="16" TextColor="White" />-->
+                                        <Label Text="{Binding unitprice, StringFormat='{0:C}/stk.'}" FontSize="18" TextColor="black" Margin="0,12,0,0"/>
+                                        <Label Text="{Binding PricePerKg, StringFormat='{0:C} kr/kg.'}" FontSize="12" TextColor="black" />
+                                     
+                                        
+                                     
 
-                                        <Label Text="{Binding unitprice, StringFormat='{0:C}/stk.'}" 
-                                FontSize="14"  
-                                TextColor="white" />
-
-                                        <HorizontalStackLayout Grid.Column="0" Spacing="8">
-                                            <Image 
-                                    IsVisible="{Binding IsQuantityEditable}"
-                                    BackgroundColor="Transparent"                                             
-                                    Source="minussign.png"
-                                    WidthRequest="20" 
-                                    InputTransparent="False">
+                                        <!-- Quantity controls -->
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Image Source="minussign.png"
+                                                   WidthRequest="20"
+                                                   BackgroundColor="Transparent"
+                                                   IsVisible="{Binding IsQuantityEditable}">
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnImageMinusTapped" />
                                                 </Image.GestureRecognizers>
                                             </Image>
-                                            <Label 
-                                IsVisible="{Binding IsQuantityVisible}" 
-                                Text="{Binding quantity,  StringFormat='{0} stk.'}" 
-                                FontSize="14" 
-                                VerticalOptions="Center" 
-                                TextColor="white" />
-                                            <Image 
-                                    BackgroundColor="Transparent"
-                                    IsVisible="{Binding IsQuantityEditable}"
-                                    Source="plussign.png"
-                                    WidthRequest="20"
-                                    HeightRequest="20">
+                                            <Label Text="{Binding quantity, StringFormat='{0} stk.'}"
+                                                   FontSize="14"
+                                                   VerticalOptions="Center"
+                                                   TextColor="White"
+                                                   IsVisible="{Binding IsQuantityVisible}" />
+                                            <Image Source="plussign.png"
+                                                   WidthRequest="20"
+                                                   HeightRequest="20"
+                                                   BackgroundColor="Transparent"
+                                                   IsVisible="{Binding IsQuantityEditable}">
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnImagePlusTapped" />
                                                 </Image.GestureRecognizers>
                                             </Image>
-
-
-
-                                            <Image 
-                                    BackgroundColor="Transparent"
-                                    IsVisible="{Binding IsInBasket}" 
-                                    Source="shoppingbasket.png"
-                                    WidthRequest="40"
-                                    HeightRequest="40">
+                                            <!--<Image Source="shoppingbasket.png"
+                                                   WidthRequest="40"
+                                                   HeightRequest="40"
+                                                   BackgroundColor="Transparent"
+                                                   IsVisible="{Binding IsInBasket}">
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnImagePlusTapped" />
                                                 </Image.GestureRecognizers>
-                                            </Image>
-
-
+                                            </Image>-->
                                         </HorizontalStackLayout>
-                                        <Label
-                                Text="{Binding LineTotal,  StringFormat='ialt: {0} kr.'}" 
-                                IsVisible="{Binding IsInBasket}" 
-                                 HorizontalOptions="End"
-                                FontSize="15" 
-                                VerticalOptions="Center"  
-                                TextColor="white" />
 
-                                        <Button 
-                                             WidthRequest="150"
-                                           HorizontalOptions="Start"
-                                           IsVisible="{Binding IsQuantityEditable}"
-                                           BackgroundColor="white" 
-                                           TextColor="black" 
-                                           Text="Put i kurven" Clicked="OnAddToBasketClicked" />
+                                        <!-- Line total -->
+                                        <Label Text="{Binding LineTotal, StringFormat='ialt: {0} kr.'}"
+                                               FontSize="15"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               TextColor="White"
+                                               IsVisible="{Binding IsInBasket}" />
 
-                                        <Button  Text="Vis detaljer"
-                                                 HorizontalOptions="Start"
-                                          WidthRequest="150"
-                                        FontSize="12"
-                                        Padding="6,2"
-                                        CornerRadius="12"
-                                        BackgroundColor="White"
-                                        TextColor="Black"
-                                       
-                                        Clicked="OnDetailsTapped" />
+                                        <!-- Actions -->
 
+
+
+                                        <ImageButton
+                                                Source="shoppingbasket.png"
+                                                WidthRequest="40"
+                                                HeightRequest="40"
+                                                BackgroundColor="Transparent"
+                                                HorizontalOptions="Start"
+                                                Clicked="OnAddToBasketClicked"> 
+
+                                            <ImageButton.Triggers>
+                                                <DataTrigger TargetType="ImageButton"
+                                                             Binding="{Binding IsInBasket}"
+                                                             Value="True">  
+                                                    <Setter Property="IsVisible" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="ImageButton"
+                                                             Binding="{Binding IsInBasket}"
+                                                             Value="False"> 
+                                                    <Setter Property="IsVisible" Value="True" />
+                                                </DataTrigger>
+                                            </ImageButton.Triggers>
+                                        </ImageButton>
+
+
+                                        
+
+                                        <Button Text="Vis detaljer"
+                                                WidthRequest="150"
+                                                FontSize="12"
+                                                Padding="6,2"
+                                                CornerRadius="12"
+                                                HorizontalOptions="Start"
+                                                BackgroundColor="White"
+                                                TextColor="Black"
+                                                Clicked="OnDetailsTapped" />
+                                        
+                                        <Label Text="{Binding ShelfLife}" FontSize="14" TextColor="White" />
                                     </VerticalStackLayout>
-
+                                   
+                                    <!-- Categories -->
                                     <CollectionView x:Name="CategoriesOnProduct"
-                                                    Grid.Row="1" Grid.Column="0"
+                                                    Grid.Row="1"
+                                                    Grid.Column="0"
                                                     ItemsSource="{Binding productcategories}">
                                         <CollectionView.Header>
                                             <StackLayout Padding="10" BackgroundColor="LightGray">
                                                 <Label Text="Kategori"
-                                                   FontSize="14"
-                                                   FontAttributes="Bold"
-                                                   HorizontalOptions="Center" />    
+                                                       FontSize="14"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="Center" />
                                             </StackLayout>
                                         </CollectionView.Header>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
-
-                                                <Label Text="{Binding CategoryName}" FontSize="14"  Margin="10,0,0,0" TextColor="white"/>
-                                               
+                                                <Label Text="{Binding CategoryName}"
+                                                       FontSize="14"
+                                                       Margin="10,0,0,0"
+                                                       TextColor="White" />
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
 
+                                    <!-- Product types -->
                                     <CollectionView x:Name="ProductTypesOnProduct"
-                                                   Grid.Row="1" Grid.Column="1"                                                    
-                                                   ItemsSource="{Binding producttypes}">    
-                                        <CollectionView.Header  HorizontalTextAlignment="End" >
-                                            <StackLayout Padding="10" BackgroundColor="LightGray" HorizontalOptions="StartAndExpand">
-                                                <Label Text="Type"                  
-                                                  FontSize="14"
-                                                  FontAttributes="Bold"
-                                                  HorizontalOptions="Center" /> 
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    ItemsSource="{Binding producttypes}">
+                                        <CollectionView.Header>
+                                            <StackLayout Padding="10"
+                                                         BackgroundColor="LightGray"
+                                                         HorizontalOptions="StartAndExpand">
+                                                <Label Text="Type"
+                                                       FontSize="14"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="Center" />
                                             </StackLayout>
                                         </CollectionView.Header>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
-                                                <Label Text="{Binding Name}" FontSize="14"  Margin="10,0,0,0" TextColor="white" HorizontalTextAlignment="Start"/>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-
-                                    <CollectionView x:Name="ProductLabelsOnProduct"
-                                                    Grid.Row="2" Grid.Column="1"                                                    
-                                                    ItemsSource="{Binding productlabels}">   
-                                        <CollectionView.Header  HorizontalTextAlignment="End" >
-                                            <StackLayout Padding="10" BackgroundColor="LightGray" HorizontalOptions="StartAndExpand">
-                                                <Label Text="Mærkning"                  
-                                                   FontSize="14"
-                                                   FontAttributes="Bold"
-                                                   HorizontalOptions="Center" />    
-                                            </StackLayout>
-                                        </CollectionView.Header>
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <HorizontalStackLayout>
-                                                    <Image 
-                                                        Source="{Binding ImageUrl}" 
-                                                        WidthRequest="20" 
-                                                        HeightRequest="20"  
-                                                        Aspect="AspectFill"  
-                                                        VerticalOptions="Center" /> 
-                                                    <Label Text="{Binding LabelName}" FontSize="14"  Margin="10,0,0,0" TextColor="white" HorizontalTextAlignment="Start"/>
-                                                </HorizontalStackLayout>
+                                                <Label Text="{Binding Name}"
+                                                       FontSize="14"
+                                                       Margin="10,0,0,0"
+                                                       TextColor="White"
+                                                       HorizontalTextAlignment="Start" />
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
                                 </Grid>
+                            </Frame>
                         </Frame>
-                    </Frame>
-                </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-    </StackLayout>
-        </ScrollView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

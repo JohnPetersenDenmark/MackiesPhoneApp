@@ -100,10 +100,15 @@ public partial class OrderPage : ContentPage
 
     private void OnAddToBasketClicked(object sender, EventArgs e)
     {
-        _orderBasketService.AddOrderItemToBasket(_selectedItem);
-        _selectedItem.IsQuantityEditable = false;
-        _selectedItem.IsQuantityVisible = true;
-        _selectedItem.IsInBasket = true;
+        if (sender is ImageButton imageButton && imageButton.BindingContext is OrderItem selectedOrderItem)
+        {
+            _selectedItem = selectedOrderItem;
+           
+            _selectedItem.IsQuantityEditable = false;
+            _selectedItem.IsQuantityVisible = true;
+            _selectedItem.IsInBasket = true;
+            _orderBasketService.AddOrderItemToBasket(_selectedItem);
+        }
     }
 
     private void OnImageMinusTapped(object? sender, EventArgs e)
