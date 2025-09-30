@@ -50,7 +50,7 @@ public partial class OrderPage : ContentPage
 
         _orderBasketService.UpdateAllProductsItems(allOrderItems);
 
-        OrderItemsCollectionView.ItemsSource = allOrderItems;
+       // OrderItemsCollectionView.ItemsSource = allOrderItems;
 
         var categoryList = await MackiesPhoneApp.Services.Products.getProductCategories();
         _orderBasketService.ProductCategories = new ObservableCollection<ProductCategoryDto>(categoryList);
@@ -100,13 +100,14 @@ public partial class OrderPage : ContentPage
 
     private void OnAddToBasketClicked(object sender, EventArgs e)
     {
-        if (sender is ImageButton imageButton && imageButton.BindingContext is OrderItem selectedOrderItem)
+        if (sender is Image image && image.BindingContext is OrderItem selectedOrderItem)
         {
             _selectedItem = selectedOrderItem;
            
             _selectedItem.IsQuantityEditable = false;
             _selectedItem.IsQuantityVisible = true;
             _selectedItem.IsInBasket = true;
+            _selectedItem.quantity = 1;
             _orderBasketService.AddOrderItemToBasket(_selectedItem);
         }
     }
@@ -129,7 +130,7 @@ public partial class OrderPage : ContentPage
     private async void OnDetailsTapped(object sender, EventArgs e)
     {
         //if (sender is Label detailLabel && detailLabel.BindingContext is OrderItem selectedOrderItem)
-            if (sender is Button button && button.BindingContext is OrderItem selectedOrderItem)
+            if (sender is Image image && image.BindingContext is OrderItem selectedOrderItem)
             {
             var popup = new PopupDetailPage(selectedOrderItem);
             var result = await this.ShowPopupAsync(popup);
@@ -402,6 +403,10 @@ public partial class OrderPage : ContentPage
         MakeResultOrderItemList();
     }
 
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+    }
 }
 
-    
+

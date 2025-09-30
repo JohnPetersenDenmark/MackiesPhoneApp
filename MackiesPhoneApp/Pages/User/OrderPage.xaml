@@ -142,6 +142,7 @@
 
             <!-- Order items -->
             <CollectionView x:Name="OrderItemsCollectionView"
+                            ItemsSource="{Binding AllProductsItems}"
                             SelectionMode="None">
 
                 <CollectionView.ItemTemplate Margin="20">
@@ -165,15 +166,16 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition />
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
                                     <!-- Product image -->
-                                    <Image Grid.Column="0"
+                                    <Image Grid.Column="0"                                           
+                                           Grid.Row="0"
                                            Source="{Binding imageurl}"
                                            WidthRequest="190"
                                            HeightRequest="190"
@@ -182,9 +184,11 @@
 
                                     <!-- Product info -->
                                     <VerticalStackLayout Grid.Column="1"
+                                                          Grid.ColumnSpan="2"
+                                                          Grid.Row="0"
                                                          VerticalOptions="Center"
                                                          Spacing="2">
-                                      
+
 
                                         <Border
                                             StrokeShape="RoundRectangle 12"
@@ -199,139 +203,120 @@
                                                 HorizontalOptions="Center"
                                                 Text="{Binding Badge}"
                                                 FontSize="12"
-                                                TextColor="White">  
-                                             
+                                                TextColor="White">
+
                                             </Label>
                                         </Border>
-                                        
-                                        <Label Text="{Binding productname}" FontSize="16" TextColor="White" />
-                                        <Label Text="{Binding SalesWeight}" FontSize="14" TextColor="White" />
+
+                                        <Label Text="{Binding productname}" FontSize="16" TextColor="Black" />
+                                        <Label Text="{Binding SalesWeight}" FontSize="14" TextColor="Black" />
+
+
                                         <!-- Labels -->
-                                        <CollectionView x:Name="ProductLabelsOnProduct"                                                
+                                        <CollectionView x:Name="ProductLabelsOnProduct" 
+                                                        ItemsLayout="HorizontalList"
                                                         ItemsSource="{Binding productlabels}">
-                                                <!--<CollectionView.Header>
-                                                    <StackLayout Padding="10"
-                                                      BackgroundColor="LightGray"
-                                                      HorizontalOptions="StartAndExpand">
-                                                        <Label Text="Mærkning"
-                                                            FontSize="14"
-                                                            FontAttributes="Bold"
-                                                            HorizontalOptions="Center" />   
-                                                </StackLayout>
-                                            </CollectionView.Header>-->
                                             <CollectionView.ItemTemplate>
                                                 <DataTemplate>
-                                                    <HorizontalStackLayout>
-                                                        <Image Source="{Binding ImageUrl}"
+                                                    <Image Source="{Binding ImageUrl}"
+                                                           Margin="0,0,10,0"
                                                         WidthRequest="20"
                                                         HeightRequest="20"
                                                         Aspect="AspectFill"
                                                         VerticalOptions="Center" />
-                                                        <!--<Label Text="{Binding LabelName}"
-                                                        FontSize="14"
-                                                        Margin="10,0,0,0"
-                                                        TextColor="White"
-                                                        HorizontalTextAlignment="Start" />-->  
-                                                    </HorizontalStackLayout>
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
-                                        </CollectionView>   
-                                        <!--<Label Text="{Binding productdescription}" FontSize="16" TextColor="White" />-->
+
+                                        </CollectionView>
+
+                                        <HorizontalStackLayout Spacing="2" Margin="0,10,0,0">
+                                            <Image
+                                                 Source="leaf.svg"
+                                                 WidthRequest="20"
+                                                 HeightRequest="20"
+                                                 BackgroundColor="Transparent"
+                                                 HorizontalOptions="Start"    
+                                                />
+
+                                            <Label Text="{Binding ShelfLife}" FontSize="14" BackgroundColor="#1ce08d" TextColor="Black" />
+                                        </HorizontalStackLayout>
+                                        
+                                        
                                         <Label Text="{Binding unitprice, StringFormat='{0:C}/stk.'}" FontSize="18" TextColor="black" Margin="0,12,0,0"/>
                                         <Label Text="{Binding PricePerKg, StringFormat='{0:C} kr/kg.'}" FontSize="12" TextColor="black" />
-                                     
-                                        
-                                     
+
+
+
 
                                         <!-- Quantity controls -->
                                         <HorizontalStackLayout Spacing="8">
-                                            <Image Source="minussign.png"
-                                                   WidthRequest="20"
-                                                   BackgroundColor="Transparent"
-                                                   IsVisible="{Binding IsQuantityEditable}">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="OnImageMinusTapped" />
-                                                </Image.GestureRecognizers>
-                                            </Image>
                                             <Label Text="{Binding quantity, StringFormat='{0} stk.'}"
                                                    FontSize="14"
                                                    VerticalOptions="Center"
                                                    TextColor="White"
                                                    IsVisible="{Binding IsQuantityVisible}" />
-                                            <Image Source="plussign.png"
-                                                   WidthRequest="20"
-                                                   HeightRequest="20"
-                                                   BackgroundColor="Transparent"
-                                                   IsVisible="{Binding IsQuantityEditable}">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="OnImagePlusTapped" />
-                                                </Image.GestureRecognizers>
-                                            </Image>
-                                            <!--<Image Source="shoppingbasket.png"
-                                                   WidthRequest="40"
-                                                   HeightRequest="40"
-                                                   BackgroundColor="Transparent"
-                                                   IsVisible="{Binding IsInBasket}">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="OnImagePlusTapped" />
-                                                </Image.GestureRecognizers>
-                                            </Image>-->
+                                            <Label Text="{Binding LineTotal, StringFormat='ialt: {0} kr.'}"
+                                                    FontSize="15"
+                                                    HorizontalOptions="End"
+                                                    VerticalOptions="Center"
+                                                    TextColor="White"
+                                                    IsVisible="{Binding IsInBasket}" />
                                         </HorizontalStackLayout>
 
-                                        <!-- Line total -->
-                                        <Label Text="{Binding LineTotal, StringFormat='ialt: {0} kr.'}"
-                                               FontSize="15"
-                                               HorizontalOptions="End"
-                                               VerticalOptions="Center"
-                                               TextColor="White"
-                                               IsVisible="{Binding IsInBasket}" />
+                                        <Image
+                                            Source="basket.svg"
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            BackgroundColor="Transparent"
+                                            HorizontalOptions="Start"
+                                           
+                                            >
 
-                                        <!-- Actions -->
+                                            <!-- Tap handling -->
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnAddToBasketClicked" />
+                                            </Image.GestureRecognizers>
 
-
-
-                                        <ImageButton
-                                                Source="shoppingbasket.png"
-                                                WidthRequest="40"
-                                                HeightRequest="40"
-                                                BackgroundColor="Transparent"
-                                                HorizontalOptions="Start"
-                                                Clicked="OnAddToBasketClicked"> 
-
-                                            <ImageButton.Triggers>
-                                                <DataTrigger TargetType="ImageButton"
+                                            <!-- Triggers -->
+                                            <Image.Triggers>
+                                                <DataTrigger TargetType="Image"
                                                              Binding="{Binding IsInBasket}"
-                                                             Value="True">  
+                                                             Value="True">
                                                     <Setter Property="IsVisible" Value="False" />
                                                 </DataTrigger>
-                                                <DataTrigger TargetType="ImageButton"
+                                                <DataTrigger TargetType="Image"
                                                              Binding="{Binding IsInBasket}"
-                                                             Value="False"> 
+                                                             Value="False">
                                                     <Setter Property="IsVisible" Value="True" />
                                                 </DataTrigger>
-                                            </ImageButton.Triggers>
-                                        </ImageButton>
+                                            </Image.Triggers>
+                                        </Image>
 
+                                       
 
-                                        
-
-                                        <Button Text="Vis detaljer"
-                                                WidthRequest="150"
-                                                FontSize="12"
-                                                Padding="6,2"
-                                                CornerRadius="12"
-                                                HorizontalOptions="Start"
-                                                BackgroundColor="White"
-                                                TextColor="Black"
-                                                Clicked="OnDetailsTapped" />
-                                        
-                                        <Label Text="{Binding ShelfLife}" FontSize="14" TextColor="White" />
+                                      
                                     </VerticalStackLayout>
+
+                                    <HorizontalStackLayout
+                                        Grid.Row="1"
+                                          VerticalOptions="Center"
+                                          Spacing="10">  
+                                        <Image
+                                        
+                                        
+                                        HeightRequest="30"
+                                        WidthRequest="30"
+                                        Source="document.svg">
+                                        <!-- Tap handling -->
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnDetailsTapped" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                    
                                     <!-- Categories -->
                                     <CollectionView x:Name="CategoriesOnProduct"
-                                                    Grid.Row="1"
-                                                    Grid.Column="0"
+                                                    
+                                                  
                                                     ItemsSource="{Binding productcategories}">
                                         <CollectionView.Header>
                                             <StackLayout Padding="10" BackgroundColor="LightGray">
@@ -353,8 +338,8 @@
 
                                     <!-- Product types -->
                                     <CollectionView x:Name="ProductTypesOnProduct"
-                                                    Grid.Row="1"
-                                                    Grid.Column="1"
+                                                   
+                                                   
                                                     ItemsSource="{Binding producttypes}">
                                         <CollectionView.Header>
                                             <StackLayout Padding="10"
@@ -376,13 +361,13 @@
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
+                                    </HorizontalStackLayout>
                                 </Grid>
                             </Frame>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </StackLayout>
     </ScrollView>
 </ContentPage>

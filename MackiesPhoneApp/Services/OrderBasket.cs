@@ -213,7 +213,7 @@ namespace MackiesPhoneApp.Services
         {
             order.OrderItemsList.Remove(orderItem);
             orderItem.IsInBasket = false;
-            // orderItem.IsQuantityVisible = false;
+             orderItem.IsQuantityVisible = false;
             OrderTotal = CalculateOrderTotal();
         }
 
@@ -234,6 +234,7 @@ namespace MackiesPhoneApp.Services
                 productItem.IsInBasket = false;
                 productItem.IsQuantityEditable = false;
                 productItem.IsQuantityVisible = false;
+                productItem.quantity = 0;
             }
         }
 
