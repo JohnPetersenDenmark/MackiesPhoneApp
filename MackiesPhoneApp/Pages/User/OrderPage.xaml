@@ -177,8 +177,8 @@
                                     <Image Grid.Column="0"                                           
                                            Grid.Row="0"
                                            Source="{Binding imageurl}"
-                                           WidthRequest="190"
-                                           HeightRequest="190"
+                                           WidthRequest="200"
+                                           HeightRequest="200"
                                            Aspect="AspectFill"
                                            VerticalOptions="Center" />
 
