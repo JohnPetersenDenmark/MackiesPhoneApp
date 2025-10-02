@@ -68,6 +68,13 @@
                 Text="{Binding CustomerEmail}"
                 TextColor="Black" />
 
+                    <Label x:Name="ErrorLabelEmailEntry"
+        TextColor="Red"
+ >
+
+                    </Label>
+                    
+
                     <Entry x:Name="PhoneNumberEntry"
                 Placeholder="Telefonnummer"
                 PlaceholderColor="Gray"               
@@ -83,7 +90,15 @@
                         <Button Text="Send order" 
                             Clicked="OnSubmitOrderClicked" 
                               BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}" />
+
+                       
                     </HorizontalStackLayout>
+
+                    <Label x:Name="ErrorLabelNoOrderlines"
+                           TextColor="Red"
+                    >
+
+                    </Label>
 
                     <Frame Margin="0,20,0,0">
                         <VerticalStackLayout >

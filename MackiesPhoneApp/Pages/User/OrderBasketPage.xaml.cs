@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using System;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 
 namespace MackiesPhoneApp.Pages.User
 {
@@ -34,6 +35,18 @@ namespace MackiesPhoneApp.Pages.User
         private async void OnSubmitOrderClicked(object sender, EventArgs e)
         {
             var orderItemList = MakeOrderItemsDtos();
+            if (orderItemList.Count == 0)
+            {
+                this.ErrorLabelNoOrderlines.Text = "Du har ikke nogle varer i kurven";
+                return;
+            }
+
+            if (!IsValidEmail(EmailEntry.Text))
+            {
+                this.ErrorLabelEmailEntry.Text = "Ugyldig emailadresse";
+                return;
+            }
+
             var orderDto = MakeOrderDto();
 
             orderDto.OrderLines = orderItemList;
@@ -125,6 +138,15 @@ namespace MackiesPhoneApp.Pages.User
 
             return OrderItemsList;
 
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
     }
 }
