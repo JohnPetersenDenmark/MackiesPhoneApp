@@ -37,6 +37,17 @@ namespace MackiesPhoneApp.Services
             }
         }
 
+        private string? _numberOfOrderItems;
+        public string? NumberOfOrderItems
+        {
+            get => _numberOfOrderItems;
+            set
+            {               
+                    _numberOfOrderItems = value;
+                    OnPropertyChanged(nameof(NumberOfOrderItems));                
+            }
+        }
+
 
         private ObservableCollection<OrderItem> _allProductsItems;
         public ObservableCollection<OrderItem> AllProductsItems
@@ -163,6 +174,7 @@ namespace MackiesPhoneApp.Services
                     npc.PropertyChanged += AllProductItem_PropertyChanged;
 
             OrderTotal = CalculateOrderTotal();
+            
         }
 
         private void AllProductItemsCollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
@@ -201,6 +213,7 @@ namespace MackiesPhoneApp.Services
             order.OrderItemsList.Add(orderItem);
             orderItem.IsInBasket = true;
             OrderTotal = CalculateOrderTotal();
+            NumberOfOrderItems = order.OrderItemsList.Count.ToString();
         }
 
         public bool IsProductInBasket(int productId)
@@ -215,6 +228,7 @@ namespace MackiesPhoneApp.Services
             orderItem.IsInBasket = false;
              orderItem.IsQuantityVisible = false;
             OrderTotal = CalculateOrderTotal();
+            NumberOfOrderItems = order.OrderItemsList.Count.ToString();
         }
 
         public void ClearBasket()
@@ -228,6 +242,8 @@ namespace MackiesPhoneApp.Services
             order.LocationId = 0;
 
             OrderTotal = 0;
+
+            NumberOfOrderItems = "0";
 
             foreach (var productItem in _allProductsItems)
             {
