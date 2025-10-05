@@ -148,5 +148,7 @@ namespace MackiesPhoneApp.Pages.User
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
+
+       
     }
 }

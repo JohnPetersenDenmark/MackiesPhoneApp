@@ -13,29 +13,68 @@
                         <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
                             <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                                 <VerticalStackLayout>
-                                    <Image BackgroundColor="white" Source="minussign.png"
-                               WidthRequest="20"
-                              
-                                InputTransparent="False">
+                                    <HorizontalStackLayout Margin="20" Spacing="20" >
+                                    <Border Stroke="White"
+                                            StrokeThickness="2"
+                                            StrokeShape="RoundRectangle 40"
+                                            BackgroundColor="#2c509c"
+                                            HeightRequest="40"
+                                            WidthRequest="40"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                            <Image BackgroundColor="transparent" Source="minussign.png"
+                                               WidthRequest="20"                              
+                                               InputTransparent="False">   
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnImageMinusTapped" />
                                         </Image.GestureRecognizers>
-                                    </Image>
+                                        </Image>
+                                       </Border>
+
+                                        <Border Stroke="White"
+                                                 StrokeThickness="1"
+                                                 StrokeShape="RoundRectangle 10"
+                                                 BackgroundColor="#ffffff"
+                                                 HeightRequest="40"
+                                                 WidthRequest="40"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center">  
+                                            <Label Text="{Binding quantity}" 
+                                                   TextColor="Black" 
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"   
+                                                   FontSize="16"/>
+                                        </Border>
+
+                                        <Border Stroke="White"
+                                               StrokeThickness="2"
+                                               StrokeShape="RoundRectangle 40"
+                                               BackgroundColor="#2c509c"
+                                               HeightRequest="40"
+                                               WidthRequest="40"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center">    
+                                            <Image BackgroundColor="transparent" Source="plussign.png"
+                                                   WidthRequest="30"
+                                                   HeightRequest="30">  
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnImagePlusTapped" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Border>
+                                    </HorizontalStackLayout>
 
                                     <HorizontalStackLayout Margin="20" Spacing="20" >
-                                        <Label Text="{Binding quantity}" TextColor="White" FontSize="16"/>
+                                      
                                         <Label Text="{Binding productname}" TextColor="White" FontSize="16" />
                                         <Label Text="{Binding unitprice}" TextColor="White" FontSize="16" />
                                         <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" TextColor="White" FontSize="16"/>
                                     </HorizontalStackLayout>
 
-                                    <Image BackgroundColor="White" Source="plussign.png"
-                            WidthRequest="20"
-                            HeightRequest="20">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnImagePlusTapped" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
+
+                                 
 
                                 </VerticalStackLayout>
                             </Frame>
@@ -91,7 +130,8 @@
                             Clicked="OnSubmitOrderClicked" 
                               BackgroundColor="{AppThemeBinding Light={StaticResource OrderBasketButtonBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}" />
 
-                       
+
+               
                     </HorizontalStackLayout>
 
                     <Label x:Name="ErrorLabelNoOrderlines"
