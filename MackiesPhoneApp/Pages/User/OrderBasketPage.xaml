@@ -13,7 +13,7 @@
                         <Frame CornerRadius="5"  Padding="10" Margin="2" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBorderColorLight}, Dark={StaticResource ViewItemBorderColorDark}}" >
                             <Frame Padding="0" Margin="0" CornerRadius="8" BackgroundColor="{AppThemeBinding Light={StaticResource ViewItemBackgroundColorLight}, Dark={StaticResource ViewItemBackgroundColorDark}}">
                                 <VerticalStackLayout>
-                                    <HorizontalStackLayout Margin="20" Spacing="20" >
+                                    <HorizontalStackLayout Margin="10" Spacing="20" >
                                     <Border Stroke="White"
                                             StrokeThickness="2"
                                             StrokeShape="RoundRectangle 40"
@@ -63,18 +63,39 @@
                                                     <TapGestureRecognizer Tapped="OnImagePlusTapped" />
                                                 </Image.GestureRecognizers>
                                             </Image>
-                                        </Border>
+                                        </Border>   
                                     </HorizontalStackLayout>
 
-                                    <HorizontalStackLayout Margin="20" Spacing="20" >
+                                    <Grid ColumnSpacing="10"
+                                          HorizontalOptions="Start">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
+                                        <Image Grid.Column="0"                                           
+                                             Grid.Row="0"
+                                             Source="{Binding imageurl}"
+                                               Margin="10,0,0,10"
+                                             WidthRequest="100"
+                                             HeightRequest="100"
+                                             Aspect="AspectFill"
+                                             VerticalOptions="Center" />    
+                                        
+                                        <VerticalStackLayout Grid.Column="1" Margin="0,0,0,0" Spacing="5" >
                                       
                                         <Label Text="{Binding productname}" TextColor="White" FontSize="16" />
                                         <Label Text="{Binding unitprice}" TextColor="White" FontSize="16" />
                                         <Label Text="{Binding LineTotal, StringFormat='Total: {0:C}'}" TextColor="White" FontSize="16"/>
-                                    </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+
+                                    </Grid>
 
 
-                                 
+
 
                                 </VerticalStackLayout>
                             </Frame>
