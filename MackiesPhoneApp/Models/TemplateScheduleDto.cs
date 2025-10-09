@@ -33,13 +33,13 @@ namespace MackiesPhoneApp.Models
         public string EndTime { get; set; }
 
         [JsonPropertyName("shopOpenTimeInterval")]
-        public string ShopOpenTimeInterval { get; set; }
+        public string? ShopOpenTimeInterval { get; set; }
 
         [JsonPropertyName("date")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [JsonPropertyName("location")]
-        public LocationDto Location { get; set; }
+        public LocationDto? Location { get; set; }
     }
 }
 
